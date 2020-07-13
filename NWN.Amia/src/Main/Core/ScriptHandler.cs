@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NWN.Amia.Main.Core.Types;
-using NWN.Amia.Main.Managed;
 
 namespace NWN.Amia.Main.Core
 {

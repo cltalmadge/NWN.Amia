@@ -38,5 +38,12 @@ namespace NWN.Amia.Test
             _runner = new ScriptHandler(_managedContextNested);
             Assert.Equal(0, _runner.HandleContext());
         }
+
+        [Fact]
+        public void ScriptRunnerReturnsFailureOnNullData()
+        {
+            _runner = new ScriptHandler(new ScriptContext {ScriptName = null, OwnerObject = 0});
+            Assert.Equal(-1, _runner.HandleContext());
+        }
     }
 }
