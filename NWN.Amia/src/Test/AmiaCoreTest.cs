@@ -30,5 +30,14 @@ namespace NWN.Amia.Test
             _amiaCore.OnRunScript("", 0);
             Assert.Equal((uint)0, _amiaCore.ObjectSelf);
         }
+
+        [Fact]
+        public void OnClosureResetsObjectSelfToOldValue()
+        {
+            _amiaCore.OnRunScript("", 1);
+            _amiaCore.OnClosure(0, 0);
+            
+            Assert.Equal(_amiaCore.ObjectSelf, (uint)1);
+        }
     }
 }
