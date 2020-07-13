@@ -1,7 +1,7 @@
 ﻿using NWN.Amia.Main.Core;
 using Xunit;
 
-namespace NWN.Amia.test
+namespace NWN.Amia.Test
 {
     public class AmiaCoreTest
     {
@@ -22,6 +22,13 @@ namespace NWN.Amia.test
         public void OnRunScriptCannotHandleNonExistent()
         {
             Assert.Equal(-1, _amiaCore.OnRunScript("", 0));
+        }
+
+        [Fact]
+        public void ObjectSelfIsSetToOidSelf()
+        {
+            _amiaCore.OnRunScript("", 0);
+            Assert.Equal((uint)0, _amiaCore.ObjectSelf);
         }
     }
 }

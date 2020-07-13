@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using NWN.Amia.Main.Core.Types;
 using NWN.Core;
@@ -8,31 +9,51 @@ namespace NWN.Amia.Main.Core
     [UsedImplicitly]
     public class AmiaCore : IGameManager
     {
-        [UsedImplicitly] public uint ObjectSelf { get; }
-
+        public uint ObjectSelf { get; private set; } = NWScript.OBJECT_INVALID;
         private ulong NextEventId { get; set; }
-
         private readonly Stack<ScriptContext> _scriptContexts = new Stack<ScriptContext>();
         private readonly Dictionary<ulong, Closure> _closures = new Dictionary<ulong, Closure>();
 
-
         public void OnMainLoop(ulong frame)
         {
-            throw new System.NotImplementedException();
+            // Don't do anything.
         }
 
         public int OnRunScript(string script, uint oidSelf)
         {
-            var scriptBeingCalled = new ScriptContext {OwnerObject = oidSelf, ScriptName = script};
+            ObjectSelf = oidSelf;
 
+            var scriptBeingCalled = new ScriptContext {OwnerObject = oidSelf, ScriptName = script};
             IContextHandler contextHandler = new ScriptHandler(scriptBeingCalled);
+
             return contextHandler.HandleContext();
         }
 
         public void OnClosure(ulong eid, uint oidSelf)
         {
-            throw new System.NotImplementedException();
+            var old = ObjectSelf;
+            ObjectSelf = oidSelf;
+
+
+            RunClosures(eid);
+            
+            ObjectSelf = old;
         }
+
+        private void RunClosures(ulong eid)
+        {
+            try
+            {
+                _closures[eid].Run();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            _closures.Remove(eid);
+        }
+
 
         public void ClosureAssignCommand(uint obj, ActionDelegate func)
         {

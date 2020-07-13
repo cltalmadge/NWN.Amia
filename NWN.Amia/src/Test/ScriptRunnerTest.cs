@@ -2,7 +2,7 @@
 using NWN.Amia.Main.Core.Types;
 using Xunit;
 
-namespace NWN.Amia.test
+namespace NWN.Amia.Test
 {
     public class ScriptRunnerTest
     {
