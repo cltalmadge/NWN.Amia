@@ -35,12 +35,12 @@ namespace NWN.Amia.Main.Core
             ObjectSelf = oidSelf;
 
 
-            RunClosures(eid);
-            
+            RunClosure(eid);
+
             ObjectSelf = old;
         }
 
-        private void RunClosures(ulong eid)
+        private void RunClosure(ulong eid)
         {
             try
             {
@@ -53,7 +53,6 @@ namespace NWN.Amia.Main.Core
 
             _closures.Remove(eid);
         }
-
 
         public void ClosureAssignCommand(uint obj, ActionDelegate func)
         {
