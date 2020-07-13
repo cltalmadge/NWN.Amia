@@ -27,10 +27,10 @@ namespace NWN.Amia.Main.Core
         {
             IRunnableScript scriptToRun = new InvalidScript();
 
-            foreach (var type in GetTypesInNamespace(Assembly.GetExecutingAssembly(), "NWN.Amia.Main.Managed"))
+            foreach (var type in GetTypesInAssembly(Assembly.GetExecutingAssembly()))
             {
                 ScriptName scriptName = (ScriptName) Attribute.GetCustomAttribute(type, typeof(ScriptName));
-                
+
                 Console.Write(type.Assembly.FullName);
                 if (null != scriptName && scriptName.Name == _currentScript.ScriptName)
                 {
@@ -47,6 +47,11 @@ namespace NWN.Amia.Main.Core
                 assembly.GetTypes()
                     .Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal))
                     .ToArray();
+        }
+
+        private static IEnumerable<Type> GetTypesInAssembly(Assembly assembly)
+        {
+            return assembly.GetTypes().ToArray();
         }
     }
 }

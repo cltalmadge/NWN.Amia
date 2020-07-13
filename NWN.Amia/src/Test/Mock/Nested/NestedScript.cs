@@ -1,9 +1,9 @@
 ﻿using NWN.Amia.Main.Core.Types;
 
-namespace NWN.Amia.Main.Managed
+namespace NWN.Amia.Test.Mock.Nested
 {
-    [ScriptName("z_real_script_name")]
-    public class MockScript : IRunnableScript
+    [ScriptName("nested_script")]
+    public class NestedScript : IRunnableScript
     {
         public int Run(uint nwnObjectId)
         {
