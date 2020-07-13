@@ -1,6 +1,4 @@
-﻿using NWN.Amia.Main.Core.Types;
-
-namespace NWN.Amia.Main.Managed
+﻿namespace NWN.Amia.Main.Core.Types
 {
     public class InvalidScript : IRunnableScript
     {
