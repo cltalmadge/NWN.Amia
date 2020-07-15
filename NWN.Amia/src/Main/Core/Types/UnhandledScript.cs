@@ -1,6 +1,6 @@
 ﻿namespace NWN.Amia.Main.Core.Types
 {
-    public class InvalidScript : IRunnableScript
+    public class UnhandledScript : IRunnableScript
     {
         public int Run(uint nwnObjectId)
         {
