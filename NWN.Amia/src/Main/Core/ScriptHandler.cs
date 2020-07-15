@@ -43,7 +43,7 @@ namespace NWN.Amia.Main.Core
         {
             return
                 assembly.GetTypes()
-                    .Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal))
+                    .Where(t => string.Equals(t.Namespace, nameSpace, StringComparison.Ordinal))
                     .ToArray();
         }
 
