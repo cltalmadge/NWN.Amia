@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,11 +9,11 @@ namespace NWN.Amia.Main.Core
 {
     public static class ScriptDictionary
     {
-        public static Dictionary<string, Type> StoredScripts { get; } = new Dictionary<string, Type>();
+        private static ConcurrentDictionary<string, Type> StoredScripts { get; } = new ConcurrentDictionary<string, Type>();
 
-        public static bool Initialized { get; set; }
+        private static bool Initialized { get; set; }
 
-        public static void PerformInitialSetup()
+        private static void PerformInitialSetup()
         {
             Console.WriteLine("Performing initial setup for script dictionary.");
             

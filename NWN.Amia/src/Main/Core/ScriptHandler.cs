@@ -14,8 +14,6 @@ namespace NWN.Amia.Main.Core
 
         public int HandleContext()
         {
-            Console.WriteLine($"Resolving class associated with script: {_currentScript.ScriptName}.");
-
             return GetScriptFromContext().Run(_currentScript.OwnerObject);
         }
 
