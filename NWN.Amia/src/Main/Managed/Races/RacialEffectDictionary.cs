@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using NWN.Amia.Main.Managed.Feats.Types;
 using NWN.Amia.Main.Managed.Races.Types.RacialEffects;
-using NWN.Core;
 
-namespace NWN.Amia.Main.Managed.Feats
+namespace NWN.Amia.Main.Managed.Races
 {
     public static class RacialEffectDictionary
     {

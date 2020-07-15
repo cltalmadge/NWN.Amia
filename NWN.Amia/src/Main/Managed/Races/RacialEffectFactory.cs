@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using Microsoft.VisualBasic;
+﻿using System.Collections.Generic;
+using NWN.Amia.Main.Managed.Feats;
 using NWN.Amia.Main.Managed.Feats.Types;
 using NWN.Core;
 
-namespace NWN.Amia.Main.Managed.Feats
+namespace NWN.Amia.Main.Managed.Races
 {
     public class RacialEffectCreator : IFeatEffectCreator
     {
