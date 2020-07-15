@@ -3,7 +3,7 @@ using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Feats.Types
 {
-    public interface IFeatEffectCreator
+    public interface IEffectCreator
     {
         List<Effect> GetFeatEffects(uint objectId);
     }

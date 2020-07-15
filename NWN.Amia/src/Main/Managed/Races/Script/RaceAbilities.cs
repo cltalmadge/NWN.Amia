@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NWN.Amia.Main.Core.Types;
-using NWN.Amia.Main.Managed.Feats;
 using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Races.Script
@@ -21,7 +20,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
 
             var raceEffects = new RacialEffectCreator().GetFeatEffects(nwnObjectId);
             var supernaturalEffects = ConvertEffectsToSupernatural(raceEffects);
-            
+
             foreach (Effect effect in supernaturalEffects)
             {
                 NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, nwnObjectId);
