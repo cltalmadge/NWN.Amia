@@ -30,7 +30,6 @@ namespace NWN.Amia.Main.Core
             {
                 ScriptName scriptName = (ScriptName) Attribute.GetCustomAttribute(type, typeof(ScriptName));
 
-                Console.Write(type.Assembly.FullName);
                 if (null != scriptName && scriptName.Name == _currentScript.ScriptName)
                 {
                     scriptToRun = (IRunnableScript) Activator.CreateInstance(type);
