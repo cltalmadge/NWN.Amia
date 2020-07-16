@@ -10,7 +10,7 @@ namespace NWN.Amia.Main.Managed.Races
         {
             var raceType = NWScript.GetRacialType(objectId);
 
-            var racialEffectCollector = RacialEffectDictionary.Races[raceType];
+            var racialEffectCollector = ManagedRaces.Races[raceType];
 
             return null == racialEffectCollector ? new List<Effect>() : racialEffectCollector.GatherEffectsForObject(objectId);
         }

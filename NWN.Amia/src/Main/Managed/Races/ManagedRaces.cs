@@ -4,11 +4,11 @@ using NWN.Amia.Main.Managed.Races.Types.RacialEffects;
 
 namespace NWN.Amia.Main.Managed.Races
 {
-    public static class RacialEffectDictionary
+    public static class ManagedRaces
     {
         public static Dictionary<int, IEffectCollector> Races { get; }
 
-        static RacialEffectDictionary()
+        static ManagedRaces()
         {
             Races = new Dictionary<int, IEffectCollector>
             {
@@ -28,10 +28,11 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Damaran, new DamaranEffects()},
                 {(int) RacialType.Ffolk, new FfolkEffects()},
                 {(int) RacialType.Mulan, new MulanEffects()},
+                {(int) RacialType.Ogrillon, new OgrillonEffects()}
             };
         }
 
-        private enum RacialType
+        public enum RacialType
         {
             Duergar = 0,
             Drow = 1,
@@ -48,7 +49,9 @@ namespace NWN.Amia.Main.Managed.Races
             Chultan = 13,
             Damaran = 14,
             Ffolk = 15,
-            Mulan = 16
+            Mulan = 16,
+            Ogrillon = 17,
+            Feytouched = 18
         }
     }
 

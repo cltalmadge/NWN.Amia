@@ -7,7 +7,7 @@ using NWN.Amia.Main.Core.Types;
 
 namespace NWN.Amia.Main.Core
 {
-    public static class ScriptDictionary
+    public static class ManagedScripts
     {
         private static ConcurrentDictionary<string, Type> StoredScripts { get; } = new ConcurrentDictionary<string, Type>();
 

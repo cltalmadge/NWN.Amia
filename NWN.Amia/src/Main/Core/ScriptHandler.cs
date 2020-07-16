@@ -19,7 +19,7 @@ namespace NWN.Amia.Main.Core
 
         private IRunnableScript GetScriptFromContext()
         {
-            return ScriptDictionary.GetScriptFromName(_currentScript.ScriptName);
+            return ManagedScripts.GetScriptFromName(_currentScript.ScriptName);
         }
     }
 }

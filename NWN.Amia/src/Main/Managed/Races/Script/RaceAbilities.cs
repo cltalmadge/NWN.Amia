@@ -13,7 +13,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
         public int Run(uint nwnObjectId)
         {
             // Race isn't managed. Do nothing.
-            if (!RacialEffectDictionary.Races.ContainsKey(NWScript.GetRacialType(nwnObjectId)))
+            if (!ManagedRaces.Races.ContainsKey(NWScript.GetRacialType(nwnObjectId)))
             {
                 return 0;
             }
