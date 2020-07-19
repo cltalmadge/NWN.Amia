@@ -54,6 +54,4 @@ namespace NWN.Amia.Main.Managed.Races
             Feytouched = 18
         }
     }
-
-    
 }
