@@ -45,7 +45,7 @@ namespace NWN.Amia.Main.Core
                     (IRunnableScript) Activator.CreateInstance(
                         StoredScripts[scriptName]);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 scriptToRun = new UnhandledScript();
             }
