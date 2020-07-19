@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using NWN.Core;
-using NWN.Core.NWNX;
 
 namespace NWN.Amia.Main.Managed.Characters.Types
 {
