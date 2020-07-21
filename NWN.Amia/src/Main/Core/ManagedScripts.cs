@@ -9,22 +9,23 @@ namespace NWN.Amia.Main.Core
 {
     public static class ManagedScripts
     {
-        private static ConcurrentDictionary<string, Type> StoredScripts { get; } = new ConcurrentDictionary<string, Type>();
+        private static ConcurrentDictionary<string, Type> StoredScripts { get; } =
+            new ConcurrentDictionary<string, Type>();
 
         private static bool Initialized { get; set; }
 
         private static void PerformInitialSetup()
         {
             Console.WriteLine("Performing initial setup for script dictionary.");
-            
+
             foreach (var type in GetTypesInAssembly(Assembly.GetExecutingAssembly()))
             {
                 var scriptName = (ScriptName) Attribute.GetCustomAttribute(type, typeof(ScriptName));
 
-                if (scriptName?.Name != null)
-                {
-                    StoredScripts.TryAdd(scriptName.Name, type);
-                }
+                if (scriptName?.Name == null) continue;
+                
+                StoredScripts.TryAdd(scriptName.Name, type);
+                Console.WriteLine($"Cached script {scriptName.Name}.");
             }
 
             Initialized = true;
@@ -36,7 +37,7 @@ namespace NWN.Amia.Main.Core
             {
                 PerformInitialSetup();
             }
-            
+
             IRunnableScript scriptToRun;
 
             try
@@ -52,7 +53,7 @@ namespace NWN.Amia.Main.Core
 
             return scriptToRun;
         }
-        
+
 
         private static IEnumerable<Type> GetTypesInAssembly(Assembly assembly)
         {
