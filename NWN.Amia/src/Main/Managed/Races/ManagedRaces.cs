@@ -35,23 +35,23 @@ namespace NWN.Amia.Main.Managed.Races
 
         public enum RacialType
         {
-            Duergar = 1,
-            Drow = 5,
+            Duergar = 30,
+            Drow = 33,
             Tiefling = 1000,
             Aasimar = 1001,
-            Svirfneblin = 9,
-            Ghostwise = 11,
+            Svirfneblin = 36,
+            Ghostwise = 37,
             Feyri = 1003,
-            Goblin = 12,
-            Kobold = 13,
-            Hobgoblin = 18,
-            Orc = 19,
-            Orog = 21,
-            Chultan = 24,
-            Damaran = 25,
-            Ffolk = 27,
-            Mulan = 29,
-            Ogrillon = 20,
+            Goblin = 38,
+            Kobold = 39,
+            Hobgoblin = 42,
+            Orc = 43,
+            Orog = 45,
+            Chultan = 47,
+            Damaran = 48,
+            Ffolk = 50,
+            Mulan = 52,
+            Ogrillon = 44,
             Feytouched = 1002
         }
     }
