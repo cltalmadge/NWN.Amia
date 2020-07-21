@@ -28,30 +28,31 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Damaran, new DamaranEffects()},
                 {(int) RacialType.Ffolk, new FfolkEffects()},
                 {(int) RacialType.Mulan, new MulanEffects()},
-                {(int) RacialType.Ogrillon, new OgrillonEffects()}
+                {(int) RacialType.Ogrillon, new OgrillonEffects()},
+                {(int)RacialType.Feytouched, new FeytouchedEffects()}
             };
         }
 
         public enum RacialType
         {
-            Duergar = 0,
-            Drow = 1,
-            Tiefling = 2,
-            Aasimar = 3,
-            Svirfneblin = 4,
-            Ghostwise = 5,
-            Feyri = 6,
-            Goblin = 8,
-            Kobold = 9,
-            Hobgoblin = 10,
-            Orc = 11,
-            Orog = 12,
-            Chultan = 13,
-            Damaran = 14,
-            Ffolk = 15,
-            Mulan = 16,
-            Ogrillon = 17,
-            Feytouched = 18
+            Duergar = 1,
+            Drow = 5,
+            Tiefling = 1000,
+            Aasimar = 1001,
+            Svirfneblin = 9,
+            Ghostwise = 11,
+            Feyri = 1003,
+            Goblin = 12,
+            Kobold = 13,
+            Hobgoblin = 18,
+            Orc = 19,
+            Orog = 21,
+            Chultan = 24,
+            Damaran = 25,
+            Ffolk = 27,
+            Mulan = 29,
+            Ogrillon = 20,
+            Feytouched = 1002
         }
     }
 }

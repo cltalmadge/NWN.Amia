@@ -100,12 +100,12 @@ public static class RaceAdjustmentUtils
 
     private enum BaseRace
     {
-        Human = 0,
-        Dwarf = 1,
-        HalfOrc = 2,
+        Human = 22,
+        Dwarf = 0,
+        HalfOrc = 17,
         Elf = 3,
-        Gnome = 4,
-        Halfling = 5
+        Gnome = 8,
+        Halfling = 10
     }
 }
 }

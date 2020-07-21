@@ -114,7 +114,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
             }
         }
 
-        private List<Effect> GetEffectsFromLocalVars()
+        private static List<Effect> GetEffectsFromLocalVars()
         {
             return new List<Effect>();
         }

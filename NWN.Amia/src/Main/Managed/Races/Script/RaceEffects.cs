@@ -5,12 +5,11 @@ using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Races.Script
 {
-    [ScriptName("race_abilities")]
-    public class RaceAbilities : IRunnableScript
+    [ScriptName("race_effects")]
+    public class RaceEffects : IRunnableScript
     {
         public int Run(uint nwnObjectId)
         {
-            // Race isn't managed. Do nothing.
             var playerRace = NWScript.GetSubRace(nwnObjectId) == ""
                 ? NWScript.GetRacialType(nwnObjectId)
                 : GetRaceFromSubrace(nwnObjectId);
@@ -26,17 +25,6 @@ namespace NWN.Amia.Main.Managed.Races.Script
             return 0;
         }
 
-        private void SetEffectsToSupernaturalAndApply(uint nwnObjectId)
-        {
-            var raceEffects = GetListOfEffectsForRace(nwnObjectId);
-            var supernaturalEffects = ConvertEffectsToSupernatural(raceEffects);
-
-            foreach (Effect effect in supernaturalEffects)
-            {
-                NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, nwnObjectId);
-            }
-        }
-
         private int GetRaceFromSubrace(in uint nwnObjectId)
         {
             return NWScript.GetSubRace(nwnObjectId).ToLower() switch
@@ -48,6 +36,18 @@ namespace NWN.Amia.Main.Managed.Races.Script
                 "feyri" => (int) ManagedRaces.RacialType.Feyri,
                 _ => -1
             };
+        }
+
+        private void SetEffectsToSupernaturalAndApply(uint nwnObjectId)
+        {
+            var raceEffects = GetListOfEffectsForRace(nwnObjectId);
+            
+            var supernaturalEffects = ConvertEffectsToSupernatural(raceEffects);
+
+            foreach (Effect effect in supernaturalEffects)
+            {
+                NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, nwnObjectId);
+            }
         }
 
         private static List<Effect> GetListOfEffectsForRace(uint nwnObjectId)
