@@ -29,7 +29,9 @@ namespace NWN.Amia.Main.Core
         public int OnRunScript(string script, uint oidSelf)
         {
             ObjectSelf = oidSelf;
-
+            
+            Console.WriteLine($"------------------> Executing {script}");
+            
             var scriptBeingCalled = new ScriptContext {OwnerObject = oidSelf, ScriptName = script};
             IContextHandler contextHandler = new ScriptHandler(scriptBeingCalled);
 

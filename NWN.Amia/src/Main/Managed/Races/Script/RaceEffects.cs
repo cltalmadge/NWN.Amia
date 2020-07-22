@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NWN.Amia.Main.Core.Types;
 using NWN.Core;
@@ -13,6 +14,8 @@ namespace NWN.Amia.Main.Managed.Races.Script
             var playerRace = NWScript.GetSubRace(nwnObjectId) == ""
                 ? NWScript.GetRacialType(nwnObjectId)
                 : GetRaceFromSubrace(nwnObjectId);
+            
+            Console.WriteLine($"--------------> race_effects: User's race is {playerRace}");
 
             var raceIsNotManaged = !ManagedRaces.Races.ContainsKey(playerRace);
             if (raceIsNotManaged)
