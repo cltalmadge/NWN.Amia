@@ -30,8 +30,6 @@ namespace NWN.Amia.Main.Core
         {
             ObjectSelf = oidSelf;
             
-            Console.WriteLine($"------------------> Executing {script}");
-            
             var scriptBeingCalled = new ScriptContext {OwnerObject = oidSelf, ScriptName = script};
             IContextHandler contextHandler = new ScriptHandler(scriptBeingCalled);
 
