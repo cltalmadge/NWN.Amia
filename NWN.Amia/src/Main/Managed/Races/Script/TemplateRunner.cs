@@ -1,5 +1,6 @@
 ﻿using NWN.Amia.Main.Core.Types;
 using NWN.Amia.Main.Managed.Races.Types.RacialTemplates;
+using NWN.Amia.Main.Managed.Races.Utils;
 using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Races.Script
@@ -9,7 +10,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
     {
         public int Run(uint nwnObjectId)
         {
-            if (NWScript.GetItemPossessedBy(nwnObjectId, "char_template") == NWScript.OBJECT_INVALID) return 0;
+            if (TemplateItem.CreatureDoesNotHaveTemplate(nwnObjectId)) return 0;
 
             var template = TemplateMaker.CreateTemplate(nwnObjectId);
 
@@ -23,7 +24,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
     {
         public static ICharacterTemplate CreateTemplate(in uint nwnObjectId)
         {
-            var templateItem = NWScript.GetItemPossessedBy(nwnObjectId, "char_template");
+            var templateItem = NWScript.GetItemPossessedBy(nwnObjectId, TemplateItem.TemplateItemResRef);
 
             return new RacialTemplate(nwnObjectId)
             {
@@ -32,7 +33,8 @@ namespace NWN.Amia.Main.Managed.Races.Script
                 ConBonus = NWScript.GetLocalInt(templateItem, "con_mod"),
                 IntBonus = NWScript.GetLocalInt(templateItem, "int_mod"),
                 WisBonus = NWScript.GetLocalInt(templateItem, "wis_mod"),
-                ChaBonus = NWScript.GetLocalInt(templateItem, "cha_mod")
+                ChaBonus = NWScript.GetLocalInt(templateItem, "cha_mod"),
+                SubRace = NWScript.GetLocalString(templateItem, "subrace")
             };
         }
     }
