@@ -11,10 +11,8 @@ namespace NWN.Amia.Main.Managed.Races.Script
     {
         public int Run(uint nwnObjectId)
         {
-            var playerRace = NWScript.GetSubRace(nwnObjectId) == ""
-                ? NWScript.GetRacialType(nwnObjectId)
-                : GetRaceFromSubrace(nwnObjectId);
-            
+            var playerRace = NWScript.GetRacialType(nwnObjectId);
+
             Console.WriteLine($"--------------> race_effects: User's race is {playerRace}");
 
             var raceIsNotManaged = !ManagedRaces.Races.ContainsKey(playerRace);
@@ -27,20 +25,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
 
             return 0;
         }
-
-        private int GetRaceFromSubrace(in uint nwnObjectId)
-        {
-            return NWScript.GetSubRace(nwnObjectId).ToLower() switch
-            {
-                "aasimar" => (int) ManagedRaces.RacialType.Aasimar,
-                "tiefling" => (int) ManagedRaces.RacialType.Tiefling,
-                "feytouched" => (int) ManagedRaces.RacialType.Feytouched,
-                "fey'ri" => (int) ManagedRaces.RacialType.Feyri,
-                "feyri" => (int) ManagedRaces.RacialType.Feyri,
-                _ => -1
-            };
-        }
-
+        
         private void SetEffectsToSupernaturalAndApply(uint nwnObjectId)
         {
             var raceEffects = GetListOfEffectsForRace(nwnObjectId);
