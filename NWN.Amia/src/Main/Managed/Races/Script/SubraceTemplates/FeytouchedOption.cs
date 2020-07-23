@@ -15,11 +15,11 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
 
             SetSubRaceMod(nwnObjectId);
             
-            NWN.Core.NWNX.CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_FEY);
-
             var templateRunner = new TemplateRunner();
 
             templateRunner.Run(nwnObjectId);
+            
+            NWN.Core.NWNX.CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_FEY);
 
             return 0;
         }
