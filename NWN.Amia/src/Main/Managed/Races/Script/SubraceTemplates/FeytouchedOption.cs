@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-using NWN.Amia.Main.Core.Types;
-using NWN.Amia.Main.Managed.Races.Types.RacialTemplates;
+﻿using NWN.Amia.Main.Core.Types;
 using NWN.Amia.Main.Managed.Races.Utils;
 using NWN.Core;
 
@@ -11,6 +9,8 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
     {
         public int Run(uint nwnObjectId)
         {
+            if (TemplateItem.Initialized(nwnObjectId)) return 0;
+            
             NWScript.CreateItemOnObject(TemplateItem.TemplateItemResRef, nwnObjectId);
 
             SetSubRaceMod(nwnObjectId);

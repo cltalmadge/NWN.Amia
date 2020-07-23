@@ -10,7 +10,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
 {
     public class RacialTemplate : ICharacterTemplate
     {
-        private const string TemplateInitialized = "initialized";
+        private const string TemplateInitialized = TemplateItem.InitializedVar;
         private readonly uint _nwnObjectId;
 
         public RacialTemplate(in uint nwnObjectId)

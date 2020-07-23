@@ -15,6 +15,8 @@ namespace NWN.Amia.Main.Managed.Races.Utils
         public const string ChaModVar = "cha_mod";
         public const string SubRaceVar = "subrace";
 
+        public const string InitializedVar = "template_initialized";
+
         public static bool CreatureDoesNotHaveTemplate(uint creature)
         {
             return GetTemplateItemFromCreature(creature) == NWScript.OBJECT_INVALID;
@@ -68,6 +70,11 @@ namespace NWN.Amia.Main.Managed.Races.Utils
         private static void SetLocalString(string lvar, uint creature, string value)
         {
             NWScript.SetLocalString(GetTemplateItemFromCreature(creature), lvar, value);
+        }
+
+        public static bool Initialized(in uint nwnObjectId)
+        {
+            return NWScript.GetLocalInt(GetTemplateItemFromCreature(nwnObjectId), InitializedVar) == NWScript.TRUE;
         }
     }
 }
