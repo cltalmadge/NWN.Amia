@@ -17,6 +17,7 @@ public static class RaceAdjustmentUtils
             {(int) BaseRace.HalfOrc, GetHalfOrcAdjustments()},
             {(int) BaseRace.Gnome, GetGnomeAdjustments()},
             {(int) BaseRace.Dwarf, GetDwarfAdjustments()},
+            {(int) BaseRace.HalfElf, GetHalfElfAdjustments()}
         };
     }
 
@@ -96,16 +97,30 @@ public static class RaceAdjustmentUtils
             WisBonus = 0,
             ChaBonus = 0
         };
+    }    
+    
+    private static RacialTemplate GetHalfElfAdjustments()
+    {
+        return new RacialTemplate
+        {
+            StrBonus = 0,
+            IntBonus = 0,
+            DexBonus = -1,
+            ConBonus = 0,
+            WisBonus = 0,
+            ChaBonus = 0
+        };
     }
 
     private enum BaseRace
     {
-        Human = 22,
+        Human = 6,
         Dwarf = 0,
-        HalfOrc = 17,
-        Elf = 3,
-        Gnome = 8,
-        Halfling = 10
+        HalfOrc = 5,
+        HalfElf = 4,
+        Elf = 1,
+        Gnome = 2,
+        Halfling = 3
     }
 }
 }
