@@ -32,11 +32,11 @@ namespace NWN.Amia.Main.Managed.Races.Script
         {
             return NWScript.GetSubRace(nwnObjectId).ToLower() switch
             {
-                "aasimar" => (int) ManagedRaces.RacialType.Aasimar,
-                "tiefling" => (int) ManagedRaces.RacialType.Tiefling,
-                "feytouched" => (int) ManagedRaces.RacialType.Feytouched,
-                "fey'ri" => (int) ManagedRaces.RacialType.Feyri,
-                "feyri" => (int) ManagedRaces.RacialType.Feyri,
+                // "aasimar" => (int) ManagedRaces.RacialType.Aasimar,
+                // "tiefling" => (int) ManagedRaces.RacialType.Tiefling,
+                // "feytouched" => (int) ManagedRaces.RacialType.Feytouched,
+                // "fey'ri" => (int) ManagedRaces.RacialType.Feyri,
+                // "feyri" => (int) ManagedRaces.RacialType.Feyri,
                 _ => -1
             };
         }
