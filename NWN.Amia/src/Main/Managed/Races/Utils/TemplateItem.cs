@@ -7,13 +7,13 @@ namespace NWN.Amia.Main.Managed.Races.Utils
     {
         public const string TemplateItemResRef = "char_template";
 
-        public const string StrModVar = "str_mod";
-        public const string DexModVar = "dex_mod";
-        public const string ConModVar = "con_mod";
-        public const string IntModVar = "int_mod";
-        public const string WisModVar = "wis_mod";
-        public const string ChaModVar = "cha_mod";
-        public const string SubRaceVar = "subrace";
+        private const string StrModVar = "str_mod";
+        private const string DexModVar = "dex_mod";
+        private const string ConModVar = "con_mod";
+        private const string IntModVar = "int_mod";
+        private const string WisModVar = "wis_mod";
+        private const string ChaModVar = "cha_mod";
+        private const string SubRaceVar = "subrace";
 
         public const string InitializedVar = "template_initialized";
 

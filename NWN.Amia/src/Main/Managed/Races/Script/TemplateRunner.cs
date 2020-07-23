@@ -11,6 +11,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
         public int Run(uint nwnObjectId)
         {
             if (TemplateItem.CreatureDoesNotHaveTemplate(nwnObjectId)) return 0;
+            if (TemplateItem.Initialized(nwnObjectId)) return 0;
 
             var template = TemplateMaker.CreateTemplate(nwnObjectId);
 
