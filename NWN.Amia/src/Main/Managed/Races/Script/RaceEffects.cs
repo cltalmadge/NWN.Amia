@@ -40,7 +40,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
         private static void ApplyEffectPermanently(Effect effect) =>
             NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, _player);
 
-        private static List<Effect> GetListOfEffectsForRace() => new RacialEffectCreator().GetFeatEffects(_player);
+        private static IEnumerable<Effect> GetListOfEffectsForRace() => new RacialEffectCreator().GetFeatEffects(_player);
 
         private static IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects) =>
             raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
