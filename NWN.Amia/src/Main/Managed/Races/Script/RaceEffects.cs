@@ -1,53 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using NWN.Amia.Main.Core.Types;
 using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Races.Script
 {
-    [ScriptName("race_effects")]
+    [ScriptName("race_effects"), UsedImplicitly]
     public class RaceEffects : IRunnableScript
     {
+        private static uint _player;
+
         public int Run(uint nwnObjectId)
         {
-            var playerRace = NWScript.GetRacialType(nwnObjectId);
+            _player = nwnObjectId;
 
-            Console.WriteLine($"--------------> race_effects: User's race is {playerRace}");
-
-            var raceIsNotManaged = !ManagedRaces.Races.ContainsKey(playerRace);
-            if (raceIsNotManaged)
-            {
-                return 0;
-            }
-            
-            SetEffectsToSupernaturalAndApply(nwnObjectId);
+            if (RaceIsManaged()) SetEffectsToSupernaturalAndApply();
 
             return 0;
         }
-        
-        private void SetEffectsToSupernaturalAndApply(uint nwnObjectId)
-        {
-            var raceEffects = GetListOfEffectsForRace(nwnObjectId);
-            
-            var supernaturalEffects = ConvertEffectsToSupernatural(raceEffects);
 
-            foreach (Effect effect in supernaturalEffects)
+        private static bool RaceIsManaged()
+        {
+            var playerRace = NWScript.GetRacialType(_player);
+
+            return ManagedRaces.Races.ContainsKey(playerRace);
+        }
+
+        private void SetEffectsToSupernaturalAndApply()
+        {
+            var supernaturalEffects = ConvertEffectsToSupernatural(GetListOfEffectsForRace());
+
+            foreach (var effect in supernaturalEffects)
             {
-                NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, nwnObjectId);
+                ApplyEffectPermanently(effect);
             }
         }
 
-        private static List<Effect> GetListOfEffectsForRace(uint nwnObjectId)
-        {
-            var raceEffects = new RacialEffectCreator().GetFeatEffects(nwnObjectId);
-            return raceEffects;
-        }
+        private static void ApplyEffectPermanently(Effect effect) =>
+            NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, _player);
 
-        private List<Effect> ConvertEffectsToSupernatural(List<Effect> raceEffects)
-        {
-            return raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
+        private static List<Effect> GetListOfEffectsForRace() => new RacialEffectCreator().GetFeatEffects(_player);
+
+        private IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects) =>
+            raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
                 .ToList();
-        }
     }
 }
