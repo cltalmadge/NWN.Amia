@@ -27,7 +27,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
             return ManagedRaces.Races.ContainsKey(playerRace);
         }
 
-        private void SetEffectsToSupernaturalAndApply()
+        private static void SetEffectsToSupernaturalAndApply()
         {
             var supernaturalEffects = ConvertEffectsToSupernatural(GetListOfEffectsForRace());
 
@@ -42,7 +42,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
 
         private static List<Effect> GetListOfEffectsForRace() => new RacialEffectCreator().GetFeatEffects(_player);
 
-        private IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects) =>
+        private static IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects) =>
             raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
                 .ToList();
     }
