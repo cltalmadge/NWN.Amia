@@ -24,7 +24,7 @@ namespace NWN.Amia.Main.Core
         public void OnMainLoop(ulong frame)
         {
             // Don't do anything.
-        }
+        }    
 
         public int OnRunScript(string script, uint oidSelf)
         {

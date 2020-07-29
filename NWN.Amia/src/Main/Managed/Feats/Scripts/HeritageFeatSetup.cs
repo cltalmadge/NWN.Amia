@@ -1,26 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 using NWN.Amia.Main.Core.Types;
 using NWN.Amia.Main.Managed.Races;
 using NWN.Core;
-using NWN.Core.NWNX;
 
 namespace NWN.Amia.Main.Managed.Feats.Scripts
 {
-    [ScriptName("heritage_setup")]
+    [ScriptName("heritage_setup"), UsedImplicitly]
     public class HeritageFeatSetup : IRunnableScript
     {
+        private static uint _nwnObject;
+
         public int Run(uint nwnObjectId)
         {
-            var playerRace = NWScript.GetRacialType(nwnObjectId);
-            var pckey = NWScript.GetItemPossessedBy(nwnObjectId, "ds_pckey");
-            
-            if (!GetListOfRacesWithHeritage().Contains(playerRace)) return 0;
-            if (NWScript.GetLocalInt(pckey, "heritage_setup") == 1) return 0;
+            _nwnObject = nwnObjectId;
 
-            PerformHeritageFeatSetup(nwnObjectId);
-                
+            if (PlayerRaceIsSupported() && HeritageFeatNotInitialized())
+            {
+                PerformHeritageFeatSetup(nwnObjectId);
+            }
+
             return 0;
+        }
+
+        private static bool PlayerRaceIsSupported()
+        {
+            var playerRace = NWScript.GetRacialType(_nwnObject);
+            return GetListOfRacesWithHeritage().Contains(playerRace);
+        }
+
+        private static bool HeritageFeatNotInitialized()
+        {
+            var pckey = NWScript.GetItemPossessedBy(_nwnObject, "ds_pckey");
+            return NWScript.GetLocalInt(pckey, "heritage_setup") == NWScript.FALSE;
         }
 
         private static List<int> GetListOfRacesWithHeritage()
@@ -38,7 +50,7 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
             };
         }
 
-        private void PerformHeritageFeatSetup(in uint nwnObjectId)
+        private static void PerformHeritageFeatSetup(in uint nwnObjectId)
         {
             NWScript.SendMessageToPC(nwnObjectId, "TODO: Implement heritage abilities.");
         }
