@@ -30,6 +30,8 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
 
             spawner.SpawnEncounters();
 
+            InitTriggerCooldown();
+
             return 0;
         }
 
@@ -55,5 +57,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
 
             return partyMembers;
         }
+
+        private void InitTriggerCooldown() => NWScript.SetLocalInt(_trigger, "cooldown_start", TimePlugin.GetTimeStamp());
     }
 }
