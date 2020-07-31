@@ -5,6 +5,6 @@ namespace NWN.Amia.Main.Managed.Feats.Types
 {
     public interface IEffectCreator
     {
-        List<Effect> GetFeatEffects(uint objectId);
+        List<Effect> GetEffects(uint objectId);
     }
 }

@@ -38,7 +38,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
         }
 
         private static IEnumerable<Effect> GetListOfEffectsForRace() =>
-            new RacialEffectCreator().GetFeatEffects(_player);
+            new RaceEffectHelper().GetEffects(_player);
 
         private static IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects) =>
             raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)

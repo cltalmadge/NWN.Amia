@@ -4,9 +4,9 @@ using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Races
 {
-    public class RacialEffectCreator : IEffectCreator
+    public class RaceEffectHelper : IEffectCreator
     {
-        public List<Effect> GetFeatEffects(uint objectId)
+        public List<Effect> GetEffects(uint objectId)
         {
             var raceType = NWScript.GetRacialType(objectId);
 
