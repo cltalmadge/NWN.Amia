@@ -1,10 +1,11 @@
-﻿using NWN.Amia.Main.Core.Types;
+﻿using JetBrains.Annotations;
+using NWN.Amia.Main.Core.Types;
 using NWN.Amia.Main.Managed.Races.Script.SubraceTemplates;
 using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Races.Script
 {
-    [ScriptName("subrace_setup")]
+    [ScriptName("subrace_setup"), UsedImplicitly]
     public class SubraceSetup : IRunnableScript
     {
         public int Run(uint nwnObjectId)

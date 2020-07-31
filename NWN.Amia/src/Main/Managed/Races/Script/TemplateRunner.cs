@@ -13,7 +13,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
             if (TemplateItem.CreatureDoesNotHaveTemplate(nwnObjectId)) return 0;
             if (TemplateItem.Initialized(nwnObjectId)) return 0;
 
-            var template = TemplateMaker.CreateTemplate(nwnObjectId);
+            var template = TemplateMaker.SetupStats(nwnObjectId);
 
             template.Apply();
 
@@ -23,7 +23,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
 
     public static class TemplateMaker
     {
-        public static ICharacterTemplate CreateTemplate(in uint nwnObjectId)
+        public static ICharacterTemplate SetupStats(in uint nwnObjectId)
         {
             var templateItem = NWScript.GetItemPossessedBy(nwnObjectId, TemplateItem.TemplateItemResRef);
 
