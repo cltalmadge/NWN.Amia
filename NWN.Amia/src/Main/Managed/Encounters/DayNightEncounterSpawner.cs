@@ -55,8 +55,8 @@ namespace NWN.Amia.Main.Managed.Encounters
         {
             for (var i = 0; i < maxSpawns; i++)
             {
-                var randomDayCreature = new Random().Next(0, resRefs.Count-1);
-                SpawnEncounterAtWaypoint(resRefs[randomDayCreature]);
+                var randomCreature = new Random().Next(0, resRefs.Count);
+                SpawnEncounterAtWaypoint(resRefs[randomCreature]);
             }
         }
 
