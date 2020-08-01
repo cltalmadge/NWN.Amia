@@ -31,7 +31,11 @@ namespace NWN.Amia.Main.Managed.Encounters
             var isNightTime = NWScript.GetTimeHour() < 6 && NWScript.GetTimeHour() >= 18;
 
             var spawnsVary = NWScript.GetLocalInt(_trigger, "spawns_vary") == 1;
+            
             var spawnsToChoose = isNightTime && spawnsVary ? VarPrefixes[1] : VarPrefixes[0];
+            
+            Console.WriteLine($"{spawnsToChoose}");
+            
             var dayCreatureResRefs = GetResRefsForPrefix(spawnsToChoose) as string[] ??
                                      GetResRefsForPrefix(spawnsToChoose).ToArray();
 
@@ -70,7 +74,7 @@ namespace NWN.Amia.Main.Managed.Encounters
             for (var i = 0; i < numberOfLocalVars; i++)
             {
                 var variableName = ObjectPlugin.GetLocalVariable(_objectWithVariables, i).key;
-                if (variableName == prefix)
+                if (variableName.Contains(prefix))
                 {
                     resRefs.Add(NWScript.GetLocalString(_objectWithVariables, variableName));
                 }
