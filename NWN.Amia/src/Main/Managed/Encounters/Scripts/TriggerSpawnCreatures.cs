@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using JetBrains.Annotations;
 using NWN.Amia.Main.Core.Types;
 using NWN.Core;
@@ -23,8 +24,8 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
             {
                 return 0;
             }
-            
-            
+
+
             if (TriggerStillOnCooldown())
             {
                 NWScript.SendMessageToPC(player, "You see signs of recent fighting here.");
@@ -33,7 +34,11 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
 
             var spawner = new DayNightEncounterSpawner(_trigger, area);
 
-            if (GetNumberOfPartyMembers(player) > 6) spawner.DoubleSpawn = true;
+            if (GetNumberOfPartyMembers(player) > 6)
+            {
+                Console.WriteLine("Double spawns.");
+                spawner.DoubleSpawn = true;
+            }
 
             spawner.SpawnEncounters();
 
@@ -65,6 +70,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
             return partyMembers;
         }
 
-        private void InitTriggerCooldown() => NWScript.SetLocalInt(_trigger, "cooldown_start", TimePlugin.GetTimeStamp());
+        private void InitTriggerCooldown() =>
+            NWScript.SetLocalInt(_trigger, "cooldown_start", TimePlugin.GetTimeStamp());
     }
 }
