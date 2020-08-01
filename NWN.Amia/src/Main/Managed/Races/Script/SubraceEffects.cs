@@ -7,8 +7,7 @@ using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Races.Script
 {
-    [ScriptName("subrace_effects")]
-    [UsedImplicitly]
+    [ScriptName("subrace_effects"), UsedImplicitly]
     public class SubraceEffects : IRunnableScript
     {
         public int Run(uint nwnObjectId)

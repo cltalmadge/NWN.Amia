@@ -29,13 +29,19 @@ namespace NWN.Amia.Main.Managed.Encounters
 
 
             var isNightTime = NWScript.GetTimeHour() < 6 && NWScript.GetTimeHour() >= 18;
-            
+
             var spawnsToChoose = isNightTime ? VarPrefixes[1] : VarPrefixes[0];
             var dayCreatureResRefs = GetResRefsForPrefix(spawnsToChoose) as string[] ??
                                      GetResRefsForPrefix(spawnsToChoose).ToArray();
 
             var typicalSpawns = NWScript.d4() + 2;
             var maxSpawns = DoubleSpawn ? typicalSpawns * 2 : typicalSpawns;
+
+            if (dayCreatureResRefs.Length == 0)
+            {
+                Console.WriteLine("DEBUG: Trigger was set as an encounter spawner but could not resolve any resrefs.");
+                return;
+            }
 
             SpawnCreaturesFromResRefs(maxSpawns, dayCreatureResRefs);
         }
@@ -44,7 +50,7 @@ namespace NWN.Amia.Main.Managed.Encounters
         {
             for (var i = 0; i < maxSpawns; i++)
             {
-                var randomDayCreature = new Random().Next(0, resRefs.Count);
+                var randomDayCreature = new Random().Next(0, resRefs.Count-1);
                 SpawnEncounterAtWaypoint(resRefs[randomDayCreature]);
             }
         }
