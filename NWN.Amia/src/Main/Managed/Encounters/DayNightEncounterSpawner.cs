@@ -62,6 +62,7 @@ namespace NWN.Amia.Main.Managed.Encounters
 
         private static void SpawnEncounterAtWaypoint(string resRef)
         {
+            Console.WriteLine($"Spawning ResRef {resRef}");
             NWScript.CreateObject(NWScript.OBJECT_TYPE_CREATURE, resRef, _waypointLocation);
         }
 
