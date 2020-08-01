@@ -18,6 +18,13 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
             var player = NWScript.GetEnteringObject();
             var area = NWScript.GetArea(_trigger);
 
+            var notPlayer = NWScript.GetIsPC(player) != 1 && NWScript.GetIsPossessedFamiliar(player) != 1;
+            if (notPlayer)
+            {
+                return 0;
+            }
+            
+            
             if (TriggerStillOnCooldown())
             {
                 NWScript.SendMessageToPC(player, "You see signs of recent fighting here.");
