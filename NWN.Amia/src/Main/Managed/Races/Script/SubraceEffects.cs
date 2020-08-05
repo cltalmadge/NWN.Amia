@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using NWN.Amia.Main.Core.Types;
 using NWN.Amia.Main.Managed.Feats;
@@ -14,6 +15,11 @@ namespace NWN.Amia.Main.Managed.Races.Script
         {
             var listOfSubraceEffects = ResolveEffectsForObject(nwnObjectId);
 
+            if (!listOfSubraceEffects.Any())
+            {
+                return 0;
+            }
+            
             EffectApplier.Apply(nwnObjectId, listOfSubraceEffects);
 
             return 0;
