@@ -9,20 +9,27 @@ namespace NWN.Amia.Main.Core
     [UsedImplicitly]
     public class AmiaCore : IGameManager
     {
+        public static AmiaCore Instance { get; } = new AmiaCore();
         public uint ObjectSelf { get; private set; } = NWScript.OBJECT_INVALID;
         private ulong NextEventId { get; set; }
+        
         private readonly Stack<ScriptContext> _scriptContexts = new Stack<ScriptContext>();
         private readonly Dictionary<ulong, Closure> _closures = new Dictionary<ulong, Closure>();
+
+        public static int Bootstrap(IntPtr ptr, int nativeHandlesLength) {
+            // Call internal bootstrap function
+            return Internal.Init(ptr, nativeHandlesLength, Instance);
+        }
 
         public void OnMainLoop(ulong frame)
         {
             // Don't do anything.
-        }
+        }    
 
         public int OnRunScript(string script, uint oidSelf)
         {
             ObjectSelf = oidSelf;
-
+            
             var scriptBeingCalled = new ScriptContext {OwnerObject = oidSelf, ScriptName = script};
             IContextHandler contextHandler = new ScriptHandler(scriptBeingCalled);
 

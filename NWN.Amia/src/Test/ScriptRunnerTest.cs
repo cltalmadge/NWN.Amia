@@ -21,8 +21,7 @@ namespace NWN.Amia.Test
         public void ScriptRunnerMockScriptReturnsZero()
         {
             _runner = new ScriptHandler(_managedContext);
-            Assert.Equal(0,
-                _runner.HandleContext());
+            Assert.Equal(0, _runner.HandleContext());
         }
 
         [Fact]
