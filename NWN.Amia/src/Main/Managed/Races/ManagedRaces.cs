@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NWN.Amia.Main.Managed.Feats.Types;
+using NWN.Amia.Main.Managed.Races.Types.HeritageAbilities;
 using NWN.Amia.Main.Managed.Races.Types.RacialEffects;
 
 namespace NWN.Amia.Main.Managed.Races
@@ -7,6 +8,7 @@ namespace NWN.Amia.Main.Managed.Races
     public static class ManagedRaces
     {
         public static Dictionary<int, IEffectCollector> Races { get; }
+        public static Dictionary<int, IHeritageAbilities> HeritageRaces { get; }
 
         static ManagedRaces()
         {
@@ -30,6 +32,11 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Mulan, new MulanEffects()},
                 {(int) RacialType.Ogrillon, new OgrillonEffects()},
                 {(int)RacialType.Feytouched, new FeytouchedEffects()}
+            };
+            
+            HeritageRaces = new Dictionary<int, IHeritageAbilities>
+            {
+                {(int) RacialType.Drow, new DrowHeritageAbilities()} 
             };
         }
 
@@ -55,4 +62,6 @@ namespace NWN.Amia.Main.Managed.Races
             Feytouched = 1002
         }
     }
+
+
 }

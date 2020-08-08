@@ -19,5 +19,7 @@ namespace NWN.Amia.Main.Managed.Characters.Types
         
         public List<int> Classes { get; set; }
         public List<Effect> ActiveEffects { get; set; }
+
+        public void UpdateAbilities();
     }
 }
