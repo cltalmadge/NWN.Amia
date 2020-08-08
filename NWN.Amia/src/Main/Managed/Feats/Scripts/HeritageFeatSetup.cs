@@ -25,6 +25,10 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
             _pckey = NWScript.GetItemPossessedBy(_nwnObject, "ds_pckey");
             _playerRace = ResolvePlayerRace();
 
+            if(HasHeritageFeat()) Console.WriteLine("Has heritage feat.");
+            if(PlayerRaceIsSupported()) Console.WriteLine("Player race is supported.");
+            if(HeritageFeatInitialized()) Console.WriteLine("Feat already initialized.");
+            
             if (!PlayerRaceIsSupported() || HeritageFeatInitialized() || !HasHeritageFeat()) return 0;
 
             Console.WriteLine("------------> Performing initial heritage feat setup.");
