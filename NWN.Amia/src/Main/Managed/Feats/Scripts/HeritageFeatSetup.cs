@@ -26,14 +26,14 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
             _playerRace = ResolvePlayerRace();
 
             Console.WriteLine($"Player race is {_playerRace}.");
-            if(HasHeritageFeat()) Console.WriteLine("Has heritage feat.");
-            if(PlayerRaceIsSupported()) Console.WriteLine("Player race is supported.");
-            if(HeritageFeatInitialized()) Console.WriteLine("Feat already initialized.");
-            
+            if (HasHeritageFeat()) Console.WriteLine("Has heritage feat.");
+            if (PlayerRaceIsSupported()) Console.WriteLine("Player race is supported.");
+            if (HeritageFeatInitialized()) Console.WriteLine("Feat already initialized.");
+
             if (!PlayerRaceIsSupported() || HeritageFeatInitialized() || !HasHeritageFeat()) return 0;
 
             Console.WriteLine("------------> Performing initial heritage feat setup.");
-            
+
             PerformHeritageFeatSetup();
             FlagHeritageAsSetup();
 
@@ -49,7 +49,7 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
                 "tiefling" => (int) ManagedRaces.RacialType.Tiefling,
                 "feytouched" => (int) ManagedRaces.RacialType.Feytouched,
                 "feyri" => (int) ManagedRaces.RacialType.Feyri,
-                _ => _playerRace
+                _ => NWScript.GetRacialType(_nwnObject)
             };
 
         private static bool PlayerRaceIsSupported() => ManagedRaces.HeritageRaces.ContainsKey(_playerRace);
