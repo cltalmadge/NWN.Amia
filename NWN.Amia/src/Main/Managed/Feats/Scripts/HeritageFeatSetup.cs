@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 using NWN.Amia.Main.Core.Types;
 using NWN.Amia.Main.Managed.Characters;
 using NWN.Amia.Main.Managed.Races;
@@ -23,13 +24,17 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
             _pckey = NWScript.GetItemPossessedBy(_nwnObject, "ds_pckey");
             _playerRace = ResolvePlayerRace();
 
-            if (!PlayerRaceIsSupported() || !HeritageFeatNotInitialized()) return 0;
+            if (!PlayerRaceIsSupported() || HeritageFeatInitialized() || !HasHeritageFeat()) return 0;
 
+            Console.WriteLine("------------> Performing initial heritage feat setup.");
+            
             PerformHeritageFeatSetup();
             FlagHeritageAsSetup();
 
             return 0;
         }
+
+        private static bool HasHeritageFeat() => NWScript.GetHasFeat(1238, _nwnObject) == NWScript.TRUE;
 
         private static int ResolvePlayerRace() =>
             _player.Subrace.ToLower() switch
@@ -43,8 +48,8 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
 
         private static bool PlayerRaceIsSupported() => ManagedRaces.HeritageRaces.ContainsKey(_playerRace);
 
-        private static bool HeritageFeatNotInitialized() =>
-            NWScript.GetLocalInt(_pckey, HeritageSetupVar) == NWScript.FALSE;
+        private static bool HeritageFeatInitialized() =>
+            NWScript.GetLocalInt(_pckey, HeritageSetupVar) == NWScript.TRUE;
 
         private static void FlagHeritageAsSetup() => NWScript.SetLocalInt(_pckey, HeritageSetupVar, NWScript.TRUE);
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NWN.Amia.Main.Managed.Characters.Types;
 using NWN.Core;
 using NWN.Core.NWNX;
@@ -48,6 +49,8 @@ namespace NWN.Amia.Main.Managed.Characters
 
         public void UpdateAbilities()
         {
+            Console.WriteLine("Updating abilities.");
+            
             UpdateAbility(NWScript.ABILITY_STRENGTH, Str);
             UpdateAbility(NWScript.ABILITY_CONSTITUTION, Con);
             UpdateAbility(NWScript.ABILITY_DEXTERITY, Dex);
