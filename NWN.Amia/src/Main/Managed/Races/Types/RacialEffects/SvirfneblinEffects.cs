@@ -8,7 +8,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
     {
         private uint _oid = NWScript.OBJECT_INVALID;
         private bool _hasHeritageFeat;
-        private const int Heritage = 0;
+        private const int Heritage = 1238;
 
         public List<Effect> GatherEffectsForObject(uint oid)
         {
