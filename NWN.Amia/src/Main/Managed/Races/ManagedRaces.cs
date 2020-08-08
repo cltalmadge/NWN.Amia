@@ -36,7 +36,15 @@ namespace NWN.Amia.Main.Managed.Races
             
             HeritageRaces = new Dictionary<int, IHeritageAbilities>
             {
-                {(int) RacialType.Drow, new DrowHeritageAbilities()} 
+                {(int) RacialType.Drow, new DrowHeritageAbilities()},
+                {(int) RacialType.Ogrillon, new OgrillonHeritageAbilities()},
+                {(int) RacialType.Orog, new OrogHeritageAbilities()},
+                {(int) RacialType.Feyri, new FeyriHeritageAbilities()},
+                {(int) RacialType.Svirfneblin, new SvirfneblinHeritageAbilities()},
+                {(int) RacialType.Aasimar, new AasimarHeritageAbilities()},
+                {(int) RacialType.Tiefling, new TieflingHeritageAbilities()},
+                {(int) RacialType.Feytouched, new FeytouchedHeritageAbilities()},
+                
             };
         }
 

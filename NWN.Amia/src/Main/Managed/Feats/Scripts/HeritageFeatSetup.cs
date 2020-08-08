@@ -9,8 +9,10 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
     [ScriptName("heritage_setup"), UsedImplicitly]
     public class HeritageFeatSetup : IRunnableScript
     {
+        private const string HeritageSetupVar = "heritage_setup";
+
         private static uint _nwnObject;
-        private static readonly int PlayerRace = NWScript.GetRacialType(_nwnObject);
+        private static int _playerRace;
         private static Player _player;
         private static uint _pckey;
 
@@ -19,21 +21,34 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
             _nwnObject = nwnObjectId;
             _player = new Player(_nwnObject);
             _pckey = NWScript.GetItemPossessedBy(_nwnObject, "ds_pckey");
+            _playerRace = ResolvePlayerRace();
 
+            if (!PlayerRaceIsSupported() || !HeritageFeatNotInitialized()) return 0;
 
-            if (PlayerRaceIsSupported() && HeritageFeatNotInitialized())
-            {
-                PerformHeritageFeatSetup();
-            }
+            PerformHeritageFeatSetup();
+            FlagHeritageAsSetup();
 
             return 0;
         }
 
-        private static bool PlayerRaceIsSupported() => ManagedRaces.HeritageRaces.ContainsKey(PlayerRace);
+        private static int ResolvePlayerRace() =>
+            _player.Subrace.ToLower() switch
+            {
+                "aasimar" => (int) ManagedRaces.RacialType.Aasimar,
+                "tiefling" => (int) ManagedRaces.RacialType.Tiefling,
+                "feytouched" => (int) ManagedRaces.RacialType.Feytouched,
+                "feyri" => (int) ManagedRaces.RacialType.Feyri,
+                _ => _playerRace
+            };
+
+        private static bool PlayerRaceIsSupported() => ManagedRaces.HeritageRaces.ContainsKey(_playerRace);
 
         private static bool HeritageFeatNotInitialized() =>
-            NWScript.GetLocalInt(_pckey, "heritage_setup") == NWScript.FALSE;
+            NWScript.GetLocalInt(_pckey, HeritageSetupVar) == NWScript.FALSE;
 
-        private static void PerformHeritageFeatSetup() => ManagedRaces.HeritageRaces[PlayerRace].SetupStats(_player);
+        private static void FlagHeritageAsSetup() => NWScript.SetLocalInt(_pckey, HeritageSetupVar, NWScript.TRUE);
+
+
+        private static void PerformHeritageFeatSetup() => ManagedRaces.HeritageRaces[_playerRace].SetupStats(_player);
     }
 }

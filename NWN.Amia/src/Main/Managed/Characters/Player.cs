@@ -28,6 +28,7 @@ namespace NWN.Amia.Main.Managed.Characters
         public List<int> Classes { get; set; }
 
         public List<Effect> ActiveEffects { get; set; }
+        public string Subrace { get; }
 
         public Player(uint objectId)
         {
@@ -39,9 +40,10 @@ namespace NWN.Amia.Main.Managed.Characters
             Int = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_INTELLIGENCE);
             Wis = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_WISDOM);
             Cha = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_CHARISMA);
-            
+
             HitDice = NWScript.GetHitDice(ObjectId);
             HitPoints = NWScript.GetMaxHitPoints(ObjectId);
+            Subrace = NWScript.GetSubRace(ObjectId);
         }
 
         public void UpdateAbilities()
