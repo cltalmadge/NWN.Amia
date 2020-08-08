@@ -50,7 +50,7 @@ namespace NWN.Amia.Main.Managed.Characters
         public void UpdateAbilities()
         {
             Console.WriteLine("Updating abilities.");
-            
+
             UpdateAbility(NWScript.ABILITY_STRENGTH, Str);
             UpdateAbility(NWScript.ABILITY_CONSTITUTION, Con);
             UpdateAbility(NWScript.ABILITY_DEXTERITY, Dex);
@@ -60,6 +60,6 @@ namespace NWN.Amia.Main.Managed.Characters
         }
 
         private void UpdateAbility(int ability, int newAbilityValue) =>
-            CreaturePlugin.SetAbilityScore(ObjectId, ability, newAbilityValue);
+            CreaturePlugin.SetRawAbilityScore(ObjectId, ability, newAbilityValue);
     }
 }
