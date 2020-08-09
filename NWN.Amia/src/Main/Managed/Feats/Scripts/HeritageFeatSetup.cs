@@ -19,12 +19,11 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
 
         public int Run(uint nwnObjectId)
         {
-            Console.WriteLine("TEST");
             _nwnObject = nwnObjectId;
             _player = new Player(_nwnObject);
             _pckey = NWScript.GetItemPossessedBy(_nwnObject, "ds_pckey");
             _playerRace = ResolvePlayerRace();
-            
+
             if (!PlayerRaceIsSupported() || HeritageFeatInitialized() || !HasHeritageFeat()) return 0;
 
             PerformHeritageFeatSetup();
