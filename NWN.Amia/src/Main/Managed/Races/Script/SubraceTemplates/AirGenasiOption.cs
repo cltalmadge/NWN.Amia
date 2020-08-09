@@ -11,8 +11,8 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
     {
         public int Run(uint nwnObjectId)
         {
-            NWScript.CreateItemOnObject(TemplateItem.TemplateItemResRef, nwnObjectId);
-
+            if (TemplateItem.Initialized(nwnObjectId)) return 0;
+            
             SetSubRaceMod(nwnObjectId);
 
 

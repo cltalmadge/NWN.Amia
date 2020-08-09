@@ -11,16 +11,16 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
     {
         public int Run(uint nwnObjectId)
         {
-            NWScript.CreateItemOnObject(TemplateItem.TemplateItemResRef, nwnObjectId);
+            if (TemplateItem.Initialized(nwnObjectId)) return 0;
 
             SetSubRaceMod(nwnObjectId);
-            
+
             var templateRunner = new TemplateRunner();
 
             templateRunner.Run(nwnObjectId);
 
             NWN.Core.NWNX.CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_OUTSIDER);
-            
+
             return 0;
         }
 
