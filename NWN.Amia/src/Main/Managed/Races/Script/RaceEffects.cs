@@ -33,6 +33,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
 
             foreach (var effect in supernaturalEffects)
             {
+                if (NWScript.GetIsEffectValid(effect) == NWScript.TRUE) RemoveEffectIfExists(effect);
                 ApplyEffectPermanently(effect);
             }
         }
@@ -43,12 +44,16 @@ namespace NWN.Amia.Main.Managed.Races.Script
 
             var racialEffectCollector = ManagedRaces.Races[raceType];
 
-            return null == racialEffectCollector ? new List<Effect>() : racialEffectCollector.GatherEffectsForObject(_player);
+            return null == racialEffectCollector
+                ? new List<Effect>()
+                : racialEffectCollector.GatherEffectsForObject(_player);
         }
 
         private static IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects) =>
             raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
                 .ToList();
+
+        private static void RemoveEffectIfExists(Effect effect) => NWScript.RemoveEffect(_player, effect);
 
         private static void ApplyEffectPermanently(Effect effect) =>
             NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, _player);
