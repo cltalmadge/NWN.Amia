@@ -9,15 +9,34 @@ namespace NWN.Amia.Main.Managed.Races.Script
     [ScriptName("race_effects"), UsedImplicitly]
     public class RaceEffects : IRunnableScript
     {
+        private const string SubracePrefix = "subraceEffect";
         private static uint _player;
 
         public int Run(uint nwnObjectId)
         {
             _player = nwnObjectId;
 
-            if (RaceIsManaged()) SetEffectsToSupernaturalAndApply();
+            if (!RaceIsManaged()) return 0;
+
+            RemoveActiveSubraceEffects();
+            SetEffectsToSupernaturalAndApply();
 
             return 0;
+        }
+
+        private static void RemoveActiveSubraceEffects()
+        {
+            Effect effect = NWScript.GetFirstEffect(_player);
+
+            while (NWScript.GetIsEffectValid(effect) == NWScript.TRUE)
+            {
+                if (NWScript.GetEffectTag(effect).Contains(SubracePrefix))
+                {
+                    NWScript.RemoveEffect(_player, effect);
+                }
+
+                effect = NWScript.GetNextEffect(_player);
+            }
         }
 
         private static bool RaceIsManaged()
@@ -30,13 +49,17 @@ namespace NWN.Amia.Main.Managed.Races.Script
         private static void SetEffectsToSupernaturalAndApply()
         {
             var supernaturalEffects = ConvertEffectsToSupernatural(GetListOfEffectsForRace());
+            var taggedEffects = TagEffects(supernaturalEffects);
 
-            foreach (var effect in supernaturalEffects)
+            foreach (var effect in taggedEffects)
             {
-                if (NWScript.GetIsEffectValid(effect) == NWScript.TRUE) RemoveEffectIfExists(effect);
                 ApplyEffectPermanently(effect);
             }
         }
+
+        private static IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects) =>
+            raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
+                .ToList();
 
         private static IEnumerable<Effect> GetListOfEffectsForRace()
         {
@@ -49,11 +72,18 @@ namespace NWN.Amia.Main.Managed.Races.Script
                 : racialEffectCollector.GatherEffectsForObject(_player);
         }
 
-        private static IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects) =>
-            raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
-                .ToList();
+        private static IEnumerable<Effect> TagEffects(IEnumerable<Effect> supernaturalEffects)
+        {
+            var taggedEffects = new List<Effect>();
 
-        private static void RemoveEffectIfExists(Effect effect) => NWScript.RemoveEffect(_player, effect);
+            foreach (var effect in supernaturalEffects)
+            {
+                var subracePrefixWithCount = SubracePrefix + taggedEffects.Count;
+                taggedEffects.Add(NWScript.TagEffect(effect, subracePrefixWithCount));
+            }
+
+            return taggedEffects;
+        }
 
         private static void ApplyEffectPermanently(Effect effect) =>
             NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, _player);
