@@ -53,11 +53,24 @@ namespace NWN.Amia.Main.Managed.Encounters
         private IntPtr GetLocationForSpawn()
         {
             var playerLocation = NWScript.GetPosition(_player);
-            var positionInFront = Vector3.Multiply(playerLocation, Vector3.UnitZ);
             // return NWScript.GetLocation(NWScript.GetNearestObjectByTag("ds_spwn", _trigger));
-            return NWScript.Location(NWScript.GetArea(_player), positionInFront, 0.0f);
+            return NWScript.Location(NWScript.GetArea(_player),
+                GetPositionInFront(playerLocation, 3, NWScript.GetFacing(_player)),
+                NWScript.GetFacing(_player));
         }
 
+        private static Vector3 GetPositionInFront(Vector3 original, float distance, float angle) =>
+            new Vector3
+            {
+                Z = original.Z,
+                X = (float) Math.Abs(original.X + ChangeInX(distance, angle)),
+                Y = (float) Math.Abs(original.Y + ChangeInY(distance, angle))
+            };
+
+        private static double ChangeInX(float distance, float angle) => distance * Math.Cos(angle);
+
+        private static double ChangeInY(float distance, float angle) => distance * Math.Sin(angle);
+        
         private static void SpawnCreaturesFromResRefs(int maxSpawns, IReadOnlyList<string> resRefs)
         {
             if (!resRefs.Any()) return;
