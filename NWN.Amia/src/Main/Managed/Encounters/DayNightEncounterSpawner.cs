@@ -73,7 +73,11 @@ namespace NWN.Amia.Main.Managed.Encounters
         
         private static void SpawnCreaturesFromResRefs(int maxSpawns, IReadOnlyList<string> resRefs)
         {
-            if (!resRefs.Any()) return;
+            if (!resRefs.Any())
+            {
+                Console.WriteLine("Shit broke.");
+                return;
+            }
 
             for (var i = 0; i < maxSpawns; i++)
             {
