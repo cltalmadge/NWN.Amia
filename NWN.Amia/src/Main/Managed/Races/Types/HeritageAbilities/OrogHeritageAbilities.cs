@@ -9,17 +9,8 @@ namespace NWN.Amia.Main.Managed.Races.Types.HeritageAbilities
     {
         public void SetupStats(Player player)
         {
-            var str = player.Str;
-            Console.WriteLine($"{str}");
-            str += 1;
-            Console.WriteLine($"{str}");
-            player.Str += 1;
-            player.Cha += 1;
-
-            player.UpdateAbilities();
-            
-            // Hack
-            CreaturePlugin.ModifyRawAbilityScore(player.ObjectId, NWScript.ABILITY_STRENGTH, -1);
+            CreaturePlugin.ModifyRawAbilityScore(player.ObjectId, NWScript.ABILITY_STRENGTH, 1);
+            CreaturePlugin.ModifyRawAbilityScore(player.ObjectId, NWScript.ABILITY_CHARISMA, 1);
         }
     }
 }
