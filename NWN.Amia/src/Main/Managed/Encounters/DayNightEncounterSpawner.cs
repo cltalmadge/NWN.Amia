@@ -60,7 +60,7 @@ namespace NWN.Amia.Main.Managed.Encounters
             var playerLocation = NWScript.GetPosition(_player);
             // return NWScript.GetLocation(NWScript.GetNearestObjectByTag("ds_spwn", _trigger));
             return NWScript.Location(NWScript.GetArea(_player),
-                GetPositionInFront(playerLocation, 10, NWScript.GetFacing(_player)),
+                GetPositionInFront(playerLocation, 20, NWScript.GetFacing(_player)),
                 NWScript.GetFacing(_player));
         }
 
