@@ -89,6 +89,7 @@ namespace NWN.Amia.Main.Managed.Encounters
                 var randomCreature = new Random().Next(0, resRefs.Count);
                 Console.WriteLine($"Creature to spawn {resRefs[randomCreature]}");
                 SpawnEncounterAtWaypoint(resRefs[randomCreature]);
+                NWScript.ApplyEffectAtLocation(NWScript.DURATION_TYPE_INSTANT, NWScript.EffectVisualEffect(22), _waypointLocation);
             }
         }
 
