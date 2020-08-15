@@ -9,27 +9,22 @@ namespace NWN.Amia.Main.Core
     [UsedImplicitly]
     public class AmiaCore : IGameManager
     {
-        public static AmiaCore Instance { get; } = new AmiaCore();
-        public uint ObjectSelf { get; private set; } = NWScript.OBJECT_INVALID;
-        private ulong NextEventId { get; set; }
-        
-        private readonly Stack<ScriptContext> _scriptContexts = new Stack<ScriptContext>();
         private readonly Dictionary<ulong, Closure> _closures = new Dictionary<ulong, Closure>();
 
-        public static int Bootstrap(IntPtr ptr, int nativeHandlesLength) {
-            // Call internal bootstrap function
-            return Internal.Init(ptr, nativeHandlesLength, Instance);
-        }
+        private readonly Stack<ScriptContext> _scriptContexts = new Stack<ScriptContext>();
+        public static AmiaCore Instance { get; } = new AmiaCore();
+        private ulong NextEventId { get; set; }
+        public uint ObjectSelf { get; private set; } = NWScript.OBJECT_INVALID;
 
         public void OnMainLoop(ulong frame)
         {
             // Don't do anything.
-        }    
+        }
 
         public int OnRunScript(string script, uint oidSelf)
         {
             ObjectSelf = oidSelf;
-            
+
             var scriptBeingCalled = new ScriptContext {OwnerObject = oidSelf, ScriptName = script};
             IContextHandler contextHandler = new ScriptHandler(scriptBeingCalled);
 
@@ -45,20 +40,6 @@ namespace NWN.Amia.Main.Core
             RunClosure(eid);
 
             ObjectSelf = old;
-        }
-
-        private void RunClosure(ulong eid)
-        {
-            try
-            {
-                _closures[eid].Run();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-
-            _closures.Remove(eid);
         }
 
         public void ClosureAssignCommand(uint obj, ActionDelegate func)
@@ -77,6 +58,26 @@ namespace NWN.Amia.Main.Core
         {
             if (Internal.NativeFunctions.ClosureActionDoCommand(obj, NextEventId) != 0)
                 _closures.Add(NextEventId++, new Closure {OwnerObject = obj, Run = func});
+        }
+
+        public static int Bootstrap(IntPtr ptr, int nativeHandlesLength)
+        {
+            // Call internal bootstrap function
+            return Internal.Init(ptr, nativeHandlesLength, Instance);
+        }
+
+        private void RunClosure(ulong eid)
+        {
+            try
+            {
+                _closures[eid].Run();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            _closures.Remove(eid);
         }
     }
 }

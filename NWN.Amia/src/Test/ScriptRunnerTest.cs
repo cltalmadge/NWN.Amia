@@ -18,20 +18,6 @@ namespace NWN.Amia.Test
         private ScriptHandler _runner;
 
         [Fact]
-        public void ScriptRunnerMockScriptReturnsZero()
-        {
-            _runner = new ScriptHandler(_managedContext);
-            Assert.Equal(0, _runner.HandleContext());
-        }
-
-        [Fact]
-        public void ScriptRunnerWillNotResolveUnmanaged()
-        {
-            _runner = new ScriptHandler(_unmanagedContext);
-            Assert.Equal(-1, _runner.HandleContext());
-        }
-
-        [Fact]
         public void ScriptRunnerCanFindScriptsInSubdirectories()
         {
             _runner = new ScriptHandler(_managedContextNested);
@@ -39,9 +25,23 @@ namespace NWN.Amia.Test
         }
 
         [Fact]
+        public void ScriptRunnerMockScriptReturnsZero()
+        {
+            _runner = new ScriptHandler(_managedContext);
+            Assert.Equal(0, _runner.HandleContext());
+        }
+
+        [Fact]
         public void ScriptRunnerReturnsFailureOnNullData()
         {
             _runner = new ScriptHandler(new ScriptContext {ScriptName = null, OwnerObject = 0});
+            Assert.Equal(-1, _runner.HandleContext());
+        }
+
+        [Fact]
+        public void ScriptRunnerWillNotResolveUnmanaged()
+        {
+            _runner = new ScriptHandler(_unmanagedContext);
             Assert.Equal(-1, _runner.HandleContext());
         }
     }

@@ -5,7 +5,8 @@ using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Races.Script
 {
-    [ScriptName("subrace_setup"), UsedImplicitly]
+    [ScriptName("subrace_setup")]
+    [UsedImplicitly]
     public class SubraceSetup : IRunnableScript
     {
         public int Run(uint nwnObjectId)

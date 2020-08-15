@@ -33,10 +33,7 @@ namespace NWN.Amia.Main.Core
 
         public static IRunnableScript GetScriptFromName(string scriptName)
         {
-            if (!Initialized)
-            {
-                PerformInitialSetup();
-            }
+            if (!Initialized) PerformInitialSetup();
 
             IRunnableScript scriptToRun;
 

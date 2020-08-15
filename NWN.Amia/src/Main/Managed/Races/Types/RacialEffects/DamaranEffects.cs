@@ -6,7 +6,6 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
 {
     public class DamaranEffects : IEffectCollector
     {
-
         public List<Effect> GatherEffectsForObject(uint objectId)
         {
             return new List<Effect>

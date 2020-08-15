@@ -6,7 +6,8 @@ using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Races.Script
 {
-    [ScriptName("race_effects"), UsedImplicitly]
+    [ScriptName("race_effects")]
+    [UsedImplicitly]
     public class RaceEffects : IRunnableScript
     {
         private const string SubracePrefix = "subraceEffect";
@@ -30,10 +31,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
 
             while (NWScript.GetIsEffectValid(effect) == NWScript.TRUE)
             {
-                if (NWScript.GetEffectTag(effect).Contains(SubracePrefix))
-                {
-                    NWScript.RemoveEffect(_player, effect);
-                }
+                if (NWScript.GetEffectTag(effect).Contains(SubracePrefix)) NWScript.RemoveEffect(_player, effect);
 
                 effect = NWScript.GetNextEffect(_player);
             }
@@ -51,15 +49,14 @@ namespace NWN.Amia.Main.Managed.Races.Script
             var supernaturalEffects = ConvertEffectsToSupernatural(GetListOfEffectsForRace());
             var taggedEffects = TagEffects(supernaturalEffects);
 
-            foreach (var effect in taggedEffects)
-            {
-                ApplyEffectPermanently(effect);
-            }
+            foreach (var effect in taggedEffects) ApplyEffectPermanently(effect);
         }
 
-        private static IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects) =>
-            raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
+        private static IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects)
+        {
+            return raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
                 .ToList();
+        }
 
         private static IEnumerable<Effect> GetListOfEffectsForRace()
         {
@@ -85,7 +82,9 @@ namespace NWN.Amia.Main.Managed.Races.Script
             return taggedEffects;
         }
 
-        private static void ApplyEffectPermanently(Effect effect) =>
+        private static void ApplyEffectPermanently(Effect effect)
+        {
             NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, _player);
+        }
     }
 }

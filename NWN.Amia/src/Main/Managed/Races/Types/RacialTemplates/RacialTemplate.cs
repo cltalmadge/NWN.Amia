@@ -5,7 +5,6 @@ using NWN.Amia.Main.Managed.Races.Utils;
 using NWN.Core;
 using NWN.Core.NWNX;
 
-
 namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
 {
     public class RacialTemplate : ICharacterTemplate
@@ -35,9 +34,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
         public void Apply()
         {
             if (!RaceAdjustmentUtils.BaseRaceDict.ContainsKey(NWScript.GetRacialType(_nwnObjectId)))
-            {
                 NWScript.SendMessageToPC(_nwnObjectId, "Racial templates are only supported by the default NWN races.");
-            }
 
             RemoveBaseAbilitiesIfNotInitialized();
 
@@ -50,7 +47,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
         {
             var race = NWScript.GetRacialType(_nwnObjectId);
             RacialTemplate baseRaceTemplate;
-            
+
             try
             {
                 baseRaceTemplate = RaceAdjustmentUtils.BaseRaceDict[race];
@@ -66,10 +63,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
             var raceIsNullOrOffsetSet = NWScript.GetLocalInt(templateItem, offsetsApplied) == NWScript.TRUE ||
                                         baseRaceTemplate == null;
 
-            if (raceIsNullOrOffsetSet)
-            {
-                return;
-            }
+            if (raceIsNullOrOffsetSet) return;
 
             CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_STRENGTH, baseRaceTemplate.StrBonus);
             CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_CONSTITUTION,
@@ -87,10 +81,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
         {
             var templateItem = NWScript.GetItemPossessedBy(_nwnObjectId, "char_template");
 
-            if (NWScript.GetLocalInt(templateItem, TemplateInitialized) == NWScript.TRUE)
-            {
-                return;
-            }
+            if (NWScript.GetLocalInt(templateItem, TemplateInitialized) == NWScript.TRUE) return;
 
             CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_STRENGTH, StrBonus);
             CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_CONSTITUTION, ConBonus);
@@ -108,10 +99,8 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
         {
             TemplateEffects = GetEffectsFromLocalVars();
             foreach (var effect in TemplateEffects)
-            {
                 NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, NWScript.SupernaturalEffect(effect),
                     _nwnObjectId);
-            }
         }
 
         private static List<Effect> GetEffectsFromLocalVars()
@@ -120,4 +109,3 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
         }
     }
 }
-

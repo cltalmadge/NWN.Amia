@@ -6,16 +6,16 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
 {
     public class SvirfneblinEffects : IEffectCollector
     {
-        private uint _oid = NWScript.OBJECT_INVALID;
-        private bool _hasHeritageFeat;
         private const int Heritage = 1238;
+        private bool _hasHeritageFeat;
+        private uint _oid = NWScript.OBJECT_INVALID;
 
         public List<Effect> GatherEffectsForObject(uint oid)
         {
             _oid = oid;
             _hasHeritageFeat = HasHeritageFeat();
-            
-            
+
+
             var spellResistance = GetSpellResistanceBasedOnFeat();
 
             var effectsForObject = new List<Effect>

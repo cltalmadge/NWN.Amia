@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using NWN.Amia.Main.Managed.Feats.Types;
 using NWN.Core;
-using NWN.Core.NWNX;
 
 namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
 {

@@ -11,12 +11,13 @@ namespace NWN.Amia.Main.Managed.Feats
             var supernaturalEffects = MakeEffectsSupernatural(effects);
 
             foreach (var effect in supernaturalEffects)
-            {
                 NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, nwnObjectId);
-            }
         }
 
-        private static IEnumerable<Effect> MakeEffectsSupernatural(List<Effect> effects) => effects
-            .Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy).ToList();
+        private static IEnumerable<Effect> MakeEffectsSupernatural(List<Effect> effects)
+        {
+            return effects
+                .Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy).ToList();
+        }
     }
 }

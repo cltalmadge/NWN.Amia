@@ -13,7 +13,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
                 NWScript.EffectSkillIncrease(NWScript.SKILL_CRAFT_ARMOR, 2),
                 NWScript.EffectSkillIncrease(NWScript.SKILL_CRAFT_WEAPON, 2),
                 NWScript.EffectDamageResistance(NWScript.DAMAGE_TYPE_FIRE, 5),
-                NWScript.EffectDamageResistance(NWScript.DAMAGE_TYPE_COLD, 5),
+                NWScript.EffectDamageResistance(NWScript.DAMAGE_TYPE_COLD, 5)
             };
         }
     }

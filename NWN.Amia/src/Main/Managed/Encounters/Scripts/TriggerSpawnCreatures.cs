@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Specialized;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using NWN.Amia.Main.Core.Types;
 using NWN.Core;
 using NWN.Core.NWNX;
 
 namespace NWN.Amia.Main.Managed.Encounters.Scripts
 {
-    [ScriptName("ds_db_spawner"), UsedImplicitly]
+    [ScriptName("ds_db_spawner")]
+    [UsedImplicitly]
     public class TriggerSpawnCreatures : IRunnableScript
     {
         private uint _trigger;
@@ -20,10 +19,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
             var area = NWScript.GetArea(_trigger);
 
             var notPlayer = NWScript.GetIsPC(player) != 1 && NWScript.GetIsPossessedFamiliar(player) != 1;
-            if (notPlayer)
-            {
-                return 0;
-            }
+            if (notPlayer) return 0;
 
 
             if (TriggerStillOnCooldown())
@@ -34,11 +30,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
 
             var spawner = new DayNightEncounterSpawner(_trigger, area);
 
-            if (GetNumberOfPartyMembers(player) > 6)
-            {
-                Console.WriteLine("Double spawns.");
-                spawner.DoubleSpawn = true;
-            }
+            if (GetNumberOfPartyMembers(player) > 6) spawner.DoubleSpawn = true;
 
             spawner.SpawnEncounters();
 
@@ -47,9 +39,15 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
             return 0;
         }
 
-        private bool TriggerStillOnCooldown() => TimePlugin.GetTimeStamp() - GetTriggerCoolDownStart() <= 900;
+        private bool TriggerStillOnCooldown()
+        {
+            return TimePlugin.GetTimeStamp() - GetTriggerCoolDownStart() <= 900;
+        }
 
-        private int GetTriggerCoolDownStart() => NWScript.GetLocalInt(_trigger, "cooldown_start");
+        private int GetTriggerCoolDownStart()
+        {
+            return NWScript.GetLocalInt(_trigger, "cooldown_start");
+        }
 
         private static int GetNumberOfPartyMembers(in uint player)
         {
@@ -59,10 +57,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
 
             while (NWScript.GetIsObjectValid(partyMember) == NWScript.TRUE)
             {
-                if (NWScript.GetIsPC(partyMember) == NWScript.TRUE)
-                {
-                    partyMembers++;
-                }
+                if (NWScript.GetIsPC(partyMember) == NWScript.TRUE) partyMembers++;
 
                 partyMember = NWScript.GetNextFactionMember(player);
             }
@@ -70,7 +65,9 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
             return partyMembers;
         }
 
-        private void InitTriggerCooldown() =>
+        private void InitTriggerCooldown()
+        {
             NWScript.SetLocalInt(_trigger, "cooldown_start", TimePlugin.GetTimeStamp());
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NWN.Amia.Main.Managed.Feats.Types;
 using NWN.Core;
 
@@ -8,8 +7,8 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
     public class AasimarEffects : IEffectCollector
     {
         private const int Heritage = 0;
-        private uint _oid = NWScript.OBJECT_INVALID;
         private bool _hasHeritageFeat;
+        private uint _oid = NWScript.OBJECT_INVALID;
 
         public List<Effect> GatherEffectsForObject(uint objectId)
         {
