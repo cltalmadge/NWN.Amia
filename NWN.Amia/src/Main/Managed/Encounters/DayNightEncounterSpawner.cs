@@ -10,7 +10,7 @@ namespace NWN.Amia.Main.Managed.Encounters
 {
     public class DayNightEncounterSpawner : IEncounterSpawner
     {
-        private static IntPtr _waypointLocation;
+        private static IntPtr _spawnLocation;
         private static uint _objectWithVariables;
         private static readonly string[] VarPrefixes = {"day_spawn", "night_spawn"};
         private readonly uint _player;
@@ -27,7 +27,7 @@ namespace NWN.Amia.Main.Managed.Encounters
 
         public void SpawnEncounters()
         {
-            _waypointLocation = GetLocationForSpawn();
+            _spawnLocation = GetLocationForSpawn();
 
             var isNightTime = NWScript.GetTimeHour() < 6 && NWScript.GetTimeHour() >= 18;
 
@@ -66,6 +66,7 @@ namespace NWN.Amia.Main.Managed.Encounters
         {
             if (!resRefs.Any()) return;
 
+            NWScript.ApplyEffectAtLocation(NWScript.DURATION_TYPE_INSTANT, NWScript.EffectVisualEffect(247), _spawnLocation);
             for (var i = 0; i < maxSpawns; i++)
             {
                 var randomCreature = new Random().Next(0, resRefs.Count);
@@ -75,7 +76,7 @@ namespace NWN.Amia.Main.Managed.Encounters
 
         private static void SpawnEncounterAtWaypoint(string resRef)
         {
-            var creature = NWScript.CreateObject(NWScript.OBJECT_TYPE_CREATURE, resRef, _waypointLocation);
+            var creature = NWScript.CreateObject(NWScript.OBJECT_TYPE_CREATURE, resRef, _spawnLocation);
             if (creature == NWScript.OBJECT_INVALID) Console.WriteLine("Spawn wasn't valid!");
         }
 
