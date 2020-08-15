@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using NWN.Amia.Main.Managed.Encounters.Types;
 using NWN.Core;
 using NWN.Core.NWNX;
@@ -52,8 +53,7 @@ namespace NWN.Amia.Main.Managed.Encounters
         private IntPtr GetLocationForSpawn()
         {
             var playerLocation = NWScript.GetPosition(_player);
-            var positionInFront = playerLocation * NWScript.Vector(0, 0, 1);
-
+            var positionInFront = Vector3.Multiply(playerLocation, Vector3.UnitZ);
             // return NWScript.GetLocation(NWScript.GetNearestObjectByTag("ds_spwn", _trigger));
             return NWScript.Location(NWScript.GetArea(_player), positionInFront, 0.0f);
         }
