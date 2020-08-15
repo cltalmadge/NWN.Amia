@@ -37,9 +37,8 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
             return NWScript.GetHasFeat(1238, _nwnObject) == NWScript.TRUE;
         }
 
-        private static int ResolvePlayerRace()
-        {
-            return _player.Subrace.ToLower() switch
+        private static int ResolvePlayerRace() =>
+            _player.Subrace.ToLower() switch
             {
                 "aasimar" => (int) ManagedRaces.RacialType.Aasimar,
                 "tiefling" => (int) ManagedRaces.RacialType.Tiefling,
@@ -47,27 +46,14 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
                 "feyri" => (int) ManagedRaces.RacialType.Feyri,
                 _ => NWScript.GetRacialType(_nwnObject)
             };
-        }
 
-        private static bool PlayerRaceIsSupported()
-        {
-            return ManagedRaces.HeritageRaces.ContainsKey(_playerRace);
-        }
+        private static bool PlayerRaceIsSupported() => ManagedRaces.HeritageRaces.ContainsKey(_playerRace);
 
-        private static bool HeritageFeatInitialized()
-        {
-            return NWScript.GetLocalInt(_pckey, HeritageSetupVar) == NWScript.TRUE;
-        }
+        private static bool HeritageFeatInitialized() =>
+            NWScript.GetLocalInt(_pckey, HeritageSetupVar) == NWScript.TRUE;
 
-        private static void FlagHeritageAsSetup()
-        {
-            NWScript.SetLocalInt(_pckey, HeritageSetupVar, NWScript.TRUE);
-        }
+        private static void PerformHeritageFeatSetup() => ManagedRaces.HeritageRaces[_playerRace].SetupStats(_player);
 
-
-        private static void PerformHeritageFeatSetup()
-        {
-            ManagedRaces.HeritageRaces[_playerRace].SetupStats(_player);
-        }
+        private static void FlagHeritageAsSetup() => NWScript.SetLocalInt(_pckey, HeritageSetupVar, NWScript.TRUE);
     }
 }
