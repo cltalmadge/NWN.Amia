@@ -52,7 +52,7 @@ namespace NWN.Amia.Main.Managed.Encounters
         private IntPtr GetLocationForSpawn()
         {
             var playerLocation = NWScript.GetPosition(_player);
-            var positionInFront = playerLocation + NWScript.Vector(0, 0, 1) * 3;
+            var positionInFront = playerLocation * NWScript.Vector(0, 0, 1);
 
             // return NWScript.GetLocation(NWScript.GetNearestObjectByTag("ds_spwn", _trigger));
             return NWScript.Location(NWScript.GetArea(_player), positionInFront, 0.0f);
