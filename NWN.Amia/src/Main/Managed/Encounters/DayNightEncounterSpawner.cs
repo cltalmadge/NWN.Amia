@@ -88,7 +88,8 @@ namespace NWN.Amia.Main.Managed.Encounters
 
         private static void SpawnEncounterAtWaypoint(string resRef)
         {
-            NWScript.CreateObject(NWScript.OBJECT_TYPE_CREATURE, resRef, _waypointLocation);
+            var creature = NWScript.CreateObject(NWScript.OBJECT_TYPE_CREATURE, resRef, _waypointLocation);
+            if(creature == NWScript.OBJECT_INVALID) Console.WriteLine("Spawn wasn't valid!");
         }
 
         private static IEnumerable<string> GetResRefsForPrefix(string prefix)
