@@ -39,8 +39,6 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
             RemoveBaseAbilitiesIfNotInitialized();
 
             ApplyAbilityModsIfNotInitialized();
-
-            if (GetEffectsFromLocalVars().Count != 0) ApplyEffects();
         }
 
         private void RemoveBaseAbilitiesIfNotInitialized()
@@ -65,16 +63,22 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
 
             if (raceIsNullOrOffsetSet) return;
 
-            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_STRENGTH, baseRaceTemplate.StrBonus);
-            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_CONSTITUTION,
-                baseRaceTemplate.ConBonus);
-            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_DEXTERITY, baseRaceTemplate.DexBonus);
-            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_INTELLIGENCE,
-                baseRaceTemplate.IntBonus);
-            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_CHARISMA, baseRaceTemplate.ChaBonus);
-            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_WISDOM, baseRaceTemplate.WisBonus);
+            
+            ApplyStatIfBonusNotZero(NWScript.ABILITY_STRENGTH, baseRaceTemplate.StrBonus);
+            ApplyStatIfBonusNotZero(NWScript.ABILITY_CONSTITUTION, baseRaceTemplate.ConBonus);
+            ApplyStatIfBonusNotZero(NWScript.ABILITY_DEXTERITY, baseRaceTemplate.DexBonus);
+            ApplyStatIfBonusNotZero(NWScript.ABILITY_INTELLIGENCE, baseRaceTemplate.IntBonus);
+            ApplyStatIfBonusNotZero(NWScript.ABILITY_CHARISMA, baseRaceTemplate.ChaBonus);
+            ApplyStatIfBonusNotZero(NWScript.ABILITY_WISDOM, baseRaceTemplate.WisBonus);
 
             NWScript.SetLocalInt(templateItem, offsetsApplied, NWScript.TRUE);
+        }
+
+        private void ApplyStatIfBonusNotZero(int ability, int bonus)
+        {
+            if (bonus == 0) return;
+            
+            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, ability, bonus);
         }
 
         private void ApplyAbilityModsIfNotInitialized()
@@ -83,29 +87,16 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
 
             if (NWScript.GetLocalInt(templateItem, TemplateInitialized) == NWScript.TRUE) return;
 
-            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_STRENGTH, StrBonus);
-            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_CONSTITUTION, ConBonus);
-            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_DEXTERITY, DexBonus);
-            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_INTELLIGENCE, IntBonus);
-            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_CHARISMA, ChaBonus);
-            CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, NWScript.ABILITY_WISDOM, WisBonus);
+            ApplyStatIfBonusNotZero(NWScript.ABILITY_STRENGTH, StrBonus);
+            ApplyStatIfBonusNotZero(NWScript.ABILITY_CONSTITUTION, ConBonus);
+            ApplyStatIfBonusNotZero(NWScript.ABILITY_DEXTERITY, DexBonus);
+            ApplyStatIfBonusNotZero(NWScript.ABILITY_INTELLIGENCE, IntBonus);
+            ApplyStatIfBonusNotZero(NWScript.ABILITY_CHARISMA, ChaBonus);
+            ApplyStatIfBonusNotZero(NWScript.ABILITY_WISDOM, WisBonus);
 
             NWScript.SetSubRace(_nwnObjectId, SubRace);
 
             NWScript.SetLocalInt(templateItem, TemplateInitialized, NWScript.TRUE);
-        }
-
-        private void ApplyEffects()
-        {
-            TemplateEffects = GetEffectsFromLocalVars();
-            foreach (var effect in TemplateEffects)
-                NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, NWScript.SupernaturalEffect(effect),
-                    _nwnObjectId);
-        }
-
-        private static List<Effect> GetEffectsFromLocalVars()
-        {
-            return new List<Effect>();
         }
     }
 }
