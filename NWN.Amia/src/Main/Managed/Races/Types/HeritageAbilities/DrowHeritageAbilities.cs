@@ -8,8 +8,8 @@ namespace NWN.Amia.Main.Managed.Races.Types.HeritageAbilities
     {
         public void SetupStats(Player player)
         {
-            CreaturePlugin.ModifyRawAbilityScore(player.ObjectId, NWScript.ABILITY_DEXTERITY, 1);
-            CreaturePlugin.ModifyRawAbilityScore(player.ObjectId, NWScript.ABILITY_CHARISMA, 1);
+            CreaturePlugin.ModifyRawAbilityScore(player.ObjectId, NWScript.ABILITY_DEXTERITY, 2);
+            CreaturePlugin.ModifyRawAbilityScore(player.ObjectId, NWScript.ABILITY_CHARISMA, 2);
 
         }
     }
