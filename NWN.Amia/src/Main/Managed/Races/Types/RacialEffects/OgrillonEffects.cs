@@ -32,6 +32,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
             if (!_hasHeritageFeat) return;
 
             effectsForObject.Add(NWScript.EffectACIncrease(2));
+            effectsForObject.Add(NWScript.EffectSavingThrowDecrease(NWScript.SAVING_THROW_ALL, 1));
         }
     }
 }
