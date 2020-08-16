@@ -6,7 +6,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
 {
     public class TieflingEffects : IEffectCollector
     {
-        private const int Heritage = 0;
+        private const int Heritage = 1238;
         private bool _hasHeritageFeat;
         private uint _oid = NWScript.OBJECT_INVALID;
 

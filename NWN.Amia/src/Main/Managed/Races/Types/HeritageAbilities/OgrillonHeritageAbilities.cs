@@ -10,7 +10,6 @@ namespace NWN.Amia.Main.Managed.Races.Types.HeritageAbilities
         {
             var playerId = player.ObjectId;
             CreaturePlugin.ModifyRawAbilityScore(playerId, NWScript.ABILITY_STRENGTH, 1);
-            CreaturePlugin.SetBaseAC(playerId, CreaturePlugin.GetBaseAC(playerId) + 2);
         }
     }
 }
