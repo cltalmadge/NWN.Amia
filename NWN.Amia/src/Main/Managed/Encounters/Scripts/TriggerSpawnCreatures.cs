@@ -57,7 +57,8 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
 
             while (NWScript.GetIsObjectValid(partyMember) == NWScript.TRUE)
             {
-                if (NWScript.GetIsPC(partyMember) == NWScript.TRUE) partyMembers++;
+                if (NWScript.GetIsPC(partyMember) == NWScript.TRUE &&
+                    NWScript.GetArea(partyMember) == NWScript.GetArea(player)) partyMembers++;
 
                 partyMember = NWScript.GetNextFactionMember(player);
             }
