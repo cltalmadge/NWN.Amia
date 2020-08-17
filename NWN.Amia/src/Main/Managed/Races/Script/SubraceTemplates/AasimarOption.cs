@@ -18,6 +18,8 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
 
             var templateRunner = new TemplateRunner();
 
+            // Bodge. I have no earthly idea as to why NWNX's Creature Plugin says it doesn't account for racial bonuses but then does it anyways. (e.g. decrement by 1, end up getting decremented by 2, instead).
+            
             templateRunner.Run(nwnObjectId);
 
             CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_OUTSIDER);
