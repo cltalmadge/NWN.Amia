@@ -65,7 +65,7 @@ namespace NWN.Amia.Main.Managed.Encounters
         private static void SpawnCreaturesFromResRefs(int maxSpawns, IReadOnlyList<string> resRefs)
         {
             if (!resRefs.Any()) return;
-                )
+                
             NWScript.ApplyEffectAtLocation(NWScript.DURATION_TYPE_INSTANT, NWScript.EffectVisualEffect(247), _spawnLocation);
             for (var i = 0; i < maxSpawns; i++)
             {

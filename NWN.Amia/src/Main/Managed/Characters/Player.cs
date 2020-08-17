@@ -18,8 +18,6 @@ namespace NWN.Amia.Main.Managed.Characters
             Int = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_INTELLIGENCE);
             Wis = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_WISDOM);
             Cha = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_CHARISMA);
-            
-            Console.WriteLine($"{Str},{Con},{Wis}");
 
             HitDice = NWScript.GetHitDice(ObjectId);
             HitPoints = NWScript.GetMaxHitPoints(ObjectId);
