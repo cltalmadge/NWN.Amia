@@ -24,7 +24,8 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
             if (NWScript.GetRacialType(nwnObjectId) == NWScript.RACIAL_TYPE_HALFELF)
             {
                 CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_HUMAN);
-                CreaturePlugin.ModifyRawAbilityScore(nwnObjectId, NWScript.ABILITY_DEXTERITY, -1);
+                CreaturePlugin.SetRawAbilityScore(nwnObjectId, NWScript.ABILITY_DEXTERITY,
+                    CreaturePlugin.GetRawAbilityScore(nwnObjectId, NWScript.ABILITY_DEXTERITY) - 1);
             }
 
             templateRunner.Run(nwnObjectId);
