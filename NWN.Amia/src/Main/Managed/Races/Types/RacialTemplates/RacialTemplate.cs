@@ -76,8 +76,15 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
 
         private void ApplyStatIfBonusNotZero(int ability, int bonus)
         {
-            if (bonus == 0) return;
-            
+            switch (bonus)
+            {
+                case 0:
+                    return;
+                case -1:
+                    CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, ability, -1);
+                    return;
+            }
+
             CreaturePlugin.ModifyRawAbilityScore(_nwnObjectId, ability, bonus);
         }
 
