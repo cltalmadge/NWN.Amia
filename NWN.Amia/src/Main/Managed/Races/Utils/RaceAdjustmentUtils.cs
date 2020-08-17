@@ -40,7 +40,7 @@ namespace NWN.Amia.Main.Managed.Races.Utils
             {
                 StrBonus = 0,
                 DexBonus = 0,
-                ConBonus = -2,
+                ConBonus = 0,
                 WisBonus = 0,
                 IntBonus = 0,
                 ChaBonus = 0
