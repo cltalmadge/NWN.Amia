@@ -27,7 +27,7 @@ namespace NWN.Amia.Main.Managed.Encounters
 
         public void SpawnEncounters()
         {
-            _spawnLocation = GetLocationForSpawn();
+            SetSpawnPointToNearestWaypoint();
 
             var isNightTime = NWScript.GetTimeHour() < 6 && NWScript.GetTimeHour() >= 18;
 
@@ -43,25 +43,12 @@ namespace NWN.Amia.Main.Managed.Encounters
             SpawnCreaturesFromResRefs(maxSpawns, dayCreatureResRefs);
         }
 
-        private IntPtr GetLocationForSpawn()
+        private void SetSpawnPointToNearestWaypoint()
         {
-            var playerLocation = NWScript.GetPosition(_player);
-            return NWScript.Location(NWScript.GetArea(_player),
-                GetPositionInFront(playerLocation, 15, NWScript.GetFacing(_player)), NWScript.GetFacing(_player));
+            var waypoint = NWScript.GetNearestObjectByTag("ds_spwn", _player);
+            _spawnLocation = NWScript.GetLocation(waypoint);
         }
-
-        private static Vector3 GetPositionInFront(Vector3 original, float distance, float angle) =>
-            new Vector3
-            {
-                Z = original.Z,
-                X = (float) Math.Abs(original.X + ChangeInX(distance, angle)),
-                Y = (float) Math.Abs(original.Y + ChangeInY(distance, angle))
-            };
-
-        private static double ChangeInX(float distance, float angle) => distance * Math.Cos(angle);
-
-        private static double ChangeInY(float distance, float angle) => distance * Math.Sin(angle);
-
+        
         private static void SpawnCreaturesFromResRefs(int maxSpawns, IReadOnlyList<string> resRefs)
         {
             if (!resRefs.Any()) return;
