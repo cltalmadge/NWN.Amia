@@ -14,13 +14,14 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
 
             NWScript.CreateItemOnObject(TemplateItem.TemplateItemResRef, nwnObjectId);
 
+            CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_OUTSIDER);
+            
             SetSubRaceMod(nwnObjectId);
 
             var templateRunner = new TemplateRunner();
 
             templateRunner.Run(nwnObjectId);
 
-            CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_OUTSIDER);
 
             return 0;
         }
