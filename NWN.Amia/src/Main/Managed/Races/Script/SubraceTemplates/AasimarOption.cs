@@ -25,7 +25,7 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
 
             if (NWScript.GetRacialType(nwnObjectId) == NWScript.RACIAL_TYPE_HALFELF)
             {
-                CreaturePlugin.ModifyRawAbilityScore(nwnObjectId, NWScript.ABILITY_DEXTERITY, 1);
+                CreaturePlugin.ModifyRawAbilityScore(nwnObjectId, NWScript.ABILITY_DEXTERITY, -1);
             }
             CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_OUTSIDER);
 
