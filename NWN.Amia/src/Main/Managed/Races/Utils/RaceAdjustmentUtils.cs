@@ -104,8 +104,8 @@ namespace NWN.Amia.Main.Managed.Races.Utils
             return new RacialTemplate
             {
                 StrBonus = 0,
-                IntBonus = 0,
-                DexBonus = 1,
+                IntBonus = -1,
+                DexBonus = 0,
                 ConBonus = 0,
                 WisBonus = 0,
                 ChaBonus = 0
