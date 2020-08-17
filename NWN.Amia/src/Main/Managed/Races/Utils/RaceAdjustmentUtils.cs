@@ -82,7 +82,7 @@ namespace NWN.Amia.Main.Managed.Races.Utils
                 ConBonus = 2,
                 WisBonus = 0,
                 IntBonus = 0,
-                ChaBonus = 2
+                ChaBonus = 0
             };
         }
 
