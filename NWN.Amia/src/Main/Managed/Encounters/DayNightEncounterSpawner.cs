@@ -29,7 +29,7 @@ namespace NWN.Amia.Main.Managed.Encounters
         {
             SetSpawnPointToNearestWaypoint();
 
-            var isNightTime = NWScript.GetTimeHour() < 6 && NWScript.GetTimeHour() >= 18;
+            var isNightTime = NWScript.GetTimeHour() < 6 || NWScript.GetTimeHour() >= 18;
 
             var spawnsVary = NWScript.GetLocalInt(_trigger, "spawns_vary") == 1;
 
