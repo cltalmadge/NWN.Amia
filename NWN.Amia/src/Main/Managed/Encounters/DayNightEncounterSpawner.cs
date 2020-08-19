@@ -45,7 +45,7 @@ namespace NWN.Amia.Main.Managed.Encounters
 
         private void SetSpawnPointToNearestWaypoint()
         {
-            var waypoint = NWScript.GetNearestObjectByTag("ds_spwn", _player);
+            var waypoint = NWScript.GetNearestObjectByTag("ds_spwn", _trigger);
             _spawnLocation = NWScript.GetLocation(waypoint);
         }
         
