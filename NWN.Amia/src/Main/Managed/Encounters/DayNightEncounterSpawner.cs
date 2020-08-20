@@ -59,6 +59,7 @@ namespace NWN.Amia.Main.Managed.Encounters
 
             NWScript.ApplyEffectAtLocation(NWScript.DURATION_TYPE_INSTANT, NWScript.EffectVisualEffect(247),
                 _spawnLocation);
+
             for (var i = 0; i < maxSpawns; i++)
             {
                 var randomCreature = new Random().Next(0, resRefs.Count);
@@ -73,7 +74,8 @@ namespace NWN.Amia.Main.Managed.Encounters
         private static void SpawnEncounterAtWaypoint(string resRef)
         {
             var creature = NWScript.CreateObject(NWScript.OBJECT_TYPE_CREATURE, resRef, _spawnLocation);
-            NWScript.DestroyObject(creature, 20.0f);
+            NWScript.DestroyObject(creature, 600.0f);
+            NWScript.ChangeToStandardFaction(creature, NWScript.STANDARD_FACTION_HOSTILE);
             if (creature == NWScript.OBJECT_INVALID)
             {
                 NWScript.WriteTimestampedLogEntry(
