@@ -28,10 +28,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
             return effects;
         }
 
-        private bool HasHeritageFeat()
-        {
-            return NWScript.GetHasFeat(Heritage, _oid) == 1;
-        }
+        private bool HasHeritageFeat() => NWScript.GetHasFeat(Heritage, _oid) == 1;
 
         private void AddHeritageEffectsIfObjectHasFeat(ICollection<Effect> effectsForObject)
         {

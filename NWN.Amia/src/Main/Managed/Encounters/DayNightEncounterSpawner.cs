@@ -48,12 +48,17 @@ namespace NWN.Amia.Main.Managed.Encounters
             var waypoint = NWScript.GetNearestObjectByTag("ds_spwn", _trigger);
             _spawnLocation = NWScript.GetLocation(waypoint);
         }
-        
+
         private static void SpawnCreaturesFromResRefs(int maxSpawns, IReadOnlyList<string> resRefs)
         {
-            if (!resRefs.Any()) return;
-                
-            NWScript.ApplyEffectAtLocation(NWScript.DURATION_TYPE_INSTANT, NWScript.EffectVisualEffect(247), _spawnLocation);
+            if (!resRefs.Any())
+            {
+                LogEmptySpawns();
+                return;
+            }
+
+            NWScript.ApplyEffectAtLocation(NWScript.DURATION_TYPE_INSTANT, NWScript.EffectVisualEffect(247),
+                _spawnLocation);
             for (var i = 0; i < maxSpawns; i++)
             {
                 var randomCreature = new Random().Next(0, resRefs.Count);
@@ -61,10 +66,15 @@ namespace NWN.Amia.Main.Managed.Encounters
             }
         }
 
+        private static void LogEmptySpawns() =>
+            NWScript.WriteTimestampedLogEntry(
+                $"Attempted to spawn creatures in {NWScript.GetName(NWScript.GetAreaFromLocation(_spawnLocation))}, but there were no creatures to spawn.");
+
         private static void SpawnEncounterAtWaypoint(string resRef)
         {
             var creature = NWScript.CreateObject(NWScript.OBJECT_TYPE_CREATURE, resRef, _spawnLocation);
-            if (creature == NWScript.OBJECT_INVALID) Console.WriteLine($"Spawn wasn't valid: {resRef} not valid and creature returned OBJECT_INVALID!!!");
+            if (creature == NWScript.OBJECT_INVALID)
+                Console.WriteLine($"Spawn wasn't valid: {resRef} not valid and creature returned OBJECT_INVALID!!!");
         }
 
         private static IEnumerable<string> GetResRefsForPrefix(string prefix)
