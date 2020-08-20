@@ -38,7 +38,7 @@ namespace NWN.Amia.Main.Managed.Encounters
             var dayCreatureResRefs = GetResRefsForPrefix(spawnsToChoose) as string[] ??
                                      GetResRefsForPrefix(spawnsToChoose).ToArray();
 
-            var numToSpawn = NWScript.d3() + 4;
+            var numToSpawn = NWScript.d4() + 2;
             var maxSpawns = DoubleSpawn ? numToSpawn * 2 : numToSpawn;
             SpawnCreaturesFromResRefs(maxSpawns, dayCreatureResRefs);
         }
