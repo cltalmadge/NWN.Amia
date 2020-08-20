@@ -33,8 +33,10 @@ namespace NWN.Amia.Main.Managed.Encounters
             NWScript.WriteTimestampedLogEntry($"Time is {NWScript.GetTimeHour()} and isNightTime == {isNightTime}.");
 
             var spawnsVary = NWScript.GetLocalInt(_trigger, "spawns_vary") == 1;
+            NWScript.WriteTimestampedLogEntry($"Spawns vary is {spawnsVary}.");
 
             var spawnsToChoose = isNightTime && spawnsVary ? VarPrefixes[1] : VarPrefixes[0];
+            NWScript.WriteTimestampedLogEntry($"Choosing spawns from prefix {spawnsToChoose}.");
 
             var dayCreatureResRefs = GetResRefsForPrefix(spawnsToChoose) as string[] ??
                                      GetResRefsForPrefix(spawnsToChoose).ToArray();
