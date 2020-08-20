@@ -31,8 +31,8 @@ namespace NWN.Amia.Main.Managed.Encounters
 
             var isNightTime = NWScript.GetTimeHour() < 6 || NWScript.GetTimeHour() >= 18;
             NWScript.WriteTimestampedLogEntry($"Time is {NWScript.GetTimeHour()} and isNightTime == {isNightTime}.");
-
-            var spawnsVary = NWScript.GetLocalInt(_trigger, "spawns_vary") == 1;
+            
+            var spawnsVary = NWScript.GetLocalInt(_objectWithVariables, "spawns_vary") == 1;
             NWScript.WriteTimestampedLogEntry($"Spawns vary is {spawnsVary}.");
 
             var spawnsToChoose = isNightTime && spawnsVary ? VarPrefixes[1] : VarPrefixes[0];
