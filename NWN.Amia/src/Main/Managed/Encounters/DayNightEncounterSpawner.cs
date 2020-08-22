@@ -77,8 +77,11 @@ namespace NWN.Amia.Main.Managed.Encounters
         private static void SpawnEncounterAtWaypoint(string resRef)
         {
             var creature = NWScript.CreateObject(NWScript.OBJECT_TYPE_CREATURE, resRef, _spawnLocation);
+            
             NWScript.DestroyObject(creature, 600.0f);
+            
             NWScript.ChangeToStandardFaction(creature, NWScript.STANDARD_FACTION_HOSTILE);
+            
             if (creature == NWScript.OBJECT_INVALID)
             {
                 NWScript.WriteTimestampedLogEntry(
