@@ -42,6 +42,11 @@ namespace NWN.Amia.Main.Core
             ObjectSelf = old;
         }
 
+        public void OnSignal(string signal)
+        {
+            
+        }
+
         public void ClosureAssignCommand(uint obj, ActionDelegate func)
         {
             if (Internal.NativeFunctions.ClosureAssignCommand(obj, NextEventId) != 0)
