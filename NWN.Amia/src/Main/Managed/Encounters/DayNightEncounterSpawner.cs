@@ -62,7 +62,7 @@ namespace NWN.Amia.Main.Managed.Encounters
 
             NWScript.ApplyEffectAtLocation(NWScript.DURATION_TYPE_INSTANT, NWScript.EffectVisualEffect(247),
                 _spawnLocation);
-
+    
             for (var i = 0; i < maxSpawns; i++)
             {
                 var randomCreature = new Random().Next(0, resRefs.Count);
