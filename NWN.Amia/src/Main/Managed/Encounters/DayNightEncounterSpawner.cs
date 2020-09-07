@@ -31,7 +31,7 @@ namespace NWN.Amia.Main.Managed.Encounters
 
             var isNightTime = NWScript.GetTimeHour() < 6 || NWScript.GetTimeHour() >= 18;
             NWScript.WriteTimestampedLogEntry($"Time is {NWScript.GetTimeHour()} and isNightTime == {isNightTime}.");
-            
+
             var spawnsVary = NWScript.GetLocalInt(_objectWithVariables, "spawns_vary") == 1;
             NWScript.WriteTimestampedLogEntry($"Spawns vary is {spawnsVary}.");
 
@@ -56,13 +56,11 @@ namespace NWN.Amia.Main.Managed.Encounters
         {
             if (!resRefs.Any())
             {
-                LogEmptySpawns();
+                NWScript.WriteTimestampedLogEntry(
+                    $"Attempted to spawn creatures in {NWScript.GetName(NWScript.GetAreaFromLocation(_spawnLocation))}, but there were no creatures to spawn.");
                 return;
             }
-
-            NWScript.ApplyEffectAtLocation(NWScript.DURATION_TYPE_INSTANT, NWScript.EffectVisualEffect(247),
-                _spawnLocation);
-    
+            
             for (var i = 0; i < maxSpawns; i++)
             {
                 var randomCreature = new Random().Next(0, resRefs.Count);
@@ -70,18 +68,20 @@ namespace NWN.Amia.Main.Managed.Encounters
             }
         }
 
-        private static void LogEmptySpawns() =>
-            NWScript.WriteTimestampedLogEntry(
-                $"Attempted to spawn creatures in {NWScript.GetName(NWScript.GetAreaFromLocation(_spawnLocation))}, but there were no creatures to spawn.");
-
         private static void SpawnEncounterAtWaypoint(string resRef)
         {
+            if (resRef.Equals(""))
+            {
+                NWScript.WriteTimestampedLogEntry("Found empty resref!");
+                return;
+            }
+            
             var creature = NWScript.CreateObject(NWScript.OBJECT_TYPE_CREATURE, resRef, _spawnLocation);
-            
+
             NWScript.DestroyObject(creature, 600.0f);
-            
+
             NWScript.ChangeToStandardFaction(creature, NWScript.STANDARD_FACTION_HOSTILE);
-            
+
             if (creature == NWScript.OBJECT_INVALID)
             {
                 NWScript.WriteTimestampedLogEntry(

@@ -35,8 +35,7 @@ namespace NWN.Amia.Main.Core
         {
             var old = ObjectSelf;
             ObjectSelf = oidSelf;
-
-
+            
             RunClosure(eid);
 
             ObjectSelf = old;
