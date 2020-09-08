@@ -28,7 +28,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
                 return 0;
             }
 
-            var spawner = new DayNightEncounterSpawner(_trigger, area, player);
+            var spawner = new DayNightEncounterSpawner(_trigger, area);
 
             if (GetNumberOfPartyMembers(player) > 6) spawner.DoubleSpawn = true;
 

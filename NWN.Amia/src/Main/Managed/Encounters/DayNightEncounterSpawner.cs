@@ -13,14 +13,12 @@ namespace NWN.Amia.Main.Managed.Encounters
         private static IntPtr _spawnLocation;
         private static uint _objectWithVariables;
         private static readonly string[] VarPrefixes = {"day_spawn", "night_spawn"};
-        private readonly uint _player;
         private readonly uint _trigger;
 
-        public DayNightEncounterSpawner(uint trigger, uint objectWithVariables, uint player)
+        public DayNightEncounterSpawner(uint trigger, uint objectWithVariables)
         {
             _trigger = trigger;
             _objectWithVariables = objectWithVariables;
-            _player = player;
         }
 
         public bool DoubleSpawn { get; set; }
