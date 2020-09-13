@@ -26,7 +26,7 @@ namespace NWN.Amia.Main.Managed.Encounters
         public void SpawnEncounters()
         {
             SetSpawnPointToNearestWaypoint();
-
+            NWScript.WriteTimestampedLogEntry($"Sourcing spawns in area: {NWScript.GetName(_objectWithVariables)}");
             var isNightTime = NWScript.GetTimeHour() < 6 || NWScript.GetTimeHour() >= 18;
             NWScript.WriteTimestampedLogEntry($"Time is {NWScript.GetTimeHour()} and isNightTime == {isNightTime}.");
 
