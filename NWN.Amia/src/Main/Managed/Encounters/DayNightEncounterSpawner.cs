@@ -26,7 +26,9 @@ namespace NWN.Amia.Main.Managed.Encounters
         public void SpawnEncounters()
         {
             SetSpawnPointToNearestWaypoint();
+            
             NWScript.WriteTimestampedLogEntry($"Sourcing spawns in area: {NWScript.GetName(_objectWithVariables)}");
+            
             var isNightTime = NWScript.GetTimeHour() < 6 || NWScript.GetTimeHour() >= 18;
             NWScript.WriteTimestampedLogEntry($"Time is {NWScript.GetTimeHour()} and isNightTime == {isNightTime}.");
 
@@ -50,6 +52,28 @@ namespace NWN.Amia.Main.Managed.Encounters
             _spawnLocation = NWScript.GetLocation(waypoint);
         }
 
+        private static IEnumerable<string> GetResRefsForPrefix(string prefix)
+        {
+            var resRefs = new List<string>();
+
+            var numberOfLocalVars = ObjectPlugin.GetLocalVariableCount(_objectWithVariables);
+
+            if (numberOfLocalVars == 0)
+            {
+                NWScript.WriteTimestampedLogEntry($"ERROR: No spawns for {NWScript.GetName(_objectWithVariables)}!!! Aborted!");
+                return new List<string>();
+            }
+            
+            for (var i = 0; i < numberOfLocalVars; i++)
+            {
+                var variableName = ObjectPlugin.GetLocalVariable(_objectWithVariables, i).key;
+                if (variableName.Contains(prefix))
+                    resRefs.Add(NWScript.GetLocalString(_objectWithVariables, variableName));
+            }
+
+            return resRefs;
+        }
+
         private static void SpawnCreaturesFromResRefs(int maxSpawns, IReadOnlyList<string> resRefs)
         {
             if (!resRefs.Any())
@@ -70,7 +94,7 @@ namespace NWN.Amia.Main.Managed.Encounters
         {
             if (resRef.Equals(""))
             {
-                NWScript.WriteTimestampedLogEntry("Found empty resref!");
+                NWScript.WriteTimestampedLogEntry("Found empty resref! Aborting!");
                 return;
             }
             
@@ -85,22 +109,6 @@ namespace NWN.Amia.Main.Managed.Encounters
                 NWScript.WriteTimestampedLogEntry(
                     $"Spawn wasn't valid: {resRef} not valid and creature returned OBJECT_INVALID");
             }
-        }
-
-        private static IEnumerable<string> GetResRefsForPrefix(string prefix)
-        {
-            var resRefs = new List<string>();
-
-            var numberOfLocalVars = ObjectPlugin.GetLocalVariableCount(_objectWithVariables);
-
-            for (var i = 0; i < numberOfLocalVars; i++)
-            {
-                var variableName = ObjectPlugin.GetLocalVariable(_objectWithVariables, i).key;
-                if (variableName.Contains(prefix))
-                    resRefs.Add(NWScript.GetLocalString(_objectWithVariables, variableName));
-            }
-
-            return resRefs;
         }
     }
 }
