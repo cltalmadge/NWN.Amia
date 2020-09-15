@@ -48,26 +48,26 @@ namespace NWN.Amia.Main.Core
 
         public void ClosureAssignCommand(uint obj, ActionDelegate func)
         {
-            if (Internal.NativeFunctions.ClosureAssignCommand(obj, NextEventId) != 0)
+            if (VM.ClosureAssignCommand(obj, NextEventId) != 0)
                 _closures.Add(NextEventId++, new Closure {OwnerObject = obj, Run = func});
         }
 
         public void ClosureDelayCommand(uint obj, float duration, ActionDelegate func)
         {
-            if (Internal.NativeFunctions.ClosureDelayCommand(obj, duration, NextEventId) != 0)
+            if (VM.ClosureDelayCommand(obj, duration, NextEventId) != 0)
                 _closures.Add(NextEventId++, new Closure {OwnerObject = obj, Run = func});
         }
 
         public void ClosureActionDoCommand(uint obj, ActionDelegate func)
         {
-            if (Internal.NativeFunctions.ClosureActionDoCommand(obj, NextEventId) != 0)
+            if (VM.ClosureActionDoCommand(obj, NextEventId) != 0)
                 _closures.Add(NextEventId++, new Closure {OwnerObject = obj, Run = func});
         }
 
         public static int Bootstrap(IntPtr ptr, int nativeHandlesLength)
         {
             // Call internal bootstrap function
-            return Internal.Init(ptr, nativeHandlesLength, Instance);
+            return NWNCore.Init(ptr, nativeHandlesLength, Instance);
         }
 
         private void RunClosure(ulong eid)
