@@ -12,7 +12,7 @@ namespace NWN.Amia.Main.Core
         private readonly Dictionary<ulong, Closure> _closures = new Dictionary<ulong, Closure>();
 
         private readonly Stack<ScriptContext> _scriptContexts = new Stack<ScriptContext>();
-        public static AmiaCore Instance { get; } = new AmiaCore();
+        private static AmiaCore Instance { get; } = new AmiaCore();
         private ulong NextEventId { get; set; }
         public uint ObjectSelf { get; private set; } = NWScript.OBJECT_INVALID;
 
@@ -64,6 +64,7 @@ namespace NWN.Amia.Main.Core
                 _closures.Add(NextEventId++, new Closure {OwnerObject = obj, Run = func});
         }
 
+        [UsedImplicitly]
         public static int Bootstrap(IntPtr ptr, int nativeHandlesLength)
         {
             // Call internal bootstrap function
@@ -84,4 +85,5 @@ namespace NWN.Amia.Main.Core
             _closures.Remove(eid);
         }
     }
+    
 }
