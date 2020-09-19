@@ -8,6 +8,23 @@ namespace NWN.Amia.Main.Managed.Characters
 {
     public class Player : ICreature
     {
+        public Player(uint objectId)
+        {
+            ObjectId = objectId;
+
+            Str = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_STRENGTH);
+            Con = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_CONSTITUTION);
+            Dex = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_DEXTERITY);
+            Int = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_INTELLIGENCE);
+            Wis = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_WISDOM);
+            Cha = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_CHARISMA);
+
+            HitDice = NWScript.GetHitDice(ObjectId);
+            HitPoints = NWScript.GetMaxHitPoints(ObjectId);
+            Subrace = NWScript.GetSubRace(ObjectId);
+        }
+
+        public string Subrace { get; }
         public uint ObjectId { get; set; }
 
         public int Str { get; set; }
@@ -29,23 +46,6 @@ namespace NWN.Amia.Main.Managed.Characters
         public List<int> Classes { get; set; }
 
         public List<Effect> ActiveEffects { get; set; }
-        public string Subrace { get; }
-
-        public Player(uint objectId)
-        {
-            ObjectId = objectId;
-
-            Str = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_STRENGTH);
-            Con = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_CONSTITUTION);
-            Dex = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_DEXTERITY);
-            Int = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_INTELLIGENCE);
-            Wis = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_WISDOM);
-            Cha = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_CHARISMA);
-
-            HitDice = NWScript.GetHitDice(ObjectId);
-            HitPoints = NWScript.GetMaxHitPoints(ObjectId);
-            Subrace = NWScript.GetSubRace(ObjectId);
-        }
 
         public void UpdateAbilities()
         {
@@ -57,7 +57,9 @@ namespace NWN.Amia.Main.Managed.Characters
             UpdateAbility(NWScript.ABILITY_CHARISMA, Cha);
         }
 
-        private void UpdateAbility(int ability, int newAbilityValue) =>
+        private void UpdateAbility(int ability, int newAbilityValue)
+        {
             CreaturePlugin.SetRawAbilityScore(ObjectId, ability, newAbilityValue);
+        }
     }
 }

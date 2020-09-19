@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NWN.Amia.Main.Managed.Feats.Types;
 using NWN.Core;
 
@@ -7,9 +6,9 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
 {
     public class DuergarEffects : IEffectCollector
     {
-        private const int Heritage = 0;
-        private uint _oid = NWScript.OBJECT_INVALID;
+        private const int Heritage = 1238;
         private bool _hasHeritageFeat;
+        private uint _oid = NWScript.OBJECT_INVALID;
 
         public List<Effect> GatherEffectsForObject(uint objectId)
         {
@@ -24,9 +23,8 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
                 NWScript.EffectImmunity(NWScript.IMMUNITY_TYPE_PARALYSIS),
                 NWScript.EffectImmunity(NWScript.IMMUNITY_TYPE_POISON),
                 NWScript.EffectSpellImmunity(NWScript.SPELL_PHANTASMAL_KILLER)
-                
             };
-            
+
             AddHeritageEffectsIfObjectHasFeat(effects);
 
             return effects;

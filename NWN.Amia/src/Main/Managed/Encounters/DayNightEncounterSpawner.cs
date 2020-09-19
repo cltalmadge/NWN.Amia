@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using NWN.Amia.Main.Managed.Encounters.Types;
 using NWN.Core;
 using NWN.Core.NWNX;
@@ -9,13 +10,10 @@ namespace NWN.Amia.Main.Managed.Encounters
 {
     public class DayNightEncounterSpawner : IEncounterSpawner
     {
-        private readonly uint _trigger;
-        private static IntPtr _waypointLocation;
+        private static IntPtr _spawnLocation;
         private static uint _objectWithVariables;
         private static readonly string[] VarPrefixes = {"day_spawn", "night_spawn"};
-
-        public bool DoubleSpawn { get; set; }
-
+        private readonly uint _trigger;
 
         public DayNightEncounterSpawner(uint trigger, uint objectWithVariables)
         {
@@ -23,36 +21,68 @@ namespace NWN.Amia.Main.Managed.Encounters
             _objectWithVariables = objectWithVariables;
         }
 
+        public bool DoubleSpawn { get; set; }
+
         public void SpawnEncounters()
         {
-            _waypointLocation = NWScript.GetLocation(NWScript.GetNearestObjectByTag("ds_spwn", _trigger));
+            SetSpawnPointToNearestWaypoint();
+            
+            NWScript.WriteTimestampedLogEntry($"Sourcing spawns in area: {NWScript.GetName(_objectWithVariables)}");
+            
+            var isNightTime = NWScript.GetTimeHour() < 6 || NWScript.GetTimeHour() >= 18;
+            NWScript.WriteTimestampedLogEntry($"Time is {NWScript.GetTimeHour()} and isNightTime == {isNightTime}.");
 
-
-            var isNightTime = NWScript.GetTimeHour() < 6 && NWScript.GetTimeHour() >= 18;
-
-            var spawnsVary = NWScript.GetLocalInt(_trigger, "spawns_vary") == 1;
+            var spawnsVary = NWScript.GetLocalInt(_objectWithVariables, "spawns_vary") == 1;
+            NWScript.WriteTimestampedLogEntry($"Spawns vary is {spawnsVary}.");
 
             var spawnsToChoose = isNightTime && spawnsVary ? VarPrefixes[1] : VarPrefixes[0];
-
-            Console.WriteLine($"{spawnsToChoose}");
+            NWScript.WriteTimestampedLogEntry($"Choosing spawns from prefix {spawnsToChoose}.");
 
             var dayCreatureResRefs = GetResRefsForPrefix(spawnsToChoose) as string[] ??
                                      GetResRefsForPrefix(spawnsToChoose).ToArray();
 
-            var typicalSpawns = NWScript.d3() + 4;
-            var maxSpawns = DoubleSpawn ? typicalSpawns * 2 : typicalSpawns;
+            var numToSpawn = NWScript.d4() + 2;
+            var maxSpawns = DoubleSpawn ? numToSpawn * 2 : numToSpawn;
+            SpawnCreaturesFromResRefs(maxSpawns, dayCreatureResRefs);
+        }
 
-            if (dayCreatureResRefs.Length == 0)
+        private void SetSpawnPointToNearestWaypoint()
+        {
+            var waypoint = NWScript.GetNearestObjectByTag("ds_spwn", _trigger);
+            _spawnLocation = NWScript.GetLocation(waypoint);
+        }
+
+        private static IEnumerable<string> GetResRefsForPrefix(string prefix)
+        {
+            var resRefs = new List<string>();
+
+            var numberOfLocalVars = ObjectPlugin.GetLocalVariableCount(_objectWithVariables);
+
+            if (numberOfLocalVars == 0)
             {
-                Console.WriteLine("DEBUG: Trigger was set as an encounter spawner but could not resolve any resrefs.");
-                return;
+                NWScript.WriteTimestampedLogEntry($"ERROR: No spawns for {NWScript.GetName(_objectWithVariables)}!!! Aborted!");
+                return new List<string>();
+            }
+            
+            for (var i = 0; i < numberOfLocalVars; i++)
+            {
+                var variableName = ObjectPlugin.GetLocalVariable(_objectWithVariables, i).key;
+                if (variableName.Contains(prefix))
+                    resRefs.Add(NWScript.GetLocalString(_objectWithVariables, variableName));
             }
 
-            SpawnCreaturesFromResRefs(maxSpawns, dayCreatureResRefs);
+            return resRefs;
         }
 
         private static void SpawnCreaturesFromResRefs(int maxSpawns, IReadOnlyList<string> resRefs)
         {
+            if (!resRefs.Any())
+            {
+                NWScript.WriteTimestampedLogEntry(
+                    $"Attempted to spawn creatures in {NWScript.GetName(NWScript.GetAreaFromLocation(_spawnLocation))}, but there were no creatures to spawn.");
+                return;
+            }
+            
             for (var i = 0; i < maxSpawns; i++)
             {
                 var randomCreature = new Random().Next(0, resRefs.Count);
@@ -62,26 +92,23 @@ namespace NWN.Amia.Main.Managed.Encounters
 
         private static void SpawnEncounterAtWaypoint(string resRef)
         {
-            Console.WriteLine($"Spawning ResRef {resRef}");
-            NWScript.CreateObject(NWScript.OBJECT_TYPE_CREATURE, resRef, _waypointLocation);
-        }
-
-        private static IEnumerable<string> GetResRefsForPrefix(string prefix)
-        {
-            var resRefs = new List<string>();
-
-            var numberOfLocalVars = ObjectPlugin.GetLocalVariableCount(_objectWithVariables);
-
-            for (var i = 0; i < numberOfLocalVars; i++)
+            if (resRef.Equals(""))
             {
-                var variableName = ObjectPlugin.GetLocalVariable(_objectWithVariables, i).key;
-                if (variableName.Contains(prefix))
-                {
-                    resRefs.Add(NWScript.GetLocalString(_objectWithVariables, variableName));
-                }
+                NWScript.WriteTimestampedLogEntry("Found empty resref! Aborting!");
+                return;
             }
+            
+            var creature = NWScript.CreateObject(NWScript.OBJECT_TYPE_CREATURE, resRef, _spawnLocation);
 
-            return resRefs;
+            NWScript.DestroyObject(creature, 600.0f);
+
+            NWScript.ChangeToStandardFaction(creature, NWScript.STANDARD_FACTION_HOSTILE);
+
+            if (creature == NWScript.OBJECT_INVALID)
+            {
+                NWScript.WriteTimestampedLogEntry(
+                    $"Spawn wasn't valid: {resRef} not valid and creature returned OBJECT_INVALID");
+            }
         }
     }
 }

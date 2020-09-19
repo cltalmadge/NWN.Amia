@@ -1,4 +1,7 @@
-﻿using NWN.Amia.Main.Managed.Characters;
+﻿using System;
+using NWN.Amia.Main.Managed.Characters;
+using NWN.Core;
+using NWN.Core.NWNX;
 
 namespace NWN.Amia.Main.Managed.Races.Types.HeritageAbilities
 {
@@ -6,10 +9,8 @@ namespace NWN.Amia.Main.Managed.Races.Types.HeritageAbilities
     {
         public void SetupStats(Player player)
         {
-            player.Str += 1;
-            player.Cha += 1;
-
-            player.UpdateAbilities();
+            CreaturePlugin.ModifyRawAbilityScore(player.ObjectId, NWScript.ABILITY_STRENGTH, 1);
+            CreaturePlugin.ModifyRawAbilityScore(player.ObjectId, NWScript.ABILITY_CHARISMA, 1);
         }
     }
 }

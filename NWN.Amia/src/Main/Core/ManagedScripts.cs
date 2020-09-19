@@ -23,7 +23,7 @@ namespace NWN.Amia.Main.Core
                 var scriptName = (ScriptName) Attribute.GetCustomAttribute(type, typeof(ScriptName));
 
                 if (scriptName?.Name == null) continue;
-                
+
                 StoredScripts.TryAdd(scriptName.Name, type);
                 Console.WriteLine($"Cached script {scriptName.Name}.");
             }
@@ -33,10 +33,7 @@ namespace NWN.Amia.Main.Core
 
         public static IRunnableScript GetScriptFromName(string scriptName)
         {
-            if (!Initialized)
-            {
-                PerformInitialSetup();
-            }
+            if (!Initialized) PerformInitialSetup();
 
             IRunnableScript scriptToRun;
 

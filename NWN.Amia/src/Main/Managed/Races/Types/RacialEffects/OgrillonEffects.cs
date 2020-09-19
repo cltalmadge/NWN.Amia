@@ -6,9 +6,9 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
 {
     public class OgrillonEffects : IEffectCollector
     {
-        private uint _oid = NWScript.OBJECT_INVALID;
+        private const int Heritage = 1238;
         private bool _hasHeritageFeat;
-        private const int Heritage = 0;
+        private uint _oid = NWScript.OBJECT_INVALID;
 
         public List<Effect> GatherEffectsForObject(uint objectId)
         {
@@ -31,7 +31,8 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
         {
             if (!_hasHeritageFeat) return;
 
-            effectsForObject.Add(NWScript.EffectACIncrease(2, NWScript.AC_DODGE_BONUS));
+            effectsForObject.Add(NWScript.EffectACIncrease(2));
+            effectsForObject.Add(NWScript.EffectSavingThrowDecrease(NWScript.SAVING_THROW_ALL, 1));
         }
     }
 }

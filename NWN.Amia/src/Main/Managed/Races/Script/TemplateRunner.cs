@@ -1,4 +1,5 @@
-﻿using NWN.Amia.Main.Core.Types;
+﻿using System;
+using NWN.Amia.Main.Core.Types;
 using NWN.Amia.Main.Managed.Races.Types.RacialTemplates;
 using NWN.Amia.Main.Managed.Races.Utils;
 using NWN.Core;
@@ -14,6 +15,8 @@ namespace NWN.Amia.Main.Managed.Races.Script
             if (TemplateItem.Initialized(nwnObjectId)) return 0;
 
             var template = TemplateMaker.SetupStats(nwnObjectId);
+            
+            Console.WriteLine($"Ability Modifiers: ({template.StrBonus}, {template.ConBonus}, {template.DexBonus}, {template.IntBonus}, {template.ChaBonus}, {template.WisBonus})");
 
             template.Apply();
 
@@ -23,7 +26,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
 
     public static class TemplateMaker
     {
-        public static ICharacterTemplate SetupStats(in uint nwnObjectId)
+        public static RacialTemplate SetupStats(in uint nwnObjectId)
         {
             var templateItem = NWScript.GetItemPossessedBy(nwnObjectId, TemplateItem.TemplateItemResRef);
 

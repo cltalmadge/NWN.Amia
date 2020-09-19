@@ -7,8 +7,27 @@ namespace NWN.Amia.Main.Managed.Races
 {
     public static class ManagedRaces
     {
-        public static Dictionary<int, IEffectCollector> Races { get; }
-        public static Dictionary<int, IHeritageAbilities> HeritageRaces { get; }
+        public enum RacialType
+        {
+            Duergar = 30,
+            Drow = 33,
+            Tiefling = 1000,
+            Aasimar = 1001,
+            Svirfneblin = 36,
+            Ghostwise = 37,
+            Feyri = 1003,
+            Goblin = 38,
+            Kobold = 39,
+            Hobgoblin = 42,
+            Orc = 43,
+            Orog = 45,
+            Chultan = 47,
+            Damaran = 48,
+            Ffolk = 50,
+            Mulan = 52,
+            Ogrillon = 44,
+            Feytouched = 1002
+        }
 
         static ManagedRaces()
         {
@@ -31,9 +50,9 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Ffolk, new FfolkEffects()},
                 {(int) RacialType.Mulan, new MulanEffects()},
                 {(int) RacialType.Ogrillon, new OgrillonEffects()},
-                {(int)RacialType.Feytouched, new FeytouchedEffects()}
+                {(int) RacialType.Feytouched, new FeytouchedEffects()}
             };
-            
+
             HeritageRaces = new Dictionary<int, IHeritageAbilities>
             {
                 {(int) RacialType.Drow, new DrowHeritageAbilities()},
@@ -43,33 +62,11 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Svirfneblin, new SvirfneblinHeritageAbilities()},
                 {(int) RacialType.Aasimar, new AasimarHeritageAbilities()},
                 {(int) RacialType.Tiefling, new TieflingHeritageAbilities()},
-                {(int) RacialType.Feytouched, new FeytouchedHeritageAbilities()},
-                
+                {(int) RacialType.Feytouched, new FeytouchedHeritageAbilities()}
             };
         }
 
-        public enum RacialType
-        {
-            Duergar = 30,
-            Drow = 33,
-            Tiefling = 1000,
-            Aasimar = 1001,
-            Svirfneblin = 36,
-            Ghostwise = 37,
-            Feyri = 1003,
-            Goblin = 38,
-            Kobold = 39,
-            Hobgoblin = 42,
-            Orc = 43,
-            Orog = 45,
-            Chultan = 47,
-            Damaran = 48,
-            Ffolk = 50,
-            Mulan = 52,
-            Ogrillon = 44,
-            Feytouched = 1002
-        }
+        public static Dictionary<int, IEffectCollector> Races { get; }
+        public static Dictionary<int, IHeritageAbilities> HeritageRaces { get; }
     }
-
-
 }

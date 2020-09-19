@@ -14,7 +14,17 @@ namespace NWN.Amia.Main.Core
 
         public int HandleContext()
         {
-            return GetScriptFromContext().Run(_currentScript.OwnerObject);
+            var scriptResult = 1;
+            try
+            {
+                scriptResult = GetScriptFromContext().Run(_currentScript.OwnerObject);
+            }
+            catch (Exception m)
+            {
+                Console.WriteLine($"FAILED TO PARSE SCRIPT {_currentScript.ScriptName}. Reason: {m.Message}");
+            }
+
+            return scriptResult;
         }
 
         private IRunnableScript GetScriptFromContext()

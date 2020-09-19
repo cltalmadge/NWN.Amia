@@ -10,7 +10,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
         {
             return new List<Effect>
             {
-                NWScript.EffectSkillIncrease(NWScript.SKILL_MOVE_SILENTLY, 4),
+                NWScript.EffectSkillIncrease(NWScript.SKILL_MOVE_SILENTLY, 4)
             };
         }
     }

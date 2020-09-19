@@ -8,18 +8,16 @@ using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Races.Script
 {
-    [ScriptName("subrace_effects"), UsedImplicitly]
+    [ScriptName("subrace_effects")]
+    [UsedImplicitly]
     public class SubraceEffects : IRunnableScript
     {
         public int Run(uint nwnObjectId)
         {
             var listOfSubraceEffects = ResolveEffectsForObject(nwnObjectId);
 
-            if (!listOfSubraceEffects.Any())
-            {
-                return 0;
-            }
-            
+            if (!listOfSubraceEffects.Any()) return 0;
+
             EffectApplier.Apply(nwnObjectId, listOfSubraceEffects);
 
             return 0;

@@ -5,17 +5,27 @@ namespace NWN.Amia.Test
 {
     public class AmiaCoreTest
     {
-        private readonly AmiaCore _amiaCore;
-
         public AmiaCoreTest()
         {
             _amiaCore = new AmiaCore();
         }
 
+        private readonly AmiaCore _amiaCore;
+
         [Fact]
-        public void OnRunScriptHandlesScripts()
+        public void ObjectSelfIsSetToOidSelf()
         {
-            Assert.Equal(0, _amiaCore.OnRunScript("z_real_script_name", 0));
+            _amiaCore.OnRunScript("", 0);
+            Assert.Equal((uint) 0, _amiaCore.ObjectSelf);
+        }
+
+        [Fact]
+        public void OnClosureResetsObjectSelfToOldValue()
+        {
+            _amiaCore.OnRunScript("", 1);
+            _amiaCore.OnClosure(0, 0);
+
+            Assert.Equal(_amiaCore.ObjectSelf, (uint) 1);
         }
 
         [Fact]
@@ -25,19 +35,9 @@ namespace NWN.Amia.Test
         }
 
         [Fact]
-        public void ObjectSelfIsSetToOidSelf()
+        public void OnRunScriptHandlesScripts()
         {
-            _amiaCore.OnRunScript("", 0);
-            Assert.Equal((uint)0, _amiaCore.ObjectSelf);
-        }
-
-        [Fact]
-        public void OnClosureResetsObjectSelfToOldValue()
-        {
-            _amiaCore.OnRunScript("", 1);
-            _amiaCore.OnClosure(0, 0);
-            
-            Assert.Equal(_amiaCore.ObjectSelf, (uint)1);
+            Assert.Equal(0, _amiaCore.OnRunScript("z_real_script_name", 0));
         }
     }
 }
