@@ -5,8 +5,8 @@ using NWN.Core.NWNX;
 
 namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
 {
-    [ScriptName("race_init_feyri")]
-    public class FeyriOption : IRunnableScript
+    [ScriptName("race_init_shvar")]
+    public class ShadovarOption : IRunnableScript
     {
         public int Run(uint nwnObjectId)
         {
@@ -18,9 +18,9 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
                 return 0;
             }
 
-            if (NWScript.GetRacialType(nwnObjectId) != NWScript.RACIAL_TYPE_ELF)
+            if (NWScript.GetRacialType(nwnObjectId) != NWScript.RACIAL_TYPE_HUMAN)
             {
-                NWScript.SendMessageToPC(nwnObjectId, "Fey'ri only works with the Moon Elf base race.");
+                NWScript.SendMessageToPC(nwnObjectId, "Shadovar only works with the Half Elf base race.");
                 return 0;
             }
 
@@ -29,17 +29,19 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
             SetSubraceModifiers(nwnObjectId);
 
             var templateRunner = new TemplateRunner();
+            CreaturePlugin.AddFeatByLevel(nwnObjectId,0,1);//TODO:Change feat number to Stealthy.
 
             templateRunner.Run(nwnObjectId);
-            CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_OUTSIDER);
-            CreaturePlugin.AddFeatByLevel(nwnObjectId,0,1);//TODO:Change feat number to Darkvision.
             
             return 0;
         }
 
         private static void SetSubraceModifiers(uint nwnObjectId)
         {
-            TemplateItem.SetSubRace(nwnObjectId, "Fey'ri");
+            TemplateItem.SetSubRace(nwnObjectId, "Shadovar");
+            TemplateItem.SetDexMod(nwnObjectId, 1);
+            TemplateItem.SetIntMod(nwnObjectId, 1);
+            TemplateItem.SetConMod(nwnObjectId, -2);
         }
     }
 }

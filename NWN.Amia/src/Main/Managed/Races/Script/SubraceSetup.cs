@@ -28,6 +28,8 @@ namespace NWN.Amia.Main.Managed.Races.Script
                 "aquatic elf" => new AquaticElfOption().Run(nwnObjectId),
                 "feyri" => new FeyriOption().Run(nwnObjectId),
                 "fey'ri" => new FeyriOption().Run(nwnObjectId),
+                "shadovar" => new ShadovarOption().Run(nwnObjectId),
+                "centaur" => new CentaurOption().Run(nwnObjectId),
                 _ => 1
             };
         }

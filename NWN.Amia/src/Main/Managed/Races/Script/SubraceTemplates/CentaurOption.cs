@@ -5,8 +5,8 @@ using NWN.Core.NWNX;
 
 namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
 {
-    [ScriptName("race_init_feyri")]
-    public class FeyriOption : IRunnableScript
+    [ScriptName("race_init_centr")]
+    public class CentaurOption : IRunnableScript
     {
         public int Run(uint nwnObjectId)
         {
@@ -20,7 +20,7 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
 
             if (NWScript.GetRacialType(nwnObjectId) != NWScript.RACIAL_TYPE_ELF)
             {
-                NWScript.SendMessageToPC(nwnObjectId, "Fey'ri only works with the Moon Elf base race.");
+                NWScript.SendMessageToPC(nwnObjectId, "Centaur only works with the Moon Elf base race.");
                 return 0;
             }
 
@@ -31,15 +31,20 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
             var templateRunner = new TemplateRunner();
 
             templateRunner.Run(nwnObjectId);
-            CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_OUTSIDER);
+            CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_HUMANOID_MONSTROUS);
             CreaturePlugin.AddFeatByLevel(nwnObjectId,0,1);//TODO:Change feat number to Darkvision.
+
             
             return 0;
         }
 
         private static void SetSubraceModifiers(uint nwnObjectId)
         {
-            TemplateItem.SetSubRace(nwnObjectId, "Fey'ri");
+            TemplateItem.SetSubRace(nwnObjectId, "Centaur");
+            TemplateItem.SetIntMod(nwnObjectId, -2);
+            TemplateItem.SetDexMod(nwnObjectId, -2);
+            TemplateItem.SetStrMod(nwnObjectId, 1);
+            TemplateItem.SetConMod(nwnObjectId, 3);
         }
     }
 }
