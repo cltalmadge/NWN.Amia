@@ -16,10 +16,18 @@ namespace NWN.Amia.Main.Managed.Races.Script
                 "aasimar" => new AasimarOption().Run(nwnObjectId),
                 "tiefling" => new TieflingOption().Run(nwnObjectId),
                 "earth genasi" => new EarthGenasiOption().Run(nwnObjectId),
+                "earth" => new EarthGenasiOption().Run(nwnObjectId),
                 "water genasi" => new WaterGenasiOption().Run(nwnObjectId),
+                "water" => new WaterGenasiOption().Run(nwnObjectId),
                 "fire genasi" => new FireGenasiOption().Run(nwnObjectId),
+                "fire" => new FireGenasiOption().Run(nwnObjectId),
                 "air genasi" => new AirGenasiOption().Run(nwnObjectId),
+                "air" => new AirGenasiOption().Run(nwnObjectId),
                 "feytouched" => new FeytouchedOption().Run(nwnObjectId),
+                "elfling" => new ElflingOption().Run(nwnObjectId),
+                "aquatic elf" => new AquaticElfOption().Run(nwnObjectId),
+                "feyri" => new FeyriOption().Run(nwnObjectId),
+                "fey'ri" => new FeyriOption().Run(nwnObjectId),
                 _ => 1
             };
         }
