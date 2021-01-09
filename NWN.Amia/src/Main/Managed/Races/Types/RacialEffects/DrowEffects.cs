@@ -41,9 +41,15 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
         }
 
 
-        private static int SpellResistanceWithFeat(int hitDice) => hitDice + 4;
+        private static int SpellResistanceWithFeat(int hitDice)
+        {
+            return hitDice + 4;
+        }
 
-        private static int SpellResistanceWithoutFeat(in int hitDice) => hitDice - 2;
+        private static int SpellResistanceWithoutFeat(in int hitDice)
+        {
+            return hitDice - 2;
+        }
 
         private void AddHeritageEffectsIfObjectHasFeat(ICollection<Effect> effectsForObject)
         {

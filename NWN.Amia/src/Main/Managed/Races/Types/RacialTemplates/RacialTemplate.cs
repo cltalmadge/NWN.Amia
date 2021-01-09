@@ -63,7 +63,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
 
             if (raceIsNullOrOffsetSet) return;
 
-            
+
             ApplyStatIfBonusNotZero(NWScript.ABILITY_STRENGTH, baseRaceTemplate.StrBonus);
             ApplyStatIfBonusNotZero(NWScript.ABILITY_CONSTITUTION, baseRaceTemplate.ConBonus);
             ApplyStatIfBonusNotZero(NWScript.ABILITY_DEXTERITY, baseRaceTemplate.DexBonus);
@@ -76,11 +76,12 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
 
         private void ApplyStatIfBonusNotZero(int ability, int bonus)
         {
-            Console.WriteLine($"Ability before modification: {CreaturePlugin.GetRawAbilityScore(_nwnObjectId, ability)}");
+            Console.WriteLine(
+                $"Ability before modification: {CreaturePlugin.GetRawAbilityScore(_nwnObjectId, ability)}");
             var totalToSet = CreaturePlugin.GetRawAbilityScore(_nwnObjectId, ability) + bonus;
             CreaturePlugin.SetRawAbilityScore(_nwnObjectId, ability, totalToSet);
-            Console.WriteLine($"Ability after modification: {CreaturePlugin.GetRawAbilityScore(_nwnObjectId, ability)}");
-
+            Console.WriteLine(
+                $"Ability after modification: {CreaturePlugin.GetRawAbilityScore(_nwnObjectId, ability)}");
         }
 
         private void ApplyAbilityModsIfNotInitialized()

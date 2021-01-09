@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="JetBrains.Annotations" Version="2020.2.0-eap" />
       <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
-      <PackageReference Include="NWN.Core" Version="8193.14.5" />
+      <PackageReference Include="NWN.Core" Version="8193.16.10" />
       <PackageReference Include="xunit" Version="2.4.1" />
       <PackageReference Include="xunit.runner.visualstudio" Version="2.4.2" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="src\Main\Managed\Characters\Classes\Warlock\Scripts" />
+      <Folder Include="src\Main\Managed\Objects\Classes\Warlock\Scripts" />
     </ItemGroup>
 
 </Project>

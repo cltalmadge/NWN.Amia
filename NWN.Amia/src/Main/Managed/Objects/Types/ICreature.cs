@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using NWN.Core;
 
-namespace NWN.Amia.Main.Managed.Characters.Types
+namespace NWN.Amia.Main.Managed.Objects.Types
 {
     public interface ICreature
     {

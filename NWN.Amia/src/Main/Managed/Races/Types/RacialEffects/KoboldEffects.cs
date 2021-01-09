@@ -8,7 +8,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
     {
         public List<Effect> GatherEffectsForObject(uint objectId)
         {
-            return new List<Effect>
+            return new()
             {
                 NWScript.EffectSkillIncrease(NWScript.SKILL_SET_TRAP, 4),
                 NWScript.EffectSkillIncrease(NWScript.SKILL_SEARCH, 4)

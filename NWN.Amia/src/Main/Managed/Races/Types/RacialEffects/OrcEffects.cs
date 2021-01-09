@@ -8,7 +8,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
     {
         public List<Effect> GatherEffectsForObject(uint objectId)
         {
-            return new List<Effect>
+            return new()
             {
                 NWScript.EffectSkillIncrease(NWScript.SKILL_INTIMIDATE, 4),
                 NWScript.EffectSkillIncrease(NWScript.SKILL_DISCIPLINE, 4)

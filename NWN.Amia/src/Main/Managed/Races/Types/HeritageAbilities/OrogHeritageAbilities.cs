@@ -1,5 +1,4 @@
-﻿using System;
-using NWN.Amia.Main.Managed.Characters;
+﻿using NWN.Amia.Main.Managed.Objects;
 using NWN.Core;
 using NWN.Core.NWNX;
 

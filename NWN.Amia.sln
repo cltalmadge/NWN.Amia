@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Amia", "NWN.Amia\NWN.Amia.csproj", "{1EFCAA24-52DF-4A63-A8BE-4E389B83EB8F}"
 EndProject
 Global
@@ -12,5 +15,11 @@ Global
 		{1EFCAA24-52DF-4A63-A8BE-4E389B83EB8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EFCAA24-52DF-4A63-A8BE-4E389B83EB8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EFCAA24-52DF-4A63-A8BE-4E389B83EB8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E60B45E-366A-4E11-BEBB-1DAA957730EC}
 	EndGlobalSection
 EndGlobal

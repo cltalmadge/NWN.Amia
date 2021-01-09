@@ -23,7 +23,7 @@ namespace NWN.Amia.Main.Managed.Races.Utils
 
         private static RacialTemplate GetHalflingAdjustments()
         {
-            return new RacialTemplate
+            return new()
             {
                 StrBonus = 0,
                 DexBonus = 0,
@@ -36,7 +36,7 @@ namespace NWN.Amia.Main.Managed.Races.Utils
 
         private static RacialTemplate GetElfAdjustments()
         {
-            return new RacialTemplate
+            return new()
             {
                 StrBonus = 0,
                 DexBonus = 0,
@@ -49,7 +49,7 @@ namespace NWN.Amia.Main.Managed.Races.Utils
 
         private static RacialTemplate GetHalfOrcAdjustments()
         {
-            return new RacialTemplate
+            return new()
             {
                 StrBonus = 0,
                 DexBonus = 0,
@@ -62,7 +62,7 @@ namespace NWN.Amia.Main.Managed.Races.Utils
 
         private static RacialTemplate GetGnomeAdjustments()
         {
-            return new RacialTemplate
+            return new()
             {
                 StrBonus = 0,
                 DexBonus = 0,
@@ -75,7 +75,7 @@ namespace NWN.Amia.Main.Managed.Races.Utils
 
         private static RacialTemplate GetDwarfAdjustments()
         {
-            return new RacialTemplate
+            return new()
             {
                 StrBonus = 0,
                 DexBonus = 0,
@@ -88,7 +88,7 @@ namespace NWN.Amia.Main.Managed.Races.Utils
 
         private static RacialTemplate GetHumanAdjustments()
         {
-            return new RacialTemplate
+            return new()
             {
                 StrBonus = 0,
                 IntBonus = 0,
@@ -101,7 +101,7 @@ namespace NWN.Amia.Main.Managed.Races.Utils
 
         private static RacialTemplate GetHalfElfAdjustments()
         {
-            return new RacialTemplate
+            return new()
             {
                 StrBonus = 0,
                 IntBonus = 0,
