@@ -52,9 +52,11 @@ namespace NWN.Amia.Main.Managed.Races.Script
             foreach (var effect in taggedEffects) ApplyEffectPermanently(effect);
         }
 
-        private static IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects) =>
-            raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
+        private static IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects)
+        {
+            return raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
                 .ToList();
+        }
 
         private static IEnumerable<Effect> GetListOfEffectsForRace()
         {
@@ -80,7 +82,9 @@ namespace NWN.Amia.Main.Managed.Races.Script
             return taggedEffects;
         }
 
-        private static void ApplyEffectPermanently(Effect effect) =>
+        private static void ApplyEffectPermanently(Effect effect)
+        {
             NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, _player);
+        }
     }
 }

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using NWN.Amia.Main.Managed.Characters.Types;
+﻿using System.Collections.Generic;
+using JetBrains.Annotations;
+using NWN.Amia.Main.Managed.Objects.Types;
 using NWN.Core;
 using NWN.Core.NWNX;
 
-namespace NWN.Amia.Main.Managed.Characters
+namespace NWN.Amia.Main.Managed.Objects
 {
     public class Player : ICreature
     {
@@ -19,10 +19,19 @@ namespace NWN.Amia.Main.Managed.Characters
             Wis = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_WISDOM);
             Cha = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_CHARISMA);
 
+            PubliCdKey = NWScript.GetPCPublicCDKey(ObjectId);
+            AccountName = NWScript.GetPCPlayerName(ObjectId);
+            IpAddress = NWScript.GetPCIPAddress(ObjectId);
+
             HitDice = NWScript.GetHitDice(ObjectId);
             HitPoints = NWScript.GetMaxHitPoints(ObjectId);
             Subrace = NWScript.GetSubRace(ObjectId);
         }
+
+        [UsedImplicitly] public string PubliCdKey { get; }
+
+        [UsedImplicitly] public string AccountName { get; }
+        [UsedImplicitly] public string IpAddress { get; }
 
         public string Subrace { get; }
         public uint ObjectId { get; set; }

@@ -15,8 +15,9 @@ namespace NWN.Amia.Main.Managed.Races.Script
             if (TemplateItem.Initialized(nwnObjectId)) return 0;
 
             var template = TemplateMaker.SetupStats(nwnObjectId);
-            
-            Console.WriteLine($"Ability Modifiers: ({template.StrBonus}, {template.ConBonus}, {template.DexBonus}, {template.IntBonus}, {template.ChaBonus}, {template.WisBonus})");
+
+            Console.WriteLine(
+                $"Ability Modifiers: ({template.StrBonus}, {template.ConBonus}, {template.DexBonus}, {template.IntBonus}, {template.ChaBonus}, {template.WisBonus})");
 
             template.Apply();
 

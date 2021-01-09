@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using NWN.Amia.Main.Core.Types;
-using NWN.Amia.Main.Managed.Characters;
+
+using NWN.Amia.Main.Managed.Objects;
 using NWN.Amia.Main.Managed.Races;
 using NWN.Core;
 

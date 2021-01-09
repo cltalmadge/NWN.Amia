@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="src\Main\Managed\Characters\Classes\Warlock\Scripts" />
+      <Folder Include="src\Main\Managed\Objects\Classes\Warlock\Scripts" />
     </ItemGroup>
 
 </Project>

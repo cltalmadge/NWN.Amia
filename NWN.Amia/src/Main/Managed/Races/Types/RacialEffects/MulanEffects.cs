@@ -8,7 +8,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
     {
         public List<Effect> GatherEffectsForObject(uint objectId)
         {
-            return new List<Effect>
+            return new()
             {
                 NWScript.EffectSavingThrowDecrease(NWScript.SAVING_THROW_WILL, 1)
             };

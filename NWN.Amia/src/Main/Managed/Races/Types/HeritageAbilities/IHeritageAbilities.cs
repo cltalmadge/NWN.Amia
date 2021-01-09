@@ -1,4 +1,4 @@
-﻿using NWN.Amia.Main.Managed.Characters;
+﻿using NWN.Amia.Main.Managed.Objects;
 
 namespace NWN.Amia.Main.Managed.Races.Types.HeritageAbilities
 {
