@@ -21,11 +21,9 @@ namespace NWN.Amia.Main.Core
             foreach (var type in GetTypesInAssembly(Assembly.GetExecutingAssembly()))
             {
                 var scriptName = (ScriptName) Attribute.GetCustomAttribute(type, typeof(ScriptName));
-
-                if (scriptName?.Name == null) continue;
-
-                StoredScripts.TryAdd(scriptName.Name, type);
-                Console.WriteLine($"Cached script {scriptName.Name}.");
+                
+                StoredScripts.TryAdd(scriptName?.Name, type);
+                Console.WriteLine($"Cached script {scriptName?.Name}.");
             }
 
             Initialized = true;
