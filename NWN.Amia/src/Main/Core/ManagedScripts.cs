@@ -10,7 +10,7 @@ namespace NWN.Amia.Main.Core
     public static class ManagedScripts
     {
         private static ConcurrentDictionary<string, Type> StoredScripts { get; } =
-            new ConcurrentDictionary<string, Type>();
+            new();
 
         private static bool Initialized { get; set; }
 

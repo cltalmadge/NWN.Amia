@@ -3,21 +3,21 @@ using NWN.Amia.Main.Core.Types;
 
 namespace NWN.Amia.Main.Core
 {
-    public class ScriptHandler : IContextHandler
+    public class ScriptContextRunner : IScriptContextRunner
     {
         private readonly ScriptContext _currentScript;
 
-        internal ScriptHandler(ScriptContext currentScript)
+        internal ScriptContextRunner(ScriptContext currentScript)
         {
             _currentScript = currentScript;
         }
 
-        public int HandleContext()
+        public int RunScript()
         {
             var scriptResult = 1;
             try
             {
-                scriptResult = GetScriptFromContext().Run(_currentScript.OwnerObject);
+                scriptResult = GetManagedScriptFromContext().Run(_currentScript.CallingObject);
             }
             catch (Exception m)
             {
@@ -27,7 +27,7 @@ namespace NWN.Amia.Main.Core
             return scriptResult;
         }
 
-        private IRunnableScript GetScriptFromContext()
+        private IRunnableScript GetManagedScriptFromContext()
         {
             return ManagedScripts.GetScriptFromName(_currentScript.ScriptName);
         }

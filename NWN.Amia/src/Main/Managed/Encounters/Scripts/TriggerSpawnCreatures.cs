@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 using NWN.Amia.Main.Core.Types;
 using NWN.Core;
 using NWN.Core.NWNX;
@@ -40,7 +41,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
 
         private bool TriggerStillOnCooldown()
         {
-            return TimePlugin.GetTimeStamp() - GetTriggerCoolDownStart() <= 900;
+            return (int) DateTimeOffset.Now.ToUnixTimeSeconds() - GetTriggerCoolDownStart() <= 900;
         }
 
         private int GetTriggerCoolDownStart()
@@ -67,7 +68,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
 
         private void InitTriggerCooldown()
         {
-            NWScript.SetLocalInt(_trigger, "cooldown_start", TimePlugin.GetTimeStamp());
+            NWScript.SetLocalInt(_trigger, "cooldown_start", (int) DateTimeOffset.Now.ToUnixTimeSeconds());
         }
     }
 }
