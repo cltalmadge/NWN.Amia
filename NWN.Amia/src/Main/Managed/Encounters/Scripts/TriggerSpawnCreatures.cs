@@ -20,7 +20,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
             var player = NWScript.GetEnteringObject();
             var area = NWScript.GetArea(_trigger);
 
-            var notPlayer = NWScript.GetIsPC(player) != 1 && NWScript.GetIsPossessedFamiliar(player) != 1;
+            var notPlayer = NWScript.GetIsPC(player) != NWScript.TRUE && NWScript.GetIsPossessedFamiliar(player) != NWScript.TRUE;
             if (notPlayer) return 0;
             
             if (TriggerStillOnCooldown())
@@ -31,7 +31,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
 
             var spawner = new DayNightEncounterSpawner(_trigger, area);
 
-            if (GetNumberOfPartyMembers(player) > 6) spawner.DoubleSpawn = true;
+            if (GetNumberOfPartyMembers(player) > 6) spawner.IsDoubleSpawn = true;
 
             spawner.SpawnEncounters();
 

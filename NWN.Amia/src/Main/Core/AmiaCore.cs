@@ -44,6 +44,13 @@ namespace NWN.Amia.Main.Core
             return scriptContextRunner.RunScript();
         }
 
+        /**
+         * <summary>
+         *     Closure functions deal with delayed commands and other engine actions that happen at a later time. They are called
+         *     by the engine.
+         *     It is not recommended to change or alter these unless you know what you are doing and want a specific result.
+         * </summary>
+         */
         public void OnClosure(ulong eid, uint oidSelf)
         {
             var old = ObjectSelf;
@@ -58,13 +65,7 @@ namespace NWN.Amia.Main.Core
         {
         }
 
-        /**
-         * <summary>
-         *     Closure functions deal with delayed commands and other engine actions that happen at a later time. They are called
-         *     by the engine.
-         *     It is not recommended to change or alter these unless you know what you are doing and want a specific result.
-         * </summary>
-         */
+  
         public void ClosureAssignCommand(uint obj, ActionDelegate func)
         {
             if (VM.ClosureAssignCommand(obj, NextEventId) != 0)
