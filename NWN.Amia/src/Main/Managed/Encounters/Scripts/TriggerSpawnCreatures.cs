@@ -11,6 +11,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
     public class TriggerSpawnCreatures : IRunnableScript
     {
         private uint _trigger;
+        private const int FifteenMinutesSeconds = 900;
 
         public int Run(uint nwnObjectId)
         {
@@ -41,7 +42,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
 
         private bool TriggerStillOnCooldown()
         {
-            return (int) DateTimeOffset.Now.ToUnixTimeSeconds() - GetTriggerCoolDownStart() <= 900;
+            return (int) DateTimeOffset.Now.ToUnixTimeSeconds() - GetTriggerCoolDownStart() <= FifteenMinutesSeconds;
         }
 
         private int GetTriggerCoolDownStart()
