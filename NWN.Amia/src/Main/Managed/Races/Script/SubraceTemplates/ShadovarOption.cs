@@ -29,7 +29,7 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
             SetSubraceModifiers(nwnObjectId);
 
             var templateRunner = new TemplateRunner();
-            CreaturePlugin.AddFeatByLevel(nwnObjectId,0,1);//TODO:Change feat number to Stealthy.
+            CreaturePlugin.AddFeatByLevel(nwnObjectId,387,1);
 
             templateRunner.Run(nwnObjectId);
             

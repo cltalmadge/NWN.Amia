@@ -21,7 +21,7 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
             templateRunner.Run(nwnObjectId);
 
             CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_FEY);
-            CreaturePlugin.AddFeatByLevel(nwnObjectId,0,1);//TODO:Change feat number to Low Light Vision.
+            CreaturePlugin.AddFeatByLevel(nwnObjectId,354,1);
 
             return 0;
         }

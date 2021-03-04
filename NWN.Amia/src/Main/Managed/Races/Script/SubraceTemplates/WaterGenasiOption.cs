@@ -22,7 +22,7 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
             templateRunner.Run(nwnObjectId);
 
             CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_OUTSIDER);
-            CreaturePlugin.AddFeatByLevel(nwnObjectId,0,1);//TODO:Change feat number to Darkvision.
+            CreaturePlugin.AddFeatByLevel(nwnObjectId, 228, 1);
 
             return 0;
         }
