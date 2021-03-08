@@ -6,11 +6,10 @@ using NWN.Core.NWNX;
 
 namespace NWN.Amia.Main.Managed.Objects
 {
-    public class Player : ICreature
+    public class Player : GameObject, ICreature 
     {
-        public Player(uint objectId)
+        public Player(uint objectId) : base(objectId)
         {
-            ObjectId = objectId;
 
             Str = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_STRENGTH);
             Con = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_CONSTITUTION);
@@ -19,7 +18,7 @@ namespace NWN.Amia.Main.Managed.Objects
             Wis = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_WISDOM);
             Cha = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_CHARISMA);
 
-            PubliCdKey = NWScript.GetPCPublicCDKey(ObjectId);
+            PublicCdKey = NWScript.GetPCPublicCDKey(ObjectId);
             AccountName = NWScript.GetPCPlayerName(ObjectId);
             IpAddress = NWScript.GetPCIPAddress(ObjectId);
 
@@ -28,14 +27,13 @@ namespace NWN.Amia.Main.Managed.Objects
             Subrace = NWScript.GetSubRace(ObjectId);
         }
 
-        [UsedImplicitly] public string PubliCdKey { get; }
+        [UsedImplicitly] public string PublicCdKey { get; }
 
         [UsedImplicitly] public string AccountName { get; }
         [UsedImplicitly] public string IpAddress { get; }
 
         public string Subrace { get; }
-        public uint ObjectId { get; set; }
-
+        
         public int Str { get; set; }
 
         public int Int { get; set; }

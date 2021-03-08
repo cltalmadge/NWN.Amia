@@ -1,4 +1,6 @@
-﻿namespace NWN.Amia.Main.Managed.ModuleEventSystem.Types
+﻿using System;
+
+namespace NWN.Amia.Main.Managed.ModuleEventSystem.Types
 {
     public interface IModuleEvent
     {
