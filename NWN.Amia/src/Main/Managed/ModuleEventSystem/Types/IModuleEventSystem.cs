@@ -2,6 +2,6 @@
 {
     public interface IModuleEventSystem
     {
-        void InvokeEvent(IModuleEvent @event);
+        void InvokeEvent(IModuleEvent moduleEvent);
     }
 }

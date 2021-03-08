@@ -3,9 +3,8 @@ using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Objects.Types
 {
-    public interface ICreature
+    public interface ICreature 
     {
-        public uint ObjectId { get; set; }
 
         public int Str { get; set; }
         public int Int { get; set; }
