@@ -4,12 +4,14 @@ namespace NWN.Amia.Main.Managed.ModuleEventSystem
 {
     public class RandomEncounterEvent : IModuleEvent
     {
-        public void InvokeEvent()
+        private IRandomEncounter _encounter;
+
+        public RandomEncounterEvent(IRandomEncounter encounter)
         {
-            throw new System.NotImplementedException();
+            _encounter = encounter;
         }
 
-        public void Farts()
+        public void InvokeEvent()
         {
             
         }
