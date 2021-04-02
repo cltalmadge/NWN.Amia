@@ -4,7 +4,7 @@ using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
 {
-    public class DrowEffects : IEffectCollector
+    public class HalfDragonEffects : IEffectCollector
     {
         private const int Heritage = 1238;
         private bool _hasHeritageFeat;

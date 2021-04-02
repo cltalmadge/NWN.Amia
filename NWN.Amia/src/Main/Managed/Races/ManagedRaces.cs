@@ -26,7 +26,20 @@ namespace NWN.Amia.Main.Managed.Races
             Ffolk = 50,
             Mulan = 52,
             Ogrillon = 44,
-            Feytouched = 1002
+            Feytouched = 1002,
+            Centaur = 1004,
+            Avariel = 1005,
+            Kenku = 1006,
+            Lizardfolk = 1007,
+            Halfdragon = 1008,
+            AirGenasi = 1009,
+            EarthGenasi = 1010,
+            FireGenasi = 1011,
+            WaterGenasi = 1012,
+            AquaticElf = 1013,
+            Elfling = 1014,
+            Bugbear = 1015,
+            Shadovar = 1016
         }
 
         static ManagedRaces()
@@ -50,7 +63,10 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Ffolk, new FfolkEffects()},
                 {(int) RacialType.Mulan, new MulanEffects()},
                 {(int) RacialType.Ogrillon, new OgrillonEffects()},
-                {(int) RacialType.Feytouched, new FeytouchedEffects()}
+                {(int) RacialType.Feytouched, new FeytouchedEffects()},
+                {(int) RacialType.Kenku, new KenkuEffects()},
+                {(int) RacialType.Lizardfolk, new LizardfolkEffects()},
+                {(int) RacialType.Kenku, new HalfDragonEffects()},
             };
 
             HeritageRaces = new Dictionary<int, IHeritageAbilities>
@@ -62,7 +78,10 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Svirfneblin, new SvirfneblinHeritageAbilities()},
                 {(int) RacialType.Aasimar, new AasimarHeritageAbilities()},
                 {(int) RacialType.Tiefling, new TieflingHeritageAbilities()},
-                {(int) RacialType.Feytouched, new FeytouchedHeritageAbilities()}
+                {(int) RacialType.Feytouched, new FeytouchedHeritageAbilities()},
+                {(int) RacialType.Avariel, new AvarielHeritageAbilities()},
+                {(int) RacialType.Lizardfolk, new LizardfolkHeritageAbilities()},
+                {(int) RacialType.Halfdragon, new HalfDragonHeritageAbilities()},
             };
         }
 

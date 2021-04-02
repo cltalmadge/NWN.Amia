@@ -5,8 +5,8 @@ using NWN.Core.NWNX;
 
 namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
 {
-    [ScriptName("race_init_shvar")]
-    public class ShadovarOption : IRunnableScript
+    [ScriptName("race_init_liz")]
+    public class LizardfolkOption : IRunnableScript
     {
         public int Run(uint nwnObjectId)
         {
@@ -20,7 +20,7 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
 
             if (NWScript.GetRacialType(nwnObjectId) != NWScript.RACIAL_TYPE_HUMAN)
             {
-                NWScript.SendMessageToPC(nwnObjectId, "Shadovar only works with the Non-Regional Human base race.");
+                NWScript.SendMessageToPC(nwnObjectId, "Lizardfolk only works with the Non-Regional Human base race.");
                 return 0;
             }
 
@@ -29,7 +29,7 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
             SetSubraceModifiers(nwnObjectId);
 
             var templateRunner = new TemplateRunner();
-            CreaturePlugin.AddFeatByLevel(nwnObjectId,387,1);
+            CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_HUMANOID_REPTILIAN);
 
             templateRunner.Run(nwnObjectId);
             
@@ -38,10 +38,9 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
 
         private static void SetSubraceModifiers(uint nwnObjectId)
         {
-            TemplateItem.SetSubRace(nwnObjectId, "Shadovar");
-            TemplateItem.SetDexMod(nwnObjectId, 1);
-            TemplateItem.SetIntMod(nwnObjectId, 1);
-            TemplateItem.SetConMod(nwnObjectId, -2);
+            TemplateItem.SetSubRace(nwnObjectId, "Lizardfolk");
+            TemplateItem.SetConMod(nwnObjectId, 2);
+            TemplateItem.SetIntMod(nwnObjectId, -2);
         }
     }
 }

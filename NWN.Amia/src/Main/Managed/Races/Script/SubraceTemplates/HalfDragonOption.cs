@@ -5,43 +5,39 @@ using NWN.Core.NWNX;
 
 namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
 {
-    [ScriptName("race_init_shvar")]
-    public class ShadovarOption : IRunnableScript
+    [ScriptName("race_init_hdrag")]
+    public class HalfDragonOption : IRunnableScript
     {
         public int Run(uint nwnObjectId)
         {
             if (TemplateItem.Initialized(nwnObjectId)) return 0;
-
+            
             if (NWScript.GetItemPossessedBy(nwnObjectId, "platinum_token") == NWScript.OBJECT_INVALID)
             {
                 NWScript.SendMessageToPC(nwnObjectId, "This subrace requires DM permission to play.");
                 return 0;
             }
 
-            if (NWScript.GetRacialType(nwnObjectId) != NWScript.RACIAL_TYPE_HUMAN)
-            {
-                NWScript.SendMessageToPC(nwnObjectId, "Shadovar only works with the Non-Regional Human base race.");
-                return 0;
-            }
-
             NWScript.CreateItemOnObject(TemplateItem.TemplateItemResRef, nwnObjectId);
 
-            SetSubraceModifiers(nwnObjectId);
+            SetSubRaceMod(nwnObjectId);
 
             var templateRunner = new TemplateRunner();
-            CreaturePlugin.AddFeatByLevel(nwnObjectId,387,1);
 
             templateRunner.Run(nwnObjectId);
-            
+
+            CreaturePlugin.SetRacialType(nwnObjectId, NWScript.RACIAL_TYPE_DRAGON);
+            CreaturePlugin.AddFeatByLevel(nwnObjectId,228,1);
+            CreaturePlugin.AddFeatByLevel(nwnObjectId,240,1);
+
             return 0;
         }
 
-        private static void SetSubraceModifiers(uint nwnObjectId)
+        private static void SetSubRaceMod(uint nwnObjectId)
         {
-            TemplateItem.SetSubRace(nwnObjectId, "Shadovar");
-            TemplateItem.SetDexMod(nwnObjectId, 1);
-            TemplateItem.SetIntMod(nwnObjectId, 1);
-            TemplateItem.SetConMod(nwnObjectId, -2);
+            TemplateItem.SetSubRace(nwnObjectId, "Dragon");
+            TemplateItem.SetStrMod(nwnObjectId, 2);
+            TemplateItem.SetDexMod(nwnObjectId, -2);
         }
     }
 }

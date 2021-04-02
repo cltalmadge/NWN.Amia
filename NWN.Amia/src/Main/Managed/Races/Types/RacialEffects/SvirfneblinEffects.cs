@@ -55,7 +55,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
         private void AddHeritageEffectsIfObjectHasFeat(ICollection<Effect> effectsForObject)
         {
             if (!_hasHeritageFeat) return;
-
+            effectsForObject.Add(NWScript.EffectAttackDecrease(1));
             effectsForObject.Add(NWScript.EffectSavingThrowDecrease(NWScript.SAVING_THROW_ALL, 1));
         }
     }

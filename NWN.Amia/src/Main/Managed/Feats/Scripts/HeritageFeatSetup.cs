@@ -45,6 +45,10 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
                 "tiefling" => (int) ManagedRaces.RacialType.Tiefling,
                 "feytouched" => (int) ManagedRaces.RacialType.Feytouched,
                 "feyri" => (int) ManagedRaces.RacialType.Feyri,
+                "air genasi" => (int) ManagedRaces.RacialType.AirGenasi,
+                "avariel" => (int) ManagedRaces.RacialType.Avariel,
+                "lizardfolk" => (int) ManagedRaces.RacialType.Lizardfolk,
+                "halfdragon" => (int) ManagedRaces.RacialType.Halfdragon,
                 _ => NWScript.GetRacialType(_nwnObject)
             };
 

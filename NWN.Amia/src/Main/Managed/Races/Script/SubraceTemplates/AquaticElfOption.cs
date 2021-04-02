@@ -38,7 +38,7 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
         {
             TemplateItem.SetSubRace(nwnObjectId, "Aquatic Elf");
             TemplateItem.SetIntMod(nwnObjectId, -2);
-            TemplateItem.SetConMod(nwnObjectId, 2);
+            TemplateItem.SetDexMod(nwnObjectId, 2);
         }
     }
 }

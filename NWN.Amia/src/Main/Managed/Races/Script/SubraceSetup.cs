@@ -24,12 +24,17 @@ namespace NWN.Amia.Main.Managed.Races.Script
                 "air genasi" => new AirGenasiOption().Run(nwnObjectId),
                 "air" => new AirGenasiOption().Run(nwnObjectId),
                 "feytouched" => new FeytouchedOption().Run(nwnObjectId),
-                "elfling" => new ElflingOption().Run(nwnObjectId),
                 "aquatic elf" => new AquaticElfOption().Run(nwnObjectId),
                 "feyri" => new FeyriOption().Run(nwnObjectId),
                 "fey'ri" => new FeyriOption().Run(nwnObjectId),
                 "shadovar" => new ShadovarOption().Run(nwnObjectId),
                 "centaur" => new CentaurOption().Run(nwnObjectId),
+                "avariel" => new AvarielOption().Run(nwnObjectId),
+                "kenku" => new KenkuOption().Run(nwnObjectId),
+                "lizardfolk" => new LizardfolkOption().Run(nwnObjectId),
+                "half dragon" => new HalfDragonOption().Run(nwnObjectId),
+                "half-dragon" => new HalfDragonOption().Run(nwnObjectId),
+
                 _ => 1
             };
         }

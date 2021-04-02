@@ -32,6 +32,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
                 "feyri" => new FeyriEffects().GatherEffectsForObject(nwnObjectId),
                 "feytouched" => new FeytouchedEffects().GatherEffectsForObject(nwnObjectId),
                 "centaur" => new CentaurEffects().GatherEffectsForObject(nwnObjectId),
+                "avariel" => new AvarielEffects().GatherEffectsForObject(nwnObjectId),
                 _ => new List<Effect>()
             };
         }
