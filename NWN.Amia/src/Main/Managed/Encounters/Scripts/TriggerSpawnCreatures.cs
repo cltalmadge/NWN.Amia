@@ -37,8 +37,9 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
             spawner.SpawnEncounters();
 
             InitTriggerCooldown();
+            NWScript.SetLocalInt(_trigger, "on_cooldown", NWScript.TRUE);
             NWScript.DelayCommand(FifteenMinutesSeconds,
-                () => NWScript.SetLocalInt(_trigger, "on_cooldown", NWScript.TRUE));
+                () => NWScript.SetLocalInt(_trigger, "on_cooldown", NWScript.FALSE));
 
             return 0;
         }
