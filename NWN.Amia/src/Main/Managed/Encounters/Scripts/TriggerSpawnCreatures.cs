@@ -24,11 +24,11 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
                             NWScript.GetIsPossessedFamiliar(player) != NWScript.TRUE;
             if (notPlayer) return 0;
 
-            if (TriggerStillOnCooldown() && NWScript.GetLocalInt(_trigger, "on_cooldown") == NWScript.TRUE)
-            {
-                NWScript.SendMessageToPC(player, "You see signs of recent fighting here.");
-                return 0;
-            }
+            // if (TriggerStillOnCooldown() && NWScript.GetLocalInt(_trigger, "on_cooldown") == NWScript.TRUE)
+            // {
+            //     NWScript.SendMessageToPC(player, "You see signs of recent fighting here.");
+            //     return 0;
+            // }
 
             var spawner = new DayNightEncounterSpawner(_trigger, area);
 
