@@ -67,6 +67,7 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Kenku, new KenkuEffects()},
                 {(int) RacialType.Lizardfolk, new LizardfolkEffects()},
                 {(int) RacialType.Kenku, new HalfDragonEffects()},
+                {(int) RacialType.Bugbear, new BugbearEffects()},
             };
 
             HeritageRaces = new Dictionary<int, IHeritageAbilities>

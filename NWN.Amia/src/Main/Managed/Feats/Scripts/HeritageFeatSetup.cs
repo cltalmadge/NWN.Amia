@@ -46,9 +46,16 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
                 "feytouched" => (int) ManagedRaces.RacialType.Feytouched,
                 "feyri" => (int) ManagedRaces.RacialType.Feyri,
                 "air genasi" => (int) ManagedRaces.RacialType.AirGenasi,
+                "earth genasi" => (int) ManagedRaces.RacialType.EarthGenasi,
+                "fire genasi" => (int) ManagedRaces.RacialType.FireGenasi,
+                "water genasi" => (int) ManagedRaces.RacialType.WaterGenasi,
                 "avariel" => (int) ManagedRaces.RacialType.Avariel,
                 "lizardfolk" => (int) ManagedRaces.RacialType.Lizardfolk,
-                "halfdragon" => (int) ManagedRaces.RacialType.Halfdragon,
+                "half dragon" => (int) ManagedRaces.RacialType.Halfdragon,
+                "centaur" => (int) ManagedRaces.RacialType.Centaur,
+                "aquatic elf" => (int) ManagedRaces.RacialType.AquaticElf,
+                "elfling" => (int) ManagedRaces.RacialType.Elfling,
+                "shadovar" => (int) ManagedRaces.RacialType.Shadovar,
                 _ => NWScript.GetRacialType(_nwnObject)
             };
 
