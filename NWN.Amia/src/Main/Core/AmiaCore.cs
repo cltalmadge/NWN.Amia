@@ -38,16 +38,11 @@ namespace NWN.Amia.Main.Core
         {
             ObjectSelf = oidSelf;
 
-            var scriptBeingCalled = new ScriptContext {CallingObject = oidSelf, ScriptName = script};
+            ScriptContext scriptBeingCalled = new() {CallingObject = oidSelf, ScriptName = script};
             IScriptContextRunner scriptContextRunner = new ScriptContextRunner(scriptBeingCalled);
 
             int onRunScript = scriptContextRunner.RunScript();
-            if (onRunScript == 0)
-            {
-                NWScript.WriteTimestampedLogEntry($"Called script {script}");
-            }
-            
-            
+    
             return onRunScript;
         }
 
