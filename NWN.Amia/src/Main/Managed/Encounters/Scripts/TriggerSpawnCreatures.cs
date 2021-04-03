@@ -28,7 +28,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
             //     NWScript.SendMessageToPC(player, "You see signs of recent fighting here.");
             //     return 0;
             // }
-
+    
             var spawner = new DayNightEncounterSpawner(_trigger, area);
 
             if (GetNumberOfPartyMembers(player) > 6) spawner.IsDoubleSpawn = true;
