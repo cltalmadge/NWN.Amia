@@ -74,9 +74,9 @@ namespace NWN.Amia.Main.Managed.Encounters
         
         private static IEnumerable<string> GetResRefsForPrefix(string prefix)
         {
-            var resRefs = new List<string>();
+            List<string> resRefs = new();
 
-            var numberOfLocalVars = ObjectPlugin.GetLocalVariableCount(_area);
+            int numberOfLocalVars = ObjectPlugin.GetLocalVariableCount(_area);
 
             if (numberOfLocalVars == 0)
             {
@@ -84,7 +84,7 @@ namespace NWN.Amia.Main.Managed.Encounters
                 return new List<string>();
             }
 
-            for (var i = 0; i < numberOfLocalVars; i++)
+            for (int i = 0; i < numberOfLocalVars; i++)
             {
                 var variableName = ObjectPlugin.GetLocalVariable(_area, i).key;
                 if (variableName.Contains(prefix))
@@ -103,9 +103,9 @@ namespace NWN.Amia.Main.Managed.Encounters
                 return;
             }
 
-            for (var i = 0; i < maxSpawns; i++)
+            for (int i = 0; i < maxSpawns; i++)
             {
-                var randomCreature = new Random().Next(0, resRefs.Count);
+                int randomCreature = new Random().Next(0, resRefs.Count);
                 SpawnEncounterAtWaypoint(resRefs[randomCreature]);
             }
         }

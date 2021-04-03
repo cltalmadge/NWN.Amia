@@ -98,7 +98,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Invasions
 
         public static IntPtr GenerateRandomLocation(uint area)
         {
-            const float zPosition = 0.0f;
+            // const float zPosition = 0.0f;
             const float facing = 0.0f;
 
 
@@ -181,7 +181,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Invasions
             string creaturetype3, string creaturetype4, string creaturetype5)
         {
             int countMobs = 0;
-            const float zPosition = 0.0f;
+            // const float zPosition = 0.0f;
             const float facing = 0.0f;
 
             while (countMobs < totalMobs)
