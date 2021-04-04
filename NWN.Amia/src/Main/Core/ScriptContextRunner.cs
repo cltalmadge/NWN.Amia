@@ -22,7 +22,7 @@ namespace NWN.Amia.Main.Core
             }
             catch (Exception m)
             {
-                NWScript.WriteTimestampedLogEntry($"FAILED TO PARSE SCRIPT {_currentScript.ScriptName}. Reason: {m.Message} => {m.StackTrace}");
+                NWScript.WriteTimestampedLogEntry($"FAILED TO PARSE SCRIPT {_currentScript.ScriptName}. Reason: {m.Message} \n({m.InnerException?.Message}, {m.InnerException?.StackTrace}\n => {m.StackTrace})");
             }
 
             return scriptResult;
