@@ -64,10 +64,10 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Mulan, new MulanEffects()},
                 {(int) RacialType.Ogrillon, new OgrillonEffects()},
                 {(int) RacialType.Feytouched, new FeytouchedEffects()},
-                // {(int) RacialType.Kenku, new KenkuEffects()},
-                // {(int) RacialType.Lizardfolk, new LizardfolkEffects()},
-                // {(int) RacialType.Kenku, new HalfDragonEffects()},
-                // {(int) RacialType.Bugbear, new BugbearEffects()},
+                {(int) RacialType.Kenku, new KenkuEffects()},
+                {(int) RacialType.Lizardfolk, new LizardfolkEffects()},
+                {(int) RacialType.Halfdragon, new HalfDragonEffects()},
+                {(int) RacialType.Bugbear, new BugbearEffects()},
             };
 
             HeritageRaces = new Dictionary<int, IHeritageAbilities>
@@ -80,9 +80,9 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Aasimar, new AasimarHeritageAbilities()},
                 {(int) RacialType.Tiefling, new TieflingHeritageAbilities()},
                 {(int) RacialType.Feytouched, new FeytouchedHeritageAbilities()},
-                // {(int) RacialType.Avariel, new AvarielHeritageAbilities()},
-                // {(int) RacialType.Lizardfolk, new LizardfolkHeritageAbilities()},
-                // {(int) RacialType.Halfdragon, new HalfDragonHeritageAbilities()},
+                {(int) RacialType.Avariel, new AvarielHeritageAbilities()},
+                {(int) RacialType.Lizardfolk, new LizardfolkHeritageAbilities()},
+                {(int) RacialType.Halfdragon, new HalfDragonHeritageAbilities()},
             };
         }
 
