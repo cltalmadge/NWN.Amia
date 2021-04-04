@@ -1,5 +1,6 @@
 ﻿using System;
 using NWN.Amia.Main.Core.Types;
+using NWN.Core;
 
 namespace NWN.Amia.Main.Core
 {
@@ -21,7 +22,7 @@ namespace NWN.Amia.Main.Core
             }
             catch (Exception m)
             {
-                Console.WriteLine($"FAILED TO PARSE SCRIPT {_currentScript.ScriptName}. Reason: {m.Message}");
+                NWScript.WriteTimestampedLogEntry($"FAILED TO PARSE SCRIPT {_currentScript.ScriptName}. Reason: {m.Message} => {m.StackTrace}");
             }
 
             return scriptResult;
