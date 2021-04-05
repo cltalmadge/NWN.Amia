@@ -40,8 +40,6 @@ namespace NWN.Amia.Main.Managed.Races.Script.SubraceTemplates
         private static void SetSubraceModifiers(uint nwnObjectId)
         {
             TemplateItem.SetSubRace(nwnObjectId, "Avariel");
-            TemplateItem.SetDexMod(nwnObjectId, 2);
-            TemplateItem.SetConMod(nwnObjectId, -2);
         }
     }
 }
