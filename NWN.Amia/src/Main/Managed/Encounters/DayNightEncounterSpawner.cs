@@ -30,53 +30,59 @@ namespace NWN.Amia.Main.Managed.Encounters
 
             NWScript.WriteTimestampedLogEntry($"Sourcing spawns in area: {NWScript.GetName(_area)}");
 
-            var isNightTime = NWScript.GetTimeHour() < 6 || NWScript.GetTimeHour() >= 18;
-            NWScript.WriteTimestampedLogEntry($"Time is {NWScript.GetTimeHour()} and isNightTime == {isNightTime}.");
+            NWScript.WriteTimestampedLogEntry($"Time is {NWScript.GetTimeHour()} and isNightTime == {IsNightTime()}.");
 
-            var spawnsVary = NWScript.GetLocalInt(_area, "spawns_vary") == 1;
-            NWScript.WriteTimestampedLogEntry($"Spawns vary is {spawnsVary}.");
+            NWScript.WriteTimestampedLogEntry($"Spawns vary is {DoSpawnsVary()}.");
 
-            var spawnsToChoose = isNightTime && spawnsVary ? VarPrefixes[1] : VarPrefixes[0];
-            NWScript.WriteTimestampedLogEntry($"Choosing spawns from prefix {spawnsToChoose}.");
+            NWScript.WriteTimestampedLogEntry($"Choosing spawns from prefix {DayNightPrefix()}.");
 
-            var dayCreatureResRefs = GetResRefsForPrefix(spawnsToChoose) as string[] ??
-                                     GetResRefsForPrefix(spawnsToChoose).ToArray();
+            string[] creatureResRefs = GetResRefsForPrefix(DayNightPrefix()) as string[] ??
+                                       GetResRefsForPrefix(DayNightPrefix()).ToArray();
 
-            var numToSpawn = NWScript.d4() + 2;
-            var maxSpawns = IsDoubleSpawn ? numToSpawn * 2 : numToSpawn;
-            SpawnCreaturesFromResRefs(maxSpawns, dayCreatureResRefs);
+            int numToSpawn = NWScript.d4() + 2;
+
+            int maxSpawns = IsDoubleSpawn ? numToSpawn * 2 : numToSpawn;
+
+            SpawnCreaturesFromResRefs(maxSpawns, creatureResRefs);
         }
+
+        private static string DayNightPrefix() => IsNightTime() && DoSpawnsVary() ? VarPrefixes[1] : VarPrefixes[0];
+
+        private static bool DoSpawnsVary() => NWScript.GetLocalInt(_area, "spawns_vary") == 1;
+
+        private static bool IsNightTime() => NWScript.GetTimeHour() < 6 || NWScript.GetTimeHour() >= 18;
 
         private void SetSpawnPointToRandomWaypointWithinTrigger()
         {
-            // var waypoint = NWScript.GetNearestObjectByTag("ds_spwn", _trigger);
-            // _spawnLocation = NWScript.GetLocation(waypoint);
-            var waypoint = NWScript.GetFirstInPersistentObject(_trigger, NWScript.OBJECT_TYPE_WAYPOINT);
-            var spawnPoints = GetNumberOfSpawnPointsInTrigger() as uint[] ?? GetNumberOfSpawnPointsInTrigger().ToArray();
-            var randomSpawnPosition = new Random().Next(0, spawnPoints.Length);
-            
-            _spawnLocation = NWScript.GetLocation(spawnPoints[randomSpawnPosition]);
+            uint[] spawnPoints = GetNumberOfSpawnPointsInTrigger() as uint[] ??
+                                 GetNumberOfSpawnPointsInTrigger().ToArray();
+
+            _spawnLocation = NWScript.GetLocation(GetRandomSpawnPointFromCollection(spawnPoints));
         }
+
+        private uint GetRandomSpawnPointFromCollection(IReadOnlyList<uint> spawnPoints) => spawnPoints.Count == 0
+            ? NWScript.GetNearestObjectByTag(DsSpwn, _trigger)
+            : spawnPoints[new Random().Next(0, spawnPoints.Count)];
 
         private IEnumerable<uint> GetNumberOfSpawnPointsInTrigger()
         {
-            var waypoint = NWScript.GetFirstInPersistentObject(_trigger, NWScript.OBJECT_TYPE_WAYPOINT);
-            var spawnPointsInTrigger = new List<uint>();
-            
+            uint waypoint = NWScript.GetFirstInPersistentObject(_trigger, NWScript.OBJECT_TYPE_WAYPOINT);
+            List<uint> spawnPointsInTrigger = new();
+
             while (waypoint != NWScript.OBJECT_INVALID)
             {
+                if (NWScript.GetTag(waypoint).Equals(DsSpwn)) spawnPointsInTrigger.Add(waypoint);
                 waypoint = NWScript.GetNextInPersistentObject(_trigger, NWScript.OBJECT_TYPE_WAYPOINT);
-                if(NWScript.GetTag(waypoint).Equals(DsSpwn)) spawnPointsInTrigger.Add(waypoint);
             }
 
             return spawnPointsInTrigger;
         }
-        
+
         private static IEnumerable<string> GetResRefsForPrefix(string prefix)
         {
-            var resRefs = new List<string>();
+            List<string> resRefs = new();
 
-            var numberOfLocalVars = ObjectPlugin.GetLocalVariableCount(_area);
+            int numberOfLocalVars = ObjectPlugin.GetLocalVariableCount(_area);
 
             if (numberOfLocalVars == 0)
             {
@@ -84,7 +90,7 @@ namespace NWN.Amia.Main.Managed.Encounters
                 return new List<string>();
             }
 
-            for (var i = 0; i < numberOfLocalVars; i++)
+            for (int i = 0; i < numberOfLocalVars; i++)
             {
                 var variableName = ObjectPlugin.GetLocalVariable(_area, i).key;
                 if (variableName.Contains(prefix))
@@ -103,9 +109,9 @@ namespace NWN.Amia.Main.Managed.Encounters
                 return;
             }
 
-            for (var i = 0; i < maxSpawns; i++)
+            for (int i = 0; i < maxSpawns; i++)
             {
-                var randomCreature = new Random().Next(0, resRefs.Count);
+                int randomCreature = new Random().Next(0, resRefs.Count);
                 SpawnEncounterAtWaypoint(resRefs[randomCreature]);
             }
         }

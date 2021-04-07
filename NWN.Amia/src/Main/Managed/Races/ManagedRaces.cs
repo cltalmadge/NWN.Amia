@@ -66,7 +66,7 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Feytouched, new FeytouchedEffects()},
                 {(int) RacialType.Kenku, new KenkuEffects()},
                 {(int) RacialType.Lizardfolk, new LizardfolkEffects()},
-                {(int) RacialType.Kenku, new HalfDragonEffects()},
+                {(int) RacialType.Halfdragon, new HalfDragonEffects()},
                 {(int) RacialType.Bugbear, new BugbearEffects()},
             };
 

@@ -39,7 +39,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
 
         private static bool RaceIsManaged()
         {
-            var playerRace = NWScript.GetRacialType(_player);
+            int playerRace = NWScript.GetRacialType(_player);
 
             return ManagedRaces.Races.ContainsKey(playerRace);
         }

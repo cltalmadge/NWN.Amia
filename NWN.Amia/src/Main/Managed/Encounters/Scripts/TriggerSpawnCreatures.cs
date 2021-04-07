@@ -20,10 +20,11 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
             var player = NWScript.GetEnteringObject();
             var area = NWScript.GetArea(_trigger);
 
-            var notPlayer = NWScript.GetIsPC(player) != NWScript.TRUE && NWScript.GetIsPossessedFamiliar(player) != NWScript.TRUE;
+            var notPlayer = NWScript.GetIsPC(player) != NWScript.TRUE &&
+                            NWScript.GetIsPossessedFamiliar(player) != NWScript.TRUE;
             if (notPlayer) return 0;
-            
-            if (TriggerStillOnCooldown())
+
+            if (TriggerStillOnCooldown() && NWScript.GetLocalInt(_trigger, "on_cooldown") == NWScript.TRUE)
             {
                 NWScript.SendMessageToPC(player, "You see signs of recent fighting here.");
                 return 0;
@@ -36,6 +37,9 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
             spawner.SpawnEncounters();
 
             InitTriggerCooldown();
+            NWScript.SetLocalInt(_trigger, "on_cooldown", NWScript.TRUE);
+            NWScript.DelayCommand(FifteenMinutesSeconds,
+                () => NWScript.SetLocalInt(_trigger, "on_cooldown", NWScript.FALSE));
 
             return 0;
         }
@@ -70,6 +74,7 @@ namespace NWN.Amia.Main.Managed.Encounters.Scripts
         private void InitTriggerCooldown()
         {
             NWScript.SetLocalInt(_trigger, "cooldown_start", (int) DateTimeOffset.Now.ToUnixTimeSeconds());
+            NWScript.WriteTimestampedLogEntry($"{NWScript.GetLocalInt(_trigger, "cooldown_start")}");
         }
     }
 }
