@@ -29,10 +29,14 @@ namespace NWN.Amia.Main.Managed.Races.Script
             {
                 "aasimar" => new AasimarEffects().GatherEffectsForObject(nwnObjectId),
                 "tiefling" => new TieflingEffects().GatherEffectsForObject(nwnObjectId),
+                "fey'ri" => new FeyriEffects().GatherEffectsForObject(nwnObjectId),
                 "feyri" => new FeyriEffects().GatherEffectsForObject(nwnObjectId),
                 "feytouched" => new FeytouchedEffects().GatherEffectsForObject(nwnObjectId),
                 "centaur" => new CentaurEffects().GatherEffectsForObject(nwnObjectId),
                 "avariel" => new AvarielEffects().GatherEffectsForObject(nwnObjectId),
+                "half dragon" => new HalfDragonEffects().GatherEffectsForObject(nwnObjectId),
+                "half-dragon" => new HalfDragonEffects().GatherEffectsForObject(nwnObjectId),
+                "dragon" => new HalfDragonEffects().GatherEffectsForObject(nwnObjectId),
                 _ => new List<Effect>()
             };
         }
