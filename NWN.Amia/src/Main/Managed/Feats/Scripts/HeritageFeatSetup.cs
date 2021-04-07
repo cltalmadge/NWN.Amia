@@ -52,6 +52,7 @@ namespace NWN.Amia.Main.Managed.Feats.Scripts
                 "avariel" => (int) ManagedRaces.RacialType.Avariel,
                 "lizardfolk" => (int) ManagedRaces.RacialType.Lizardfolk,
                 "half dragon" => (int) ManagedRaces.RacialType.Halfdragon,
+                "dragon" => (int) ManagedRaces.RacialType.Halfdragon,
                 "centaur" => (int) ManagedRaces.RacialType.Centaur,
                 "aquatic elf" => (int) ManagedRaces.RacialType.AquaticElf,
                 "elfling" => (int) ManagedRaces.RacialType.Elfling,
