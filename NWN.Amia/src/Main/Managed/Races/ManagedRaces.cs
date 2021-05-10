@@ -39,7 +39,8 @@ namespace NWN.Amia.Main.Managed.Races
             AquaticElf = 1013,
             Elfling = 1014,
             Bugbear = 1015,
-            Shadovar = 1016
+            Shadovar = 1016,
+            Dragon = 1017
         }
 
         static ManagedRaces()
@@ -68,6 +69,7 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Lizardfolk, new LizardfolkEffects()},
                 {(int) RacialType.Halfdragon, new HalfDragonEffects()},
                 {(int) RacialType.Bugbear, new BugbearEffects()},
+                {(int) RacialType.Dragon, new HalfDragonEffects()},
             };
 
             HeritageRaces = new Dictionary<int, IHeritageAbilities>
@@ -83,6 +85,7 @@ namespace NWN.Amia.Main.Managed.Races
                 {(int) RacialType.Avariel, new AvarielHeritageAbilities()},
                 {(int) RacialType.Lizardfolk, new LizardfolkHeritageAbilities()},
                 {(int) RacialType.Halfdragon, new HalfDragonHeritageAbilities()},
+                {(int) RacialType.Dragon, new HalfDragonHeritageAbilities()},
             };
         }
 
