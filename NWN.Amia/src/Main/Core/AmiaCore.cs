@@ -7,7 +7,7 @@ using NWN.Core;
 namespace NWN.Amia.Main.Core
 {
     [UsedImplicitly]
-    public class AmiaCore : IGameManager
+    public class AmiaCore : ICoreEventHandler, ICoreFunctionHandler
     {
         private readonly Dictionary<ulong, Closure> _closures = new();
 
@@ -68,19 +68,19 @@ namespace NWN.Amia.Main.Core
         }
 
   
-        public void ClosureAssignCommand(uint obj, ActionDelegate func)
+        public void ClosureAssignCommand(uint obj, Action func)
         {
             if (VM.ClosureAssignCommand(obj, NextEventId) != 0)
                 _closures.Add(NextEventId++, new Closure {OwnerObject = obj, Run = func});
         }
 
-        public void ClosureDelayCommand(uint obj, float duration, ActionDelegate func)
+        public void ClosureDelayCommand(uint obj, float duration, Action func)
         {
             if (VM.ClosureDelayCommand(obj, duration, NextEventId) != 0)
                 _closures.Add(NextEventId++, new Closure {OwnerObject = obj, Run = func});
         }
 
-        public void ClosureActionDoCommand(uint obj, ActionDelegate func)
+        public void ClosureActionDoCommand(uint obj, Action func)
         {
             if (VM.ClosureActionDoCommand(obj, NextEventId) != 0)
                 _closures.Add(NextEventId++, new Closure {OwnerObject = obj, Run = func});
