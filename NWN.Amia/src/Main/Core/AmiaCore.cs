@@ -112,7 +112,7 @@ namespace NWN.Amia.Main.Core
         public static int Bootstrap(IntPtr ptr, int nativeHandlesLength)
         {
             Console.WriteLine("Bootstrapped.");
-            return NWNCore.Init(ptr, nativeHandlesLength, Instance);
+            return NWNCore.Init(ptr, nativeHandlesLength, Instance, Instance);
         }
     }
 }
