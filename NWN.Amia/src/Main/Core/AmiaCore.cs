@@ -36,7 +36,6 @@ namespace NWN.Amia.Main.Core
          */
         public int OnRunScript(string script, uint oidSelf)
         {
-            Console.WriteLine($"Script run: {script}.");
             ObjectSelf = oidSelf;
 
             ScriptContext scriptBeingCalled = new() {CallingObject = oidSelf, ScriptName = script};
