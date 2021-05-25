@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using NWN.Amia.Main.Managed.Objects.Types;
 using NWN.Core;
@@ -54,7 +55,7 @@ namespace NWN.Amia.Main.Managed.Objects
 
         public List<int> Classes { get; set; }
 
-        public List<Effect> ActiveEffects { get; set; }
+        public List<IntPtr> ActiveEffects { get; set; }
 
         public void UpdateAbilities()
         {

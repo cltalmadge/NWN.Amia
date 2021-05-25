@@ -36,7 +36,6 @@ namespace NWN.Amia.Main.Core
          */
         public int OnRunScript(string script, uint oidSelf)
         {
-            Console.WriteLine($"Script run: {script}.");
             ObjectSelf = oidSelf;
 
             ScriptContext scriptBeingCalled = new() {CallingObject = oidSelf, ScriptName = script};
@@ -89,6 +88,7 @@ namespace NWN.Amia.Main.Core
 
         private void RunClosure(ulong eid)
         {
+            Console.WriteLine($"Trying to run script on eid: {eid}");
             try
             {
                 _closures[eid].Run();
@@ -111,7 +111,7 @@ namespace NWN.Amia.Main.Core
         public static int Bootstrap(IntPtr ptr, int nativeHandlesLength)
         {
             Console.WriteLine("Bootstrapped.");
-            return NWNCore.Init(ptr, nativeHandlesLength, Instance);
+            return NWNCore.Init(ptr, nativeHandlesLength, Instance, Instance);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NWN.Core;
 
@@ -9,7 +10,7 @@ namespace NWN.Amia.Main.Managed.Feats
         private static uint _player;
         private const string SubracePrefix = "subraceEffect";
 
-        public static void Apply(uint nwnObjectId, List<Effect> effects)
+        public static void Apply(uint nwnObjectId, List<IntPtr> effects)
         {
             _player = nwnObjectId;
 
@@ -20,7 +21,7 @@ namespace NWN.Amia.Main.Managed.Feats
 
         private static void RemoveTaggedEffects()
         {
-            Effect effect = NWScript.GetFirstEffect(_player);
+            IntPtr effect = NWScript.GetFirstEffect(_player);
 
             while (NWScript.GetIsEffectValid(effect) == NWScript.TRUE)
             {
@@ -30,7 +31,7 @@ namespace NWN.Amia.Main.Managed.Feats
             }
         }
 
-        private static void SetEffectsToSupernaturalAndApply(IEnumerable<Effect> effects)
+        private static void SetEffectsToSupernaturalAndApply(IEnumerable<IntPtr> effects)
         {
             var supernaturalEffects = ConvertEffectsToSupernatural(effects);
             var taggedEffects = TagEffects(supernaturalEffects);
@@ -38,14 +39,14 @@ namespace NWN.Amia.Main.Managed.Feats
             foreach (var effect in taggedEffects) ApplyEffectPermanently(effect);
         }
 
-        private static IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects) =>
-            raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
+        private static IEnumerable<IntPtr> ConvertEffectsToSupernatural(IEnumerable<IntPtr> raceEffects) =>
+            raceEffects.Select(NWScript.SupernaturalEffect).Select(dummy => (IntPtr) dummy)
                 .ToList();
 
 
-        private static IEnumerable<Effect> TagEffects(IEnumerable<Effect> supernaturalEffects)
+        private static IEnumerable<IntPtr> TagEffects(IEnumerable<IntPtr> supernaturalEffects)
         {
-            var taggedEffects = new List<Effect>();
+            var taggedEffects = new List<IntPtr>();
 
             foreach (var effect in supernaturalEffects)
             {
@@ -56,7 +57,7 @@ namespace NWN.Amia.Main.Managed.Feats
             return taggedEffects;
         }
 
-        private static void ApplyEffectPermanently(Effect effect) =>
+        private static void ApplyEffectPermanently(IntPtr effect) =>
             NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, _player);
     }
 }

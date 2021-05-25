@@ -16,7 +16,7 @@ namespace NWN.Amia.Main.Core
 
         private static void PerformInitialSetup()
         {
-            Console.WriteLine("Performing initial setup for script dictionary.");
+            Console.WriteLine("Performing initial setup. Reflectively grabbing all types with property [ScriptName].");
 
             foreach (var type in GetTypesInAssembly(Assembly.GetExecutingAssembly()))
             {

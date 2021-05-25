@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Objects.Types
@@ -18,7 +19,7 @@ namespace NWN.Amia.Main.Managed.Objects.Types
         public int HitPoints { get; set; }
 
         public List<int> Classes { get; set; }
-        public List<Effect> ActiveEffects { get; set; }
+        public List<IntPtr> ActiveEffects { get; set; }
 
         public void UpdateAbilities();
     }
