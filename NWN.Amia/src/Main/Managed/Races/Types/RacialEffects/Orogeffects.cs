@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NWN.Amia.Main.Managed.Feats.Types;
 using NWN.Core;
 
@@ -10,12 +11,12 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
         private bool _hasHeritageFeat;
         private uint _oid;
 
-        public List<Effect> GatherEffectsForObject(uint objectId)
+        public List<IntPtr> GatherEffectsForObject(uint objectId)
         {
             _oid = objectId;
             _hasHeritageFeat = HasHeritageFeat();
 
-            var orogEffects = new List<Effect>
+            var orogEffects = new List<IntPtr>
             {
                 NWScript.EffectSkillIncrease(NWScript.SKILL_CRAFT_ARMOR, 2),
                 NWScript.EffectSkillIncrease(NWScript.SKILL_CRAFT_WEAPON, 2),
@@ -33,7 +34,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
             return NWScript.GetHasFeat(Heritage, _oid) == 1;
         }
 
-        private void AddHeritageEffectsIfObjectHasFeat(List<Effect> effectsForObject)
+        private void AddHeritageEffectsIfObjectHasFeat(List<IntPtr> effectsForObject)
         {
             if (!_hasHeritageFeat) return;
 

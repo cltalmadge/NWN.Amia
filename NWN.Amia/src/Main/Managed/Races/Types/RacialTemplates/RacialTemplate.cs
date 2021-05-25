@@ -29,7 +29,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialTemplates
         [UsedImplicitly] public int DexBonus { get; set; }
         [UsedImplicitly] public int WisBonus { get; set; }
 
-        [UsedImplicitly] public List<Effect> TemplateEffects { get; set; }
+        [UsedImplicitly] public List<IntPtr> TemplateEffects { get; set; }
 
         public void Apply()
         {

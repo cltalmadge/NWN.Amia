@@ -89,6 +89,7 @@ namespace NWN.Amia.Main.Core
 
         private void RunClosure(ulong eid)
         {
+            Console.WriteLine($"Trying to run script on eid: {eid}");
             try
             {
                 _closures[eid].Run();

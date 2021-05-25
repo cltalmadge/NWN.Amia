@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NWN.Amia.Main.Managed.Feats.Types;
 using NWN.Core;
 
@@ -10,7 +11,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
         private bool _hasHeritageFeat;
         private uint _oid = NWScript.OBJECT_INVALID;
 
-        public List<Effect> GatherEffectsForObject(uint oid)
+        public List<IntPtr> GatherEffectsForObject(uint oid)
         {
             _oid = oid;
             _hasHeritageFeat = HasHeritageFeat();
@@ -18,7 +19,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
 
             var spellResistance = GetSpellResistanceBasedOnFeat();
 
-            var effectsForObject = new List<Effect>
+            var effectsForObject = new List<IntPtr>
             {
                 NWScript.EffectSpellResistanceIncrease(spellResistance)
             };
@@ -52,7 +53,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
             return hitDice - 2;
         }
 
-        private void AddHeritageEffectsIfObjectHasFeat(ICollection<Effect> effectsForObject)
+        private void AddHeritageEffectsIfObjectHasFeat(ICollection<IntPtr> effectsForObject)
         {
             if (!_hasHeritageFeat) return;
             effectsForObject.Add(NWScript.EffectAttackDecrease(1));

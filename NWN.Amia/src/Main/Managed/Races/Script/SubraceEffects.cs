@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using NWN.Amia.Main.Core.Types;
@@ -23,7 +24,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
             return 0;
         }
 
-        private static List<Effect> ResolveEffectsForObject(uint nwnObjectId)
+        private static List<IntPtr> ResolveEffectsForObject(uint nwnObjectId)
         {
             return NWScript.GetSubRace(nwnObjectId).ToLower() switch
             {
@@ -37,7 +38,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
                 "half dragon" => new HalfDragonEffects().GatherEffectsForObject(nwnObjectId),
                 "half-dragon" => new HalfDragonEffects().GatherEffectsForObject(nwnObjectId),
                 "dragon" => new HalfDragonEffects().GatherEffectsForObject(nwnObjectId),
-                _ => new List<Effect>()
+                _ => new List<IntPtr>()
             };
         }
     }

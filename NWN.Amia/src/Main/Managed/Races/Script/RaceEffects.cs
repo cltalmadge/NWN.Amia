@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using NWN.Amia.Main.Core.Types;
@@ -27,7 +28,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
 
         private static void RemoveTaggedEffects()
         {
-            Effect effect = NWScript.GetFirstEffect(_player);
+            IntPtr effect = NWScript.GetFirstEffect(_player);
 
             while (NWScript.GetIsEffectValid(effect) == NWScript.TRUE)
             {
@@ -52,26 +53,26 @@ namespace NWN.Amia.Main.Managed.Races.Script
             foreach (var effect in taggedEffects) ApplyEffectPermanently(effect);
         }
 
-        private static IEnumerable<Effect> ConvertEffectsToSupernatural(IEnumerable<Effect> raceEffects)
+        private static IEnumerable<IntPtr> ConvertEffectsToSupernatural(IEnumerable<IntPtr> raceEffects)
         {
-            return raceEffects.Select(effect => NWScript.SupernaturalEffect(effect)).Select(dummy => (Effect) dummy)
+            return raceEffects.Select(NWScript.SupernaturalEffect).Select(dummy => dummy)
                 .ToList();
         }
 
-        private static IEnumerable<Effect> GetListOfEffectsForRace()
+        private static IEnumerable<IntPtr> GetListOfEffectsForRace()
         {
             var raceType = NWScript.GetRacialType(_player);
 
             var racialEffectCollector = ManagedRaces.Races[raceType];
 
             return null == racialEffectCollector
-                ? new List<Effect>()
+                ? new List<IntPtr>()
                 : racialEffectCollector.GatherEffectsForObject(_player);
         }
 
-        private static IEnumerable<Effect> TagEffects(IEnumerable<Effect> supernaturalEffects)
+        private static IEnumerable<IntPtr> TagEffects(IEnumerable<IntPtr> supernaturalEffects)
         {
-            var taggedEffects = new List<Effect>();
+            var taggedEffects = new List<IntPtr>();
 
             foreach (var effect in supernaturalEffects)
             {
@@ -82,7 +83,7 @@ namespace NWN.Amia.Main.Managed.Races.Script
             return taggedEffects;
         }
 
-        private static void ApplyEffectPermanently(Effect effect)
+        private static void ApplyEffectPermanently(IntPtr effect)
         {
             NWScript.ApplyEffectToObject(NWScript.DURATION_TYPE_PERMANENT, effect, _player);
         }
