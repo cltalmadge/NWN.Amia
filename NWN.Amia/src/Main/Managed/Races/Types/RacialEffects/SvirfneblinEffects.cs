@@ -17,9 +17,9 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
             _hasHeritageFeat = HasHeritageFeat();
 
 
-            var spellResistance = GetSpellResistanceBasedOnFeat();
+            int spellResistance = GetSpellResistanceBasedOnFeat();
 
-            var effectsForObject = new List<IntPtr>
+            List<IntPtr> effectsForObject = new List<IntPtr>
             {
                 NWScript.EffectSpellResistanceIncrease(spellResistance)
             };
@@ -36,7 +36,7 @@ namespace NWN.Amia.Main.Managed.Races.Types.RacialEffects
 
         private int GetSpellResistanceBasedOnFeat()
         {
-            var hitDice = NWScript.GetHitDice(_oid);
+            int hitDice = NWScript.GetHitDice(_oid);
 
             return _hasHeritageFeat
                 ? SpellResistanceWithFeat(hitDice)

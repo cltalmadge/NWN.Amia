@@ -47,10 +47,10 @@ namespace NWN.Amia.Main.Managed.Races.Script
 
         private static void SetEffectsToSupernaturalAndApply()
         {
-            var supernaturalEffects = ConvertEffectsToSupernatural(GetListOfEffectsForRace());
-            var taggedEffects = TagEffects(supernaturalEffects);
+            IEnumerable<IntPtr> supernaturalEffects = ConvertEffectsToSupernatural(GetListOfEffectsForRace());
+            IEnumerable<IntPtr> taggedEffects = TagEffects(supernaturalEffects);
 
-            foreach (var effect in taggedEffects) ApplyEffectPermanently(effect);
+            foreach (IntPtr effect in taggedEffects) ApplyEffectPermanently(effect);
         }
 
         private static IEnumerable<IntPtr> ConvertEffectsToSupernatural(IEnumerable<IntPtr> raceEffects)

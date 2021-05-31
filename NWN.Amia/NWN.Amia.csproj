@@ -13,10 +13,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="src\Main\Managed\Classes\Warlock\Scripts\Invocations" />
       <Folder Include="src\Main\Managed\Economy\Scripts" />
       <Folder Include="src\Main\Managed\Persistence" />
-      <Folder Include="src\Main\Managed\Spells" />
     </ItemGroup>
 
     <ItemGroup>

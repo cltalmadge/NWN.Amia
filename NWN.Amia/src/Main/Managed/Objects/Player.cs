@@ -20,16 +20,19 @@ namespace NWN.Amia.Main.Managed.Objects
             Wis = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_WISDOM);
             Cha = NWScript.GetAbilityScore(ObjectId, NWScript.ABILITY_CHARISMA);
 
-            PubliCdKey = NWScript.GetPCPublicCDKey(ObjectId);
+            PublicCdKey = NWScript.GetPCPublicCDKey(ObjectId);
             AccountName = NWScript.GetPCPlayerName(ObjectId);
             IpAddress = NWScript.GetPCIPAddress(ObjectId);
 
             HitDice = NWScript.GetHitDice(ObjectId);
             HitPoints = NWScript.GetMaxHitPoints(ObjectId);
             Subrace = NWScript.GetSubRace(ObjectId);
+            CasterLevel = NWScript.GetCasterLevel(objectId);
         }
 
-        [UsedImplicitly] public string PubliCdKey { get; }
+        public int CasterLevel { get; }
+
+        [UsedImplicitly] public string PublicCdKey { get; }
 
         [UsedImplicitly] public string AccountName { get; }
         [UsedImplicitly] public string IpAddress { get; }
