@@ -1,9 +1,12 @@
-﻿using NWN.Amia.Main.Core.Types;
+﻿using JetBrains.Annotations;
+using NWN.Amia.Main.Core.Types;
 using NWN.Amia.Main.Managed.Spells.Commons.Types;
 using NWN.Core;
 
 namespace NWN.Amia.Main.Managed.Classes.Warlock.Scripts.Invocations.EldritchBlastImpact
 {
+    [ScriptName("wlk_vitriol_blast")]
+    [UsedImplicitly]
     public class VitriolicBlastCast : IRunnableScript
     {
         public int Run(uint nwnObjectId)
