@@ -4,24 +4,27 @@ using NWN.Amia.Main.Managed.Spells.Commons;
 using NWN.Amia.Main.Managed.Spells.Commons.Types;
 using NWN.Core;
 
-namespace NWN.Amia.Main.Managed.Classes.Warlock.Scripts.Invocations.EldritchBlast
+namespace NWN.Amia.Main.Managed.Classes.Warlock.Scripts.Invocations.EldritchBlastImpact
 {
-    [ScriptName("wlk_uttrdrk_blast")]
+    [ScriptName("wlk_hindr_blst")]
     [UsedImplicitly]
-    public class UtterdarkBlastCast:IRunnableScript
+    public class HinderingBlastCast : IRunnableScript
     {
         public int Run(uint nwnObjectId)
         {
             uint spellTargetObject = NWScript.GetSpellTargetObject();
 
+
             bool targetFailedSpellResistance = SpellUtils.ResistSpell(nwnObjectId, spellTargetObject) == 0;
-            bool touchAttackSucceeded = NWScript.TouchAttackRanged(spellTargetObject) > 0;
-            if (!targetFailedSpellResistance || !touchAttackSucceeded) return 0;
+            int touchAttackRanged = NWScript.TouchAttackRanged(spellTargetObject);
+            bool touchAttackSucceeded = touchAttackRanged > 0;
 
             ICastable eldritchBlast = new Types.EldritchBlast(nwnObjectId, spellTargetObject,
-                NWScript.DAMAGE_TYPE_NEGATIVE);
+                NWScript.DAMAGE_TYPE_MAGICAL, touchAttackRanged == 2);
+            if (!targetFailedSpellResistance || !touchAttackSucceeded) return 0;
+
             eldritchBlast.CastSpell();
-            WarlockHelper.ApplyUtterdarkEffects(nwnObjectId, spellTargetObject);
+            WarlockHelper.ApplyHinderingEffects(nwnObjectId, spellTargetObject);
 
             return 0;
         }

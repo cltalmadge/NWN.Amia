@@ -4,7 +4,7 @@ using NWN.Amia.Main.Managed.Spells.Commons;
 using NWN.Amia.Main.Managed.Spells.Commons.Types;
 using NWN.Core;
 
-namespace NWN.Amia.Main.Managed.Classes.Warlock.Scripts.Invocations.EldritchBlast
+namespace NWN.Amia.Main.Managed.Classes.Warlock.Scripts.Invocations.EldritchBlastImpact
 {
     [ScriptName("wlk_nxious_blast")]
     [UsedImplicitly]
@@ -15,11 +15,12 @@ namespace NWN.Amia.Main.Managed.Classes.Warlock.Scripts.Invocations.EldritchBlas
             uint spellTargetObject = NWScript.GetSpellTargetObject();
 
             bool targetFailedSpellResistance = SpellUtils.ResistSpell(nwnObjectId, spellTargetObject) == 0;
-            bool touchAttackSucceeded = NWScript.TouchAttackRanged(spellTargetObject) > 0;
+            int touchAttackRanged = NWScript.TouchAttackRanged(spellTargetObject);
+            bool touchAttackSucceeded = touchAttackRanged > 0;
             if (!targetFailedSpellResistance || !touchAttackSucceeded) return 0;
 
             ICastable eldritchBlast = new Types.EldritchBlast(nwnObjectId, spellTargetObject,
-                NWScript.DAMAGE_TYPE_MAGICAL);
+                NWScript.DAMAGE_TYPE_MAGICAL, touchAttackRanged == 2);
             eldritchBlast.CastSpell();
             WarlockHelper.ApplyNoxiousEffects(nwnObjectId, spellTargetObject);
 

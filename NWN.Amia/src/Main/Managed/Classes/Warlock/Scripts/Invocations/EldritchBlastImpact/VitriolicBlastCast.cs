@@ -1,9 +1,8 @@
 ﻿using NWN.Amia.Main.Core.Types;
-using NWN.Amia.Main.Managed.Spells.Commons;
 using NWN.Amia.Main.Managed.Spells.Commons.Types;
 using NWN.Core;
 
-namespace NWN.Amia.Main.Managed.Classes.Warlock.Scripts.Invocations.EldritchBlast
+namespace NWN.Amia.Main.Managed.Classes.Warlock.Scripts.Invocations.EldritchBlastImpact
 {
     public class VitriolicBlastCast : IRunnableScript
     {
@@ -11,11 +10,12 @@ namespace NWN.Amia.Main.Managed.Classes.Warlock.Scripts.Invocations.EldritchBlas
         {
             uint spellTargetObject = NWScript.GetSpellTargetObject();
 
-            bool touchAttackSucceeded = NWScript.TouchAttackRanged(spellTargetObject) > 0;
+            int touchAttackRanged = NWScript.TouchAttackRanged(spellTargetObject);
+            bool touchAttackSucceeded = touchAttackRanged > 0;
             if (!touchAttackSucceeded) return 0;
 
             ICastable eldritchBlast = new Types.EldritchBlast(nwnObjectId, spellTargetObject,
-                NWScript.DAMAGE_TYPE_MAGICAL, NWScript.VFX_BEAM_BLACK, 645);
+                NWScript.DAMAGE_TYPE_MAGICAL, NWScript.VFX_BEAM_BLACK, 645, touchAttackRanged == 2);
             eldritchBlast.CastSpell();
             WarlockHelper.ApplyVitriolicEffects(nwnObjectId, spellTargetObject);
 
